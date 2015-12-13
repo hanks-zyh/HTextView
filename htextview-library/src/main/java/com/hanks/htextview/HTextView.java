@@ -1,27 +1,45 @@
 package com.hanks.htextview;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.view.View;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
- * TODO: document your custom view class.
+ * Animate TextView
  */
-public class HTextView extends View {
-    private String mExampleString; // TODO: use a default from R.string...
-    private int   mExampleColor     = Color.RED; // TODO: use a default from R.color...
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
-    private Drawable mExampleDrawable;
+public class HTextView extends TextView {
 
-    private TextPaint mTextPaint;
-    private float     mTextWidth;
-    private float     mTextHeight;
+    float progress = 0;
+    Paint paint, oldPaint;
+
+    private float[] gaps    = new float[100];
+    private float[] oldGaps = new float[100];
+
+    private DisplayMetrics metrics;
+    private float          textSize;
+
+    private CharSequence mText;
+    private CharSequence mOldText;
+
+    private float oldStartX = 0;
+    private float startX    = 0;
+    private float startY    = 0;
+
+    private List<Different> differentList = new ArrayList<>();
 
     public HTextView(Context context) {
         super(context);
@@ -39,44 +57,81 @@ public class HTextView extends View {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
+
+        mText = "";
+        mOldText = "";
+
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.FILL);
+
+        oldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        oldPaint.setColor(Color.BLACK);
+        oldPaint.setStyle(Paint.Style.FILL);
+
+        metrics = new DisplayMetrics();
+        WindowManager windowManger = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        windowManger.getDefaultDisplay().getMetrics(metrics);
+
+        textSize = getTextSize();
+
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView, defStyle, 0);
 
-        mExampleString = a.getString(R.styleable.HTextView_exampleString);
-        mExampleColor = a.getColor(R.styleable.HTextView_exampleColor, mExampleColor);
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(R.styleable.HTextView_exampleDimension, mExampleDimension);
-
-        if (a.hasValue(R.styleable.HTextView_exampleDrawable)) {
-            mExampleDrawable = a.getDrawable(R.styleable.HTextView_exampleDrawable);
-            mExampleDrawable.setCallback(this);
-        }
-
         a.recycle();
-
-        // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
     }
 
     private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
+      /*  mTextPaint.setTextSize(mExampleDimension);
         mTextPaint.setColor(mExampleColor);
         mTextWidth = mTextPaint.measureText(mExampleString);
 
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
+        mTextHeight = fontMetrics.bottom;*/
+    }
+
+    public void animateText(CharSequence text) {
+        mOldText = mText;
+        mText = text;
+
+        paint.setTextSize(textSize);
+
+        for (int i = 0; i < mText.length(); i++) {
+            gaps[i] = paint.measureText(mText.charAt(i) + "");
+        }
+
+        oldPaint.setTextSize(textSize);
+
+        for (int i = 0; i < mOldText.length(); i++) {
+            oldGaps[i] = oldPaint.measureText(mOldText.charAt(i) + "");
+        }
+
+        oldStartX = (getWidth() - oldPaint.measureText(mOldText.toString())) / 2f;
+
+        startX = (getWidth() - paint.measureText(mText.toString())) / 2f;
+        startY = (int) ((getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2));
+
+        differentList.clear();
+        differentList.addAll(diff(mOldText, mText));
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration(1000);
+        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override public void onAnimationUpdate(ValueAnimator animation) {
+                progress = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        valueAnimator.start();
+
     }
 
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // TODO: consider storing these as member variables to reduce
         // allocations per draw cycle.
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
@@ -87,91 +142,127 @@ public class HTextView extends View {
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         // Draw the text.
-        canvas.drawText(mExampleString, paddingLeft + (contentWidth - mTextWidth) / 2, paddingTop + (contentHeight + mTextHeight) / 2, mTextPaint);
+        //canvas.drawText(mExampleString, paddingLeft + (contentWidth - mTextWidth) / 2, paddingTop + (contentHeight + mTextHeight) / 2, mTextPaint);
 
         // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop, paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
+
+        float offset = startX;
+        float oldOffset = oldStartX;
+
+        int maxLength = Math.max(mText.length(), mOldText.length());
+
+        for (int i = 0; i < maxLength; i++) {
+
+            // draw old text
+            if (i < mOldText.length()) {
+
+                int move = needMove(i);
+                if (move != -1) {
+                    oldPaint.setTextSize(textSize);
+                    oldPaint.setAlpha(255);
+                    float p = progress * 3;
+                    p = p > 1 ? 1 : p;
+                    float distX = getOffset(i, move, p);
+                    Log.d("tagddddd", distX + "");
+                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
+                } else {
+
+                    oldPaint.setAlpha((int) ((1 - progress) * 255));
+                    oldPaint.setTextSize(textSize * (1 - progress));
+                    float width = oldPaint.measureText(mOldText.charAt(i) + "");
+                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, startY, oldPaint);
+                }
+                oldOffset += oldGaps[i];
+            }
+
+            // draw new text
+            if (i < mText.length()) {
+
+                if (!stayHere(i)) {
+
+                    int alpha = (int) (255 * progress * 2 - i * 10);
+                    alpha = alpha > 255 ? 255 : alpha;
+                    alpha = alpha < 0 ? 0 : alpha;
+
+                    float size = (textSize * progress * 2 - i * 2);
+                    size = size > textSize ? textSize : size;
+                    size = size < 0 ? 0 : size;
+
+                    paint.setAlpha(alpha);
+                    paint.setTextSize(size);
+
+                    float width = paint.measureText(mText.charAt(i) + "");
+                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, paint);
+                }
+
+                offset += gaps[i];
+            }
         }
+
     }
 
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
+    private float getOffset(int from, int move, float progress) {
+
+        // 计算目标点
+        float dist = startX;
+        for (int i = 0; i < move; i++) {
+            dist += gaps[i];
+        }
+
+        // 计算当前点
+        float cur = oldStartX;
+        for (int i = 0; i < from; i++) {
+            cur += oldGaps[i];
+        }
+
+        return cur + (dist - cur) * progress;
+
     }
 
-    /**
-     * Sets the view's example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
+    public int needMove(int index) {
+        for (Different different : differentList) {
+            if (different.fromIndex == index) {
+                return different.moveIndex;
+            }
+        }
+        return -1;
     }
 
-    /**
-     * Gets the example color attribute value.
-     *
-     * @return The example color attribute value.
-     */
-    public int getExampleColor() {
-        return mExampleColor;
+    public boolean stayHere(int index) {
+        for (Different different : differentList) {
+            if (different.moveIndex == index) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     * Sets the view's example color attribute value. In the example view, this color
-     * is the font color.
-     *
-     * @param exampleColor The example color attribute value to use.
-     */
-    public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
+    public List<Different> diff(CharSequence oldText, CharSequence newText) {
+
+        List<Different> differentList = new ArrayList<>();
+        Set<Integer> skip = new HashSet<>();
+
+        for (int i = 0; i < oldText.length(); i++) {
+            char c = oldText.charAt(i);
+            for (int j = 0; j < newText.length(); j++) {
+                if (!skip.contains(j) && c == newText.charAt(j)) {
+                    skip.add(j);
+                    Different different = new Different();
+                    different.c = c;
+                    different.fromIndex = i;
+                    different.moveIndex = j;
+                    differentList.add(different);
+                    break;
+                }
+            }
+        }
+        return differentList;
+
     }
 
-    /**
-     * Gets the example dimension attribute value.
-     *
-     * @return The example dimension attribute value.
-     */
-    public float getExampleDimension() {
-        return mExampleDimension;
-    }
-
-    /**
-     * Sets the view's example dimension attribute value. In the example view, this dimension
-     * is the font size.
-     *
-     * @param exampleDimension The example dimension attribute value to use.
-     */
-    public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example drawable attribute value.
-     *
-     * @return The example drawable attribute value.
-     */
-    public Drawable getExampleDrawable() {
-        return mExampleDrawable;
-    }
-
-    /**
-     * Sets the view's example drawable attribute value. In the example view, this drawable is
-     * drawn above the text.
-     *
-     * @param exampleDrawable The example drawable attribute value to use.
-     */
-    public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
+    class Different {
+        char c;
+        int  fromIndex;
+        int  moveIndex;
     }
 }
