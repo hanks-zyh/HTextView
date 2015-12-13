@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SeekBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -15,10 +16,12 @@ import com.hanks.htextview.HTextView;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
-    String[] sentences = new String[]{"Design", "Design is not just.", "what it looks like", "and feels like,", "- Steve Jobs", "小乖乖", "小哎呀吃屁"};
+    String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
     private int mCounter = 10;
     private TextSwitcher textSwitcher;
     private HTextView    text2;
+
+    private SeekBar seekBar;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,24 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         textSwitcher.setOutAnimation(out);
 
         text2 = (HTextView) findViewById(R.id.text2);
+
+        seekBar = (SeekBar) findViewById(R.id.seekbar);
+        seekBar.setMax(20);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                text2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 + progress);
+                text2.reset(text2.getText());
+            }
+
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        seekBar.setProgress(6);
 
     }
 

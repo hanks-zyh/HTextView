@@ -8,9 +8,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,20 +27,17 @@ public class HTextView extends TextView {
 
     float progress = 0;
     Paint paint, oldPaint;
-
+    float charTime  = 400; // 每个字符动画时间 500ms
+    int   mostCount = 20; // 最多10个字符同时动画
     private float[] gaps    = new float[100];
     private float[] oldGaps = new float[100];
-
     private DisplayMetrics metrics;
     private float          textSize;
-
     private CharSequence mText;
     private CharSequence mOldText;
-
     private float oldStartX = 0;
     private float startX    = 0;
     private float startY    = 0;
-
     private List<Different> differentList = new ArrayList<>();
 
     public HTextView(Context context) {
@@ -97,6 +96,28 @@ public class HTextView extends TextView {
         mOldText = mText;
         mText = text;
 
+        calc();
+
+        int n = mText.length();
+        n = n <= 0 ? 1 : n;
+
+        // 计算动画总时间
+        long duration = (long) (charTime + charTime / mostCount * (n - 1));
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
+        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override public void onAnimationUpdate(ValueAnimator animation) {
+                progress = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        valueAnimator.start();
+
+    }
+
+    private void calc() {
+        textSize = getTextSize();
         paint.setTextSize(textSize);
 
         for (int i = 0; i < mText.length(); i++) {
@@ -116,35 +137,9 @@ public class HTextView extends TextView {
 
         differentList.clear();
         differentList.addAll(diff(mOldText, mText));
-
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration(1000);
-        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
-                progress = (float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-        valueAnimator.start();
-
     }
 
     @Override protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
-
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
-
-        // Draw the text.
-        //canvas.drawText(mExampleString, paddingLeft + (contentWidth - mTextWidth) / 2, paddingTop + (contentHeight + mTextHeight) / 2, mTextPaint);
-
-        // Draw the example drawable on top of the text.
 
         float offset = startX;
         float oldOffset = oldStartX;
@@ -155,20 +150,20 @@ public class HTextView extends TextView {
 
             // draw old text
             if (i < mOldText.length()) {
+//
+                float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
 
                 int move = needMove(i);
                 if (move != -1) {
                     oldPaint.setTextSize(textSize);
                     oldPaint.setAlpha(255);
-                    float p = progress * 3;
+                    float p = pp * 2f;
                     p = p > 1 ? 1 : p;
                     float distX = getOffset(i, move, p);
-                    Log.d("tagddddd", distX + "");
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
                 } else {
-
-                    oldPaint.setAlpha((int) ((1 - progress) * 255));
-                    oldPaint.setTextSize(textSize * (1 - progress));
+                    oldPaint.setAlpha((int) ((1 - pp) * 255));
+                    oldPaint.setTextSize(textSize * (1 - pp));
                     float width = oldPaint.measureText(mOldText.charAt(i) + "");
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, startY, oldPaint);
                 }
@@ -180,11 +175,12 @@ public class HTextView extends TextView {
 
                 if (!stayHere(i)) {
 
-                    int alpha = (int) (255 * progress * 2 - i * 10);
+                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
                     alpha = alpha > 255 ? 255 : alpha;
                     alpha = alpha < 0 ? 0 : alpha;
 
-                    float size = (textSize * progress * 2 - i * 2);
+                    float size = textSize * 1f / charTime * (progress - charTime * i / mostCount);
+                    //                  float size = (textSize * progress * 6 - i * 5 * textSize/(mText.length()-1));
                     size = size > textSize ? textSize : size;
                     size = size < 0 ? 0 : size;
 
@@ -258,6 +254,12 @@ public class HTextView extends TextView {
         }
         return differentList;
 
+    }
+
+    public void reset(CharSequence text) {
+        progress = 1;
+        calc();
+        invalidate();
     }
 
     class Different {

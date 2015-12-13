@@ -26,5 +26,11 @@
         android:textColor="#000"
         android:textSize="30sp"/>
 
+    <SeekBar
+        android:layout_marginTop="20dp"
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
