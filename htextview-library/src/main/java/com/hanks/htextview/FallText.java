@@ -133,17 +133,16 @@ public class FallText implements AnimateText {
                     // (n+y)/2=b ,y=2b-n
                     path.lineTo(2 * centerX - disX, 2 * startY - disY);
                     if (pp <= 0.7) {
+                        // 旋转
                         canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, oldPaint);
                     } else {
+                        // 下落
                         float p2 = (float) ((pp - 0.7) / 0.3f);
                         oldPaint.setAlpha((int) ((1 - p2) * 255));
                         float y = (float) ((p2) * upDistance);
                         HLog.i(y);
                         Path path2 = new Path();
                         path2.moveTo(disX, disY + y);
-                        //求点A（m,n)关于点P(a,b)的对称点B(x,y)
-                        // (m+x)/2=a ,x=2a-m
-                        // (n+y)/2=b ,y=2b-n
                         path2.lineTo(2 * centerX - disX, 2 * startY - disY + y);
                         canvas.drawTextOnPath(mOldText.charAt(i) + "", path2, 0, 0, oldPaint);
                     }

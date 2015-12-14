@@ -12,8 +12,9 @@ import android.widget.TextView;
 public class HTextView extends TextView {
 
     //private AnimateText mAnimateText = new ScaleText();
-    //private AnimateText mAnimateText = new EvaporateText();
-    private AnimateText mAnimateText = new FallText();
+    private AnimateText mAnimateText = new EvaporateText();
+    //private AnimateText mAnimateText = new FallText();
+    //private AnimateText mAnimateText = new PixelateText();
 
     public HTextView(Context context) {
         super(context);
