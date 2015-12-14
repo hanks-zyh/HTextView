@@ -35,4 +35,37 @@
         android:layout_height="wrap_content"/>
 
 
+    <RadioGroup
+        android:layout_marginTop="10dp"
+        android:id="@+id/typeGroup"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/scale"
+            android:text="Scale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/evaporate"
+            android:text="Evaporate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/fall"
+            android:text="Fall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/pixelate"
+            android:text="Pixelate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/sparkle"
+            android:text="Sparkle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
 </LinearLayout>

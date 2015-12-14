@@ -7,12 +7,18 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.hanks.htextview.EvaporateText;
+import com.hanks.htextview.FallText;
 import com.hanks.htextview.HTextView;
+import com.hanks.htextview.PixelateText;
+import com.hanks.htextview.ScaleText;
+import com.hanks.htextview.SparkleText;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
@@ -21,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
     private TextSwitcher textSwitcher;
     private HTextView    text2;
 
-    private SeekBar seekBar;
+    private SeekBar    seekBar;
+    private RadioGroup radioGroup;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,29 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             }
         });
         seekBar.setProgress(6);
+
+        radioGroup = (RadioGroup) findViewById(R.id.typeGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.scale:
+                        text2.setAnimateType(new ScaleText());
+                        break;
+                    case R.id.evaporate:
+                        text2.setAnimateType(new EvaporateText());
+                        break;
+                    case R.id.fall:
+                        text2.setAnimateType(new FallText());
+                        break;
+                    case R.id.pixelate:
+                        text2.setAnimateType(new PixelateText());
+                        break;
+                    case R.id.sparkle:
+                        text2.setAnimateType(new SparkleText());
+                        break;
+                }
+            }
+        });
 
     }
 
