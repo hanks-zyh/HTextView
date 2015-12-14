@@ -19,11 +19,13 @@
 
     <com.hanks.htextview.HTextView
         android:id="@+id/text2"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#000"
         android:gravity="center"
         android:textColor="#000"
+        android:onClick="onClick"
         android:textSize="30sp"/>
 
     <SeekBar
