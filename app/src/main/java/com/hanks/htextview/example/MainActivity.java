@@ -14,6 +14,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.hanks.htextview.BurnText;
 import com.hanks.htextview.EvaporateText;
 import com.hanks.htextview.FallText;
 import com.hanks.htextview.HTextView;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
     String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
     private int mCounter = 10;
     private TextSwitcher textSwitcher;
-    private HTextView    text2;
+    private HTextView    hTextView;
 
     private SeekBar    seekBar;
     private RadioGroup radioGroup;
@@ -43,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         textSwitcher.setInAnimation(in);
         textSwitcher.setOutAnimation(out);
 
-        text2 = (HTextView) findViewById(R.id.text2);
+        hTextView = (HTextView) findViewById(R.id.text2);
 
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setMax(20);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                text2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 + progress);
-                text2.reset(text2.getText());
+                hTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 + progress);
+                hTextView.reset(hTextView.getText());
             }
 
             @Override public void onStartTrackingTouch(SeekBar seekBar) {
@@ -68,28 +69,34 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.scale:
-                        text2.setBackgroundColor(Color.WHITE);
-                        text2.setAnimateType(new ScaleText());
+                        hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setAnimateType(new ScaleText());
                         break;
                     case R.id.evaporate:
-                        text2.setBackgroundColor(Color.WHITE);
-                        text2.setAnimateType(new EvaporateText());
+                        hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setAnimateType(new EvaporateText());
                         break;
                     case R.id.fall:
-                        text2.setBackgroundColor(Color.WHITE);
-                        text2.setAnimateType(new FallText());
+                        hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setAnimateType(new FallText());
                         break;
                     case R.id.pixelate:
-                        text2.setBackgroundColor(Color.WHITE);
-                        text2.setAnimateType(new PixelateText());
+                        hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setAnimateType(new PixelateText());
                         break;
                     case R.id.sparkle:
-                        text2.setBackgroundColor(Color.BLACK);
-                        text2.setAnimateType(new SparkleText());
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(new SparkleText());
+                        break;
+                    case R.id.burn:
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(new BurnText());
                         break;
                 }
             }
         });
+
+        radioGroup.check(R.id.burn);
 
     }
 
@@ -100,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
     private void updateCounter() {
         mCounter = mCounter >= sentences.length - 1 ? 0 : mCounter + 1;
         textSwitcher.setText(sentences[mCounter]);
-        text2.animateText(sentences[mCounter]);
+        hTextView.animateText(sentences[mCounter]);
     }
 
     @Override public View makeView() {
