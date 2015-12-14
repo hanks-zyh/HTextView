@@ -36,8 +36,6 @@ public class ScaleText implements AnimateText {
     private float startX    = 0;
     private float startY    = 0;
 
-    Bitmap sparkBitmap;
-
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
 
@@ -58,7 +56,6 @@ public class ScaleText implements AnimateText {
         windowManger.getDefaultDisplay().getMetrics(metrics);
 
         textSize = hTextView.getTextSize();
-        sparkBitmap = BitmapFactory.decodeResource(hTextView.getResources(),R.drawable.sparkle);
     }
 
     @Override public void reset(CharSequence text) {

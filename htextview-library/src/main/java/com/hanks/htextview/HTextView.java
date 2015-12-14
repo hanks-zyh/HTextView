@@ -15,7 +15,7 @@ public class HTextView extends TextView {
     //private AnimateText mAnimateText = new EvaporateText();
     //private AnimateText mAnimateText = new FallText();
     //private AnimateText mAnimateText = new PixelateText();
-    private AnimateText mAnimateText = new ScaleText();
+    private AnimateText mAnimateText = new SparkleText();
 
     public HTextView(Context context) {
         super(context);

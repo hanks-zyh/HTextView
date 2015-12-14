@@ -1,20 +1,22 @@
 package com.hanks.htextview;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
-import com.hanks.htextview.util.HLog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 /**
  * 蒸发效果
  * Created by hanks on 15-12-14.
@@ -27,16 +29,20 @@ public class SparkleText implements AnimateText {
     int   mostCount = 20; // 最多10个字符同时动画
     HTextView mHTextView;
     float upDistance = 0;
+
+    int textColor = Color.WHITE;
+    Paint backPaint;
     private float[] gaps    = new float[100];
     private float[] oldGaps = new float[100];
     private DisplayMetrics metrics;
     private float          textSize;
-    private CharSequence   mText;
-    private CharSequence   mOldText;
+    private CharSequence mText;
+    private CharSequence mOldText;
     private List<CharacterDiffResult> differentList = new ArrayList<>();
-    private float                     oldStartX     = 0;
-    private float                     startX        = 0;
-    private float                     startY        = 0;
+    private float oldStartX = 0;
+    private float startX    = 0;
+    private float startY    = 0;
+    private Bitmap sparkBitmap;
 
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
@@ -45,12 +51,16 @@ public class SparkleText implements AnimateText {
         mOldText = "";
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLACK);
+        paint.setColor(textColor);
         paint.setStyle(Paint.Style.FILL);
 
         oldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        oldPaint.setColor(Color.BLACK);
+        oldPaint.setColor(textColor);
         oldPaint.setStyle(Paint.Style.FILL);
+
+        backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        backPaint.setColor(((ColorDrawable)mHTextView.getBackground()).getColor());
+        backPaint.setStyle(Paint.Style.FILL);
 
         metrics = new DisplayMetrics();
         WindowManager windowManger = (WindowManager) hTextView.getContext()
@@ -59,6 +69,7 @@ public class SparkleText implements AnimateText {
 
         textSize = hTextView.getTextSize();
 
+        sparkBitmap = BitmapFactory.decodeResource(hTextView.getResources(), R.drawable.sparkle);
     }
 
     @Override public void reset(CharSequence text) {
@@ -95,9 +106,26 @@ public class SparkleText implements AnimateText {
         float oldOffset = oldStartX;
 
         int maxLength = Math.max(mText.length(), mOldText.length());
+        float percent = progress / (charTime + charTime / mostCount * (mText.length() - 1));
 
         for (int i = 0; i < maxLength; i++) {
+            // draw new text
+            if (i < mText.length()) {
 
+                if (!CharacterUtils.stayHere(i, differentList)) {
+
+                    paint.setAlpha(255);
+                    paint.setTextSize(textSize);
+                    float width = paint.measureText(mText.charAt(i) + "");
+                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, paint);
+                    if (percent < 1) {
+                        drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
+                    }
+
+                    canvas.drawRect(offset, startY*1.2f - (1 - percent) * (upDistance+startY*0.2f), offset + gaps[i], startY *1.2f, backPaint);
+                }
+                offset += gaps[i];
+            }
             // draw old text
             if (i < mOldText.length()) {
                 //
@@ -113,66 +141,27 @@ public class SparkleText implements AnimateText {
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
                 } else {
 
-                    oldPaint.setAlpha(255);
-                    float centerX = oldOffset + oldGaps[i] / 2;
-                    float width = oldPaint.measureText(mOldText.charAt(i) + "");
-
-                    float p = pp * 1.5f;
+                    float p = pp * 3.5f;
                     p = p > 1 ? 1 : p;
-                    double angle = (1 - p) * (Math.PI);
-                    if (i % 2 == 0) {
-                        angle = ( p * Math.PI) + Math.PI;
-                    }
-                    float disX = centerX + (float) (width / 2 * Math.cos(angle));
-                    float disY = startY + (float) (width / 2 * Math.sin(angle));
-                    oldPaint.setStyle(Paint.Style.STROKE);
-                    Path path = new Path();
-                    path.moveTo(disX, disY);
-                    //求点A（m,n)关于点P(a,b)的对称点B(x,y)
-                    // (m+x)/2=a ,x=2a-m
-                    // (n+y)/2=b ,y=2b-n
-                    path.lineTo(2 * centerX - disX, 2 * startY - disY);
-                    if (pp <= 0.7) {
-                        // 旋转
-                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, oldPaint);
-                    } else {
-                        // 下落
-                        float p2 = (float) ((pp - 0.7) / 0.3f);
-                        oldPaint.setAlpha((int) ((1 - p2) * 255));
-                        float y = (float) ((p2) * upDistance);
-                        HLog.i(y);
-                        Path path2 = new Path();
-                        path2.moveTo(disX, disY + y);
-                        path2.lineTo(2 * centerX - disX, 2 * startY - disY + y);
-                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path2, 0, 0, oldPaint);
-                    }
-
+                    oldPaint.setAlpha((int) (255 * (1 - p)));
+                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset, startY, oldPaint);
                 }
                 oldOffset += oldGaps[i];
             }
 
-            // draw new text
-            if (i < mText.length()) {
-
-                if (!CharacterUtils.stayHere(i, differentList)) {
-
-                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
-                    alpha = alpha > 255 ? 255 : alpha;
-                    alpha = alpha < 0 ? 0 : alpha;
-
-                    float size = textSize * 1f / charTime * (progress - charTime * i / mostCount);
-                    size = size > textSize ? textSize : size;
-                    size = size < 0 ? 0 : size;
-
-                    paint.setAlpha(alpha);
-                    paint.setTextSize(size);
-                    float width = paint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, paint);
-                }
-
-                offset += gaps[i];
-            }
         }
+    }
+
+    private void drawSparkle(Canvas canvas, float offset, float startY, float width) {
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (startY -  random.nextGaussian() * Math.sqrt(upDistance)), paint);
+        }
+    }
+
+    private Bitmap getRandomSpark(Random random) {
+        int dstWidth = random.nextInt(11) + 1;
+        return Bitmap.createScaledBitmap(sparkBitmap, dstWidth, dstWidth, false);
     }
 
     private void calc() {
