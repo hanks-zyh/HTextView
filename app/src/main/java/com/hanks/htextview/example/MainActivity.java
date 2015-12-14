@@ -1,5 +1,6 @@
 package com.hanks.htextview.example;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -67,18 +68,23 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.scale:
+                        text2.setBackgroundColor(Color.WHITE);
                         text2.setAnimateType(new ScaleText());
                         break;
                     case R.id.evaporate:
+                        text2.setBackgroundColor(Color.WHITE);
                         text2.setAnimateType(new EvaporateText());
                         break;
                     case R.id.fall:
+                        text2.setBackgroundColor(Color.WHITE);
                         text2.setAnimateType(new FallText());
                         break;
                     case R.id.pixelate:
+                        text2.setBackgroundColor(Color.WHITE);
                         text2.setAnimateType(new PixelateText());
                         break;
                     case R.id.sparkle:
+                        text2.setBackgroundColor(Color.BLACK);
                         text2.setAnimateType(new SparkleText());
                         break;
                 }

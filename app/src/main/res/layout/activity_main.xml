@@ -22,7 +22,7 @@
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#000"
+        android:background="#fff"
         android:gravity="center"
         android:textColor="#000"
         android:onClick="onClick"
@@ -44,6 +44,7 @@
         <RadioButton
             android:id="@+id/scale"
             android:text="Scale"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <RadioButton
