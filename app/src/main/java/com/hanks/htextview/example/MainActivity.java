@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             }
         });
 
-        radioGroup.check(R.id.burn);
+        radioGroup.check(R.id.anvil);
 
     }
 

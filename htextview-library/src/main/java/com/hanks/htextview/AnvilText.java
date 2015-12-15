@@ -1,6 +1,8 @@
 package com.hanks.htextview;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +15,7 @@ import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 /**
  * 蒸发效果
  * Created by hanks on 15-12-14.
@@ -32,9 +35,10 @@ public class AnvilText implements AnimateText {
     private CharSequence   mText;
     private CharSequence   mOldText;
     private List<CharacterDiffResult> differentList = new ArrayList<>();
-    private float oldStartX = 0;
-    private float startX    = 0;
-    private float startY    = 0;
+    private float                     oldStartX     = 0;
+    private float                     startX        = 0;
+    private float                     startY        = 0;
+    private Bitmap smokeBitmap;
 
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
@@ -43,11 +47,11 @@ public class AnvilText implements AnimateText {
         mOldText = "";
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
 
         oldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        oldPaint.setColor(Color.BLACK);
+        oldPaint.setColor(Color.WHITE);
         oldPaint.setStyle(Paint.Style.FILL);
 
         metrics = new DisplayMetrics();
@@ -57,6 +61,7 @@ public class AnvilText implements AnimateText {
 
         textSize = hTextView.getTextSize();
 
+        smokeBitmap = BitmapFactory.decodeResource(mHTextView.getResources(), R.drawable.smoke);
     }
 
     @Override public void reset(CharSequence text) {
@@ -94,26 +99,26 @@ public class AnvilText implements AnimateText {
 
         int maxLength = Math.max(mText.length(), mOldText.length());
 
+        float percent = progress / (charTime + charTime / mostCount * (mText.length() - 1)); // 动画进行的百分比 0~1
+
         for (int i = 0; i < maxLength; i++) {
 
             // draw old text
             if (i < mOldText.length()) {
-                //
-                float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
 
                 oldPaint.setTextSize(textSize);
                 int move = CharacterUtils.needMove(i, differentList);
                 if (move != -1) {
                     oldPaint.setAlpha(255);
-                    float p = pp * 2f;
+                    float p = percent * 2f;
                     p = p > 1 ? 1 : p;
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
                 } else {
-                    oldPaint.setAlpha((int) ((1 - pp) * 255));
-                    float y = startY - pp * upDistance;
-                    float width = oldPaint.measureText(mOldText.charAt(i) + "");
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, y, oldPaint);
+                    float p = percent * 2f;
+                    p = p > 1 ? 1 : p;
+                    oldPaint.setAlpha((int) ((1 - p) * 255));
+                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset, startY, oldPaint);
                 }
                 oldOffset += oldGaps[i];
             }
@@ -127,15 +132,10 @@ public class AnvilText implements AnimateText {
                     alpha = alpha > 255 ? 255 : alpha;
                     alpha = alpha < 0 ? 0 : alpha;
 
-                    float size = textSize * 1f / charTime * (progress - charTime * i / mostCount);
-                    //                  float size = (textSize * progress * 6 - i * 5 * textSize/(mText.length()-1));
-                    size = size > textSize ? textSize : size;
-                    size = size < 0 ? 0 : size;
-
                     paint.setAlpha(alpha);
                     paint.setTextSize(textSize);
-                    float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-                    float y = upDistance + startY - pp * upDistance;
+
+                    float y = startY - (1 - percent) * upDistance * 2;
 
                     float width = paint.measureText(mText.charAt(i) + "");
                     canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, paint);
@@ -144,6 +144,34 @@ public class AnvilText implements AnimateText {
                 offset += gaps[i];
             }
         }
+
+        if (percent < 1) {
+            drawSmokes(canvas, startX+ (offset-startX)/2, startY - 60, paint);
+        }
+    }
+
+    /**
+     * 烟雾, 从中间向外扩散
+     * @param canvas 画布
+     * @param x 中心点x坐标
+     * @param y 中心点Y坐标
+     * @param paint 画笔
+     */
+    private void drawSmokes(Canvas canvas, float x, float y, Paint paint) {
+        float[] positions = new float[]{-10,-8,-6,-5,-4,-3,-2.5f,-2,-1.5f,-1,-1,0,0,0,1,1,1.5f,2,2.5f,3,4,5,6,8,10};
+        Random random = new Random();
+        for (int i=0;i<positions.length;i++) {
+            Bitmap singleSmoke = getSingleSmoke(positions[i],random);
+            paint.setAlpha((int) (255*( (Math.abs(positions[i])-10)/10f)));
+            canvas.drawBitmap(singleSmoke, x + positions[i] * 20, y + (50 -singleSmoke.getHeight()), paint);
+        }
+    }
+
+    private Bitmap getSingleSmoke(float i, Random random) {
+
+        int size = (int) (Math.abs(i)* random.nextDouble() * 15 +30);
+
+        return Bitmap.createScaledBitmap(smokeBitmap, size,size,false);
     }
 
     private void calc() {
