@@ -14,6 +14,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.hanks.htextview.AnvilText;
 import com.hanks.htextview.BurnText;
 import com.hanks.htextview.EvaporateText;
 import com.hanks.htextview.FallText;
@@ -91,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                     case R.id.burn:
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new BurnText());
+                        break;
+                    case R.id.anvil:
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(new AnvilText());
                         break;
                 }
             }
