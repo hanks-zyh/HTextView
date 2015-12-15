@@ -119,7 +119,7 @@ public class BurnText implements AnimateText {
                     canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, paint);
                     canvas.drawRect(offset, startY*1.2f - (1 - percent) * (upDistance+startY*0.2f), offset + gaps[i], startY *1.2f, backPaint);
                     if (percent < 1) {
-                        //drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
+                        drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
                     }
 
                 }
@@ -135,7 +135,7 @@ public class BurnText implements AnimateText {
                 int move = CharacterUtils.needMove(i, differentList);
                 if (move != -1) {
                     oldPaint.setAlpha(255);
-                    float p = pp * 5f;
+                    float p = pp * 7f;
                     p = p > 1 ? 1 : p;
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
