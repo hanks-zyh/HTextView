@@ -1,8 +1,6 @@
-package com.hanks.htextview;
+package com.hanks.htextview.util;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,25 +9,29 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.hanks.htextview.util.CharacterUtils;
+import com.hanks.htextview.AnimateText;
+import com.hanks.htextview.CharacterDiffResult;
+import com.hanks.htextview.HTextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 /**
- * 闪光效果
- * Created by hanks on 15-12-14.
+ * 线条边框流动
+ * Created by hanks on 15-12-17.
  */
-public class SparkleText implements AnimateText {
+public class LineText implements AnimateText {
 
-    float progress = 0;
+    float progress       = 0;
+    float ANIMA_DURATION = 1000;
+
     Paint paint, oldPaint, sparkPaint;
-    float charTime = 1000;
+
     HTextView mHTextView;
+
     float upDistance = 0;
 
     int textColor = Color.WHITE;
-    Paint backPaint;
+    Paint linePaint;
 
     private DisplayMetrics metrics;
     private CharSequence   mText;
@@ -46,8 +48,6 @@ public class SparkleText implements AnimateText {
     private float[] gaps    = new float[100];
     private float[] oldGaps = new float[100];
 
-    private Bitmap sparkBitmap;
-
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
 
@@ -62,13 +62,9 @@ public class SparkleText implements AnimateText {
         oldPaint.setColor(textColor);
         oldPaint.setStyle(Paint.Style.FILL);
 
-        backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
-        backPaint.setStyle(Paint.Style.FILL);
-
-        sparkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        sparkPaint.setColor(Color.WHITE);
-        sparkPaint.setStyle(Paint.Style.FILL);
+        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        linePaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
+        linePaint.setStyle(Paint.Style.FILL);
 
         metrics = new DisplayMetrics();
         WindowManager windowManger = (WindowManager) hTextView.getContext()
@@ -76,8 +72,6 @@ public class SparkleText implements AnimateText {
         windowManger.getDefaultDisplay().getMetrics(metrics);
 
         textSize = hTextView.getTextSize();
-
-        sparkBitmap = BitmapFactory.decodeResource(hTextView.getResources(), R.drawable.sparkle);
     }
 
     @Override public void reset(CharSequence text) {
@@ -92,10 +86,8 @@ public class SparkleText implements AnimateText {
 
         calc();
 
-        //计算动画总时间
-        long duration = (long) charTime;
-
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1)
+                .setDuration((long) ANIMA_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
@@ -109,7 +101,7 @@ public class SparkleText implements AnimateText {
 
     @Override public void onDraw(Canvas canvas) {
         float offset = startX;
-        float percent = progress / (charTime);
+        float percent = progress;
 
         paint.setAlpha(255);
         paint.setTextSize(textSize);
@@ -120,29 +112,6 @@ public class SparkleText implements AnimateText {
             offset += gaps[i];
         }
 
-        canvas.drawRect(startX, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset, startY * 1.2f, backPaint);
-        if (startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f) < startY) {
-            drawSparkle(canvas, startX, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), (offset - startX));
-        }
-
-    }
-
-    private void drawSparkle(Canvas canvas, float offset, float y, float width) {
-        Random random = new Random();
-        for (int i = 0; i < random.nextInt(10); i++) {
-            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (y - 10 - random
-                    .nextDouble() * 6), sparkPaint);
-        }
-        for (int i = 0; i < width / 3; i++) {
-            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (y - random
-                    .nextDouble() * 10), sparkPaint);
-        }
-    }
-
-    private Bitmap getRandomSpark(Random random) {
-        int dstWidth = random.nextInt(8) + 1;
-        return Bitmap.createScaledBitmap(sparkBitmap, dstWidth + random.nextInt(3), dstWidth + random
-                .nextInt(5), false);
     }
 
     private void calc() {
@@ -171,4 +140,5 @@ public class SparkleText implements AnimateText {
         paint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
     }
+
 }

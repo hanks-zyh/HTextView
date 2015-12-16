@@ -22,6 +22,7 @@ import com.hanks.htextview.HTextView;
 import com.hanks.htextview.PixelateText;
 import com.hanks.htextview.ScaleText;
 import com.hanks.htextview.SparkleText;
+import com.hanks.htextview.util.LineText;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
@@ -97,11 +98,15 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new AnvilText());
                         break;
+                    case R.id.line:
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(new LineText());
+                        break;
                 }
             }
         });
 
-        radioGroup.check(R.id.sparkle);
+        radioGroup.check(R.id.line);
 
     }
 
