@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
 
@@ -24,7 +25,7 @@ public class AnvilText implements AnimateText {
 
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 300; // 每个字符动画时间 500ms
+    float charTime  = 500; // 每个字符动画时间 500ms
     int   mostCount = 20; // 最多10个字符同时动画
     HTextView mHTextView;
     float upDistance = 0;
@@ -101,6 +102,9 @@ public class AnvilText implements AnimateText {
 
         float percent = progress / (charTime + charTime / mostCount * (mText.length() - 1)); // 动画进行的百分比 0~1
 
+        float firstNew = -1;
+        float lastNew = -1;
+
         for (int i = 0; i < maxLength; i++) {
 
             // draw old text
@@ -115,6 +119,15 @@ public class AnvilText implements AnimateText {
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
                 } else {
+
+                    // 记录第一个新产生的字符和最后一个产生的字符位置,计算出现烟的中心
+                    if(firstNew == -1){
+                        firstNew = offset;
+                    }
+
+                    lastNew = offset;
+
+
                     float p = percent * 2f;
                     p = p > 1 ? 1 : p;
                     oldPaint.setAlpha((int) ((1 - p) * 255));
@@ -128,6 +141,8 @@ public class AnvilText implements AnimateText {
 
                 if (!CharacterUtils.stayHere(i, differentList)) {
 
+                    float interpolation = new BounceInterpolator().getInterpolation(percent);
+
                     int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
                     alpha = alpha > 255 ? 255 : alpha;
                     alpha = alpha < 0 ? 0 : alpha;
@@ -135,7 +150,7 @@ public class AnvilText implements AnimateText {
                     paint.setAlpha(alpha);
                     paint.setTextSize(textSize);
 
-                    float y = startY - (1 - percent) * upDistance * 2;
+                    float y = startY - (1 - interpolation) * upDistance * 2;
 
                     float width = paint.measureText(mText.charAt(i) + "");
                     canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, paint);
@@ -145,8 +160,10 @@ public class AnvilText implements AnimateText {
             }
         }
 
-        if (percent < 1) {
-            drawSmokes(canvas, startX+ (offset-startX)/2, startY - 60, paint);
+        if (percent < 1 ) {
+            if(firstNew != -1 ) {
+                drawSmokes(canvas, firstNew + (lastNew - firstNew) / 2, startY - 50, paint);
+            }
         }
     }
 
@@ -200,4 +217,7 @@ public class AnvilText implements AnimateText {
         paint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
     }
+
+
+
 }
