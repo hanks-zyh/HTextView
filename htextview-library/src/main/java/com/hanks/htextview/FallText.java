@@ -9,6 +9,8 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
@@ -117,8 +119,9 @@ public class FallText implements AnimateText {
                     float centerX = oldOffset + oldGaps[i] / 2;
                     float width = oldPaint.measureText(mOldText.charAt(i) + "");
 
-                    float p = pp * 1.5f;
+                    float p = pp * 1.4f;
                     p = p > 1 ? 1 : p;
+                    p = new OvershootInterpolator().getInterpolation(p);
                     double angle = (1 - p) * (Math.PI);
                     if (i % 2 == 0) {
                         angle = ( p * Math.PI) + Math.PI;
