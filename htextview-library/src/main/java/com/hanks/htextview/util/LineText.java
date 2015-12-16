@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
@@ -47,6 +48,10 @@ public class LineText implements AnimateText {
 
     private float[] gaps    = new float[100];
     private float[] oldGaps = new float[100];
+    private float distWidth;
+    private float distHeight;
+    private float yLineLength;
+    private float lineWidth = 2;
 
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
@@ -57,6 +62,7 @@ public class LineText implements AnimateText {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(textColor);
         paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(lineWidth);
 
         oldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         oldPaint.setColor(textColor);
@@ -99,14 +105,43 @@ public class LineText implements AnimateText {
         mHTextView.invalidate();
     }
 
+    float  padding = 20;
+    PointF p1      = new PointF();
+    PointF  p2      = new PointF();
+    PointF  p3      = new PointF();
+    PointF  p4      = new PointF();
+
+    int xLineLength = 0;
+
     @Override public void onDraw(Canvas canvas) {
         float offset = startX;
         float percent = progress;
-
         paint.setAlpha(255);
         paint.setTextSize(textSize);
 
+        xLineLength = (int) (mHTextView.getWidth() - (mHTextView.getWidth()- distWidth) * percent);
+        yLineLength = (int) (mHTextView.getHeight() - (mHTextView.getHeight()- distHeight) * percent);
+
+        p1.x = (mHTextView.getWidth() /2 + distWidth /2 )* percent;
+        p1.y = (mHTextView.getHeight() - distHeight) / 2;
+        canvas.drawLine(p1.x - xLineLength, p1.y, p1.x, p1.y, paint);
+
+        p2.x = (mHTextView.getWidth() /2 + distWidth /2 );
+        p2.y = (mHTextView.getHeight()/2 + distHeight / 2) * percent;
+        canvas.drawLine(p2.x, p2.y - yLineLength, p2.x, p2.y, paint);
+
+        p3.x = mHTextView.getWidth() -  (mHTextView.getWidth()/2+distWidth/2 ) * percent;
+        p3.y = (mHTextView.getHeight() + distHeight) / 2 ;
+        canvas.drawLine(p3.x + xLineLength, p3.y, p3.x, p3.y, paint);
+
+        p4.x = (mHTextView.getWidth() /2 - distWidth /2 );
+        p4.y = mHTextView.getHeight() - (mHTextView.getHeight()/2 + distHeight/2 ) * percent;
+        canvas.drawLine(p4.x, p4.y + yLineLength, p4.x, p4.y, paint);
+
+
         canvas.drawText(mText, 0, mText.length(), offset, startY, paint);
+
+
 
         for (int i = 0; i < mText.length(); i++) {
             offset += gaps[i];
@@ -139,6 +174,13 @@ public class LineText implements AnimateText {
         Rect bounds = new Rect();
         paint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
+
+        distWidth = bounds.width() + padding * 2;
+        distHeight = bounds.height() + padding * 2;
+
+        xLineLength = mHTextView.getWidth();
+        yLineLength = mHTextView.getHeight();
+
     }
 
 }
