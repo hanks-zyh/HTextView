@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
 
             }
         });
-        seekBar.setProgress(6);
+        seekBar.setProgress(10);
 
         radioGroup = (RadioGroup) findViewById(R.id.typeGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             }
         });
 
-        radioGroup.check(R.id.anvil);
+        radioGroup.check(R.id.sparkle);
 
     }
 
