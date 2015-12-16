@@ -193,13 +193,13 @@ public class AnvilText implements AnimateText {
         }
 
         if (percent>0.3 && percent < 1 ) {
-            if(firstNew != -1 ) {
+//            if(firstNew != -1 ) {
                 drawSmokes(canvas,startX + (offset - startX)/2f, startY-50, paint,percent);
-            }
+//            }
         }
 
         if(progress<50) {
-            mHTextView.postInvalidateDelayed(20);
+            mHTextView.postInvalidate();
             progress++;
         }
     }
