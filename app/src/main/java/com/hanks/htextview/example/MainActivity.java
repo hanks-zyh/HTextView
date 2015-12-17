@@ -14,14 +14,14 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import com.hanks.htextview.AnvilText;
-import com.hanks.htextview.BurnText;
-import com.hanks.htextview.EvaporateText;
-import com.hanks.htextview.FallText;
+import com.hanks.htextview.animatetext.AnvilText;
+import com.hanks.htextview.animatetext.BurnText;
+import com.hanks.htextview.animatetext.EvaporateText;
+import com.hanks.htextview.animatetext.FallText;
 import com.hanks.htextview.HTextView;
-import com.hanks.htextview.PixelateText;
-import com.hanks.htextview.ScaleText;
-import com.hanks.htextview.SparkleText;
+import com.hanks.htextview.animatetext.PixelateText;
+import com.hanks.htextview.animatetext.ScaleText;
+import com.hanks.htextview.animatetext.SparkleText;
 import com.hanks.htextview.util.LineText;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {

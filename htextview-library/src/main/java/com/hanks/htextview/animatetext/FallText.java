@@ -1,15 +1,19 @@
-package com.hanks.htextview;
+package com.hanks.htextview.animatetext;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 
+import com.hanks.htextview.HTextView;
 import com.hanks.htextview.util.CharacterUtils;
+import com.hanks.htextview.util.HLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +21,11 @@ import java.util.List;
  * 蒸发效果
  * Created by hanks on 15-12-14.
  */
-public class EvaporateText implements AnimateText {
+public class FallText implements AnimateText {
 
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 300; // 每个字符动画时间 500ms
+    float charTime  = 400; // 每个字符动画时间 500ms
     int   mostCount = 20; // 最多10个字符同时动画
     HTextView mHTextView;
     float upDistance = 0;
@@ -32,9 +36,9 @@ public class EvaporateText implements AnimateText {
     private CharSequence   mText;
     private CharSequence   mOldText;
     private List<CharacterDiffResult> differentList = new ArrayList<>();
-    private float oldStartX = 0;
-    private float startX    = 0;
-    private float startY    = 0;
+    private float                     oldStartX     = 0;
+    private float                     startX        = 0;
+    private float                     startY        = 0;
 
     public void init(HTextView hTextView) {
         mHTextView = hTextView;
@@ -110,10 +114,42 @@ public class EvaporateText implements AnimateText {
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, oldPaint);
                 } else {
-                    oldPaint.setAlpha((int) ((1 - pp) * 255));
-                    float y = startY - pp * upDistance;
+
+                    oldPaint.setAlpha(255);
+                    float centerX = oldOffset + oldGaps[i] / 2;
                     float width = oldPaint.measureText(mOldText.charAt(i) + "");
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, y, oldPaint);
+
+                    float p = pp * 1.4f;
+                    p = p > 1 ? 1 : p;
+                    p = new OvershootInterpolator().getInterpolation(p);
+                    double angle = (1 - p) * (Math.PI);
+                    if (i % 2 == 0) {
+                        angle = ( p * Math.PI) + Math.PI;
+                    }
+                    float disX = centerX + (float) (width / 2 * Math.cos(angle));
+                    float disY = startY + (float) (width / 2 * Math.sin(angle));
+                    oldPaint.setStyle(Paint.Style.STROKE);
+                    Path path = new Path();
+                    path.moveTo(disX, disY);
+                    //求点A（m,n)关于点P(a,b)的对称点B(x,y)
+                    // (m+x)/2=a ,x=2a-m
+                    // (n+y)/2=b ,y=2b-n
+                    path.lineTo(2 * centerX - disX, 2 * startY - disY);
+                    if (pp <= 0.7) {
+                        // 旋转
+                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, oldPaint);
+                    } else {
+                        // 下落
+                        float p2 = (float) ((pp - 0.7) / 0.3f);
+                        oldPaint.setAlpha((int) ((1 - p2) * 255));
+                        float y = (float) ((p2) * upDistance);
+                        HLog.i(y);
+                        Path path2 = new Path();
+                        path2.moveTo(disX, disY + y);
+                        path2.lineTo(2 * centerX - disX, 2 * startY - disY + y);
+                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path2, 0, 0, oldPaint);
+                    }
+
                 }
                 oldOffset += oldGaps[i];
             }
@@ -128,17 +164,13 @@ public class EvaporateText implements AnimateText {
                     alpha = alpha < 0 ? 0 : alpha;
 
                     float size = textSize * 1f / charTime * (progress - charTime * i / mostCount);
-                    //                  float size = (textSize * progress * 6 - i * 5 * textSize/(mText.length()-1));
                     size = size > textSize ? textSize : size;
                     size = size < 0 ? 0 : size;
 
                     paint.setAlpha(alpha);
-                    paint.setTextSize(textSize);
-                    float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-                    float y = upDistance + startY - pp * upDistance;
-
+                    paint.setTextSize(size);
                     float width = paint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, paint);
+                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, paint);
                 }
 
                 offset += gaps[i];

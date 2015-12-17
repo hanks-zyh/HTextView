@@ -10,8 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.hanks.htextview.AnimateText;
-import com.hanks.htextview.CharacterDiffResult;
+import com.hanks.htextview.animatetext.AnimateText;
+import com.hanks.htextview.animatetext.CharacterDiffResult;
 import com.hanks.htextview.HTextView;
 
 import java.util.ArrayList;

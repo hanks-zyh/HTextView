@@ -1,4 +1,4 @@
-package com.hanks.htextview;
+package com.hanks.htextview.animatetext;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.animation.BounceInterpolator;
 
+import com.hanks.htextview.HTextView;
+import com.hanks.htextview.R;
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
 

@@ -1,9 +1,9 @@
-package com.hanks.htextview;
-import android.content.Context;
+package com.hanks.htextview.animatetext;
 import android.graphics.Canvas;
-import android.util.AttributeSet;
+
+import com.hanks.htextview.HTextView;
 /**
- *
+ * interface used in HTextView
  * Created by hanks on 15-12-14.
  */
 public interface AnimateText {
