@@ -14,13 +14,14 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.hanks.htextview.HTextView;
 import com.hanks.htextview.animatetext.AnvilText;
 import com.hanks.htextview.animatetext.BurnText;
 import com.hanks.htextview.animatetext.EvaporateText;
 import com.hanks.htextview.animatetext.FallText;
-import com.hanks.htextview.HTextView;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.ScaleText;
+import com.hanks.htextview.animatetext.Shimmer;
 import com.hanks.htextview.animatetext.SparkleText;
 import com.hanks.htextview.util.LineText;
 
@@ -112,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
 
     public void onClick(View v) {
         updateCounter();
+        Shimmer shimmer = new Shimmer();
+        shimmer.start(hTextView);
     }
 
     private void updateCounter() {

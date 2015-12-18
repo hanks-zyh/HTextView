@@ -22,9 +22,9 @@
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#fff"
         android:gravity="center"
-        android:textColor="#000"
+        android:textColor="#444"
+        android:text="hwwwlods"
         android:onClick="onClick"
         android:textSize="30sp"/>
 

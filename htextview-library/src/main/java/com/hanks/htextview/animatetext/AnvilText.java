@@ -20,7 +20,7 @@ import java.util.List;
  * keynote 轰然坠落效果
  * Created by hanks on 15-12-14.
  */
-public class AnvilText implements AnimateText {
+public class                                                                 AnvilText implements AnimateText {
 
     Paint paint, oldPaint, bitmapPaint;
 
