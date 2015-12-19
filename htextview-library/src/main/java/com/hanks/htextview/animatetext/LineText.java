@@ -1,4 +1,4 @@
-package com.hanks.htextview.util;
+package com.hanks.htextview.animatetext;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import com.hanks.htextview.animatetext.AnimateText;
 import com.hanks.htextview.animatetext.CharacterDiffResult;
 import com.hanks.htextview.HTextView;
+import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.ArrayList;
 import java.util.List;

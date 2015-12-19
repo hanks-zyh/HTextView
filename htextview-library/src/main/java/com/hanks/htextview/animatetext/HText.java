@@ -98,9 +98,26 @@ public abstract class HText implements AnimateText {
         mHTextView.invalidate();
     }
 
+    /**
+     * 类被实例化时初始化
+     */
     protected abstract void initVariables();
+    /**
+     * 具体实现动画
+     * @param text
+     */
     protected abstract void animateStart(CharSequence text);
+
+    /**
+     * 每次动画前初始化调用
+     * @param text
+     */
     protected abstract void animatePrepare(CharSequence text);
+
+    /**
+     * 动画每次刷新界面时调用
+     * @param canvas
+     */
     protected abstract void drawFrame(Canvas canvas);
 
 }

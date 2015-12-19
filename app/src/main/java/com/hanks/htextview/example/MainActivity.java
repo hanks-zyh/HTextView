@@ -22,7 +22,7 @@ import com.hanks.htextview.animatetext.FallText;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.ScaleText;
 import com.hanks.htextview.animatetext.SparkleText;
-import com.hanks.htextview.util.LineText;
+import com.hanks.htextview.animatetext.LineText;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
