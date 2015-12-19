@@ -59,7 +59,7 @@ public class HTextView extends TextView {
                 mIHText = new ScaleText();
                 break;
             case EVAPORATE:
-                mIHText = new EvaporateTlext();
+                mIHText = new EvaporateText();
                 break;
             case FALL:
                 mIHText = new FallText();
