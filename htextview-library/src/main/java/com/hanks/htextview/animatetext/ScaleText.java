@@ -11,6 +11,7 @@ import com.hanks.htextview.util.CharacterUtils;
 public class ScaleText extends HText {
 
     float mostCount = 20;
+    private long duration;
 
     @Override protected void initVariables() {
 
@@ -20,13 +21,13 @@ public class ScaleText extends HText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
         // 计算动画总时间
-        final long duration = (long) (ANIMATE_DURATION + ANIMATE_DURATION / mostCount * (n - 1));
+        duration = (long) (ANIMATE_DURATION + ANIMATE_DURATION / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override public void onAnimationUpdate(ValueAnimator animation) {
-                progress = (float) animation.getAnimatedValue() / duration;
+                progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
         });
@@ -48,17 +49,19 @@ public class ScaleText extends HText {
             // draw old text
             if (i < mOldText.length()) {
 
+                float percent = progress / duration;
                 int move = CharacterUtils.needMove(i, differentList);
                 if (move != -1) {
                     mOldPaint.setTextSize(mTextSize);
                     mOldPaint.setAlpha(255);
-                    float p = progress * 2f;
+
+                    float p = percent * 2f;
                     p = p > 1 ? 1 : p;
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 } else {
-                    mOldPaint.setAlpha((int) ((1 - progress) * 255));
-                    mOldPaint.setTextSize(mTextSize * (1 - progress));
+                    mOldPaint.setAlpha((int) ((1 - percent) * 255));
+                    mOldPaint.setTextSize(mTextSize * (1 - percent));
                     float width = mOldPaint.measureText(mOldText.charAt(i) + "");
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, startY, mOldPaint);
                 }
@@ -71,8 +74,8 @@ public class ScaleText extends HText {
                 if (!CharacterUtils.stayHere(i, differentList)) {
 
                     int alpha = (int) (255f / ANIMATE_DURATION * (progress - ANIMATE_DURATION * i / mostCount));
-                    alpha = alpha > 255 ? 255 : alpha;
-                    alpha = alpha < 0 ? 0 : alpha;
+                    if(alpha > 255) alpha = 255;
+                    if(alpha < 0) alpha =  0;
 
                     float size = mTextSize * 1f / ANIMATE_DURATION * (progress - ANIMATE_DURATION * i / mostCount);
                     if (size > mTextSize) size = mTextSize;

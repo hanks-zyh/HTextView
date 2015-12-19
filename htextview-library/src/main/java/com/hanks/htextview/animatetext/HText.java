@@ -56,8 +56,10 @@ public abstract class HText implements AnimateText {
         mOldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mOldPaint.setColor(mHTextView.getCurrentTextColor());
         mOldPaint.setStyle(Paint.Style.FILL);
+
         mText = "";
         mOldText = "";
+
         mTextSize = mHTextView.getTextSize();
 
     }
@@ -68,7 +70,6 @@ public abstract class HText implements AnimateText {
         prepareAnimate();
         animatePrepare(text);
         animateStart(text);
-
     }
 
     @Override public void onDraw(Canvas canvas) {
