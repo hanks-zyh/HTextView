@@ -18,11 +18,12 @@ public class FallText extends HText {
     private float charTime    = 400; // 每个字符动画时间 500ms
     private int   mostCount   = 20; // 最多10个字符同时动画
     private float mTextHeight = 0;
-    private float progress;
+    private float progress ;
     private OvershootInterpolator interpolator;
 
     @Override protected void initVariables() {
         interpolator = new OvershootInterpolator();
+
     }
 
     @Override protected void animateStart(CharSequence text) {

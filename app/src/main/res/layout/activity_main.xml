@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="next"/>
-
     <TextSwitcher
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -19,69 +12,78 @@
 
     <com.hanks.htextview.HTextView
         android:id="@+id/text2"
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:clickable="true"
         android:gravity="center"
-        android:textColor="#444"
-        android:text="hwwwlods"
         android:onClick="onClick"
+        android:text="What is design?"
+        android:background="#fff"
+        android:textColor="#666"
         android:textSize="30sp"/>
 
     <SeekBar
-        android:layout_marginTop="20dp"
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
 
 
     <RadioGroup
-        android:layout_marginTop="10dp"
         android:id="@+id/typeGroup"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
         <RadioButton
             android:id="@+id/scale"
-            android:text="Scale"
-            android:checked="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Scale"/>
+
         <RadioButton
             android:id="@+id/evaporate"
-            android:text="Evaporate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Evaporate"/>
+
         <RadioButton
             android:id="@+id/fall"
-            android:text="Fall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Fall"/>
+
         <RadioButton
             android:id="@+id/pixelate"
-            android:text="Pixelate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Pixelate"/>
+
         <RadioButton
             android:id="@+id/sparkle"
-            android:text="Sparkle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Sparkle"/>
+
         <RadioButton
             android:id="@+id/burn"
-            android:text="Burn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Burn"/>
+
         <RadioButton
             android:id="@+id/anvil"
-            android:text="Anvil"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Anvil"/>
+
         <RadioButton
             android:id="@+id/line"
-            android:text="Line"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Line"/>
     </RadioGroup>
 
 </LinearLayout>

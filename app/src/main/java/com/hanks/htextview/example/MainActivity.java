@@ -103,10 +103,11 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                         hTextView.setAnimateType(new LineText());
                         break;
                 }
+
+                onClick(radioGroup.findViewById(checkedId));
             }
         });
 
-        radioGroup.check(R.id.line);
 
     }
 

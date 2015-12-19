@@ -38,6 +38,7 @@ public abstract class HText implements AnimateText {
 
     protected HTextView mHTextView;
 
+
     @Override public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
 
         mHTextView = hTextView;
@@ -50,15 +51,18 @@ public abstract class HText implements AnimateText {
         mOldPaint.setColor(mHTextView.getCurrentTextColor());
         mOldPaint.setStyle(Paint.Style.FILL);
 
-        mText = "";
-        mOldText = "";
+        mText = mHTextView.getText();
+        mOldText = mHTextView.getText();
 
         mTextSize = mHTextView.getTextSize();
 
         initVariables();
+        prepareAnimate();
+
     }
 
     @Override public void animateText(CharSequence text) {
+        mHTextView.setText(text);
         mOldText = mText;
         mText = text;
         prepareAnimate();
@@ -83,9 +87,9 @@ public abstract class HText implements AnimateText {
             oldGaps[i] = mOldPaint.measureText(mOldText.charAt(i) + "");
         }
 
-        oldStartX = (mHTextView.getWidth() - mHTextView.getCompoundPaddingLeft() - mHTextView.getPaddingLeft() - mOldPaint
+        oldStartX = (mHTextView.getMeasuredWidth() - mHTextView.getCompoundPaddingLeft() - mHTextView.getPaddingLeft() - mOldPaint
                 .measureText(mOldText.toString())) / 2f;
-        startX = (mHTextView.getWidth() - mHTextView.getCompoundPaddingLeft() - mHTextView.getPaddingLeft() - mPaint
+        startX = (mHTextView.getMeasuredWidth() - mHTextView.getCompoundPaddingLeft() - mHTextView.getPaddingLeft() - mPaint
                 .measureText(mText.toString())) / 2f;
         startY = mHTextView.getBaseline();
 
@@ -119,5 +123,7 @@ public abstract class HText implements AnimateText {
      * @param canvas
      */
     protected abstract void drawFrame(Canvas canvas);
+
+
 
 }
