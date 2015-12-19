@@ -15,13 +15,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.hanks.htextview.HTextView;
-import com.hanks.htextview.animatetext.AnvilText;
-import com.hanks.htextview.animatetext.EvaporateText;
-import com.hanks.htextview.animatetext.FallText;
-import com.hanks.htextview.animatetext.LineText;
-import com.hanks.htextview.animatetext.PixelateText;
-import com.hanks.htextview.animatetext.ScaleText;
-import com.hanks.htextview.animatetext.SparkleText;
+import com.hanks.htextview.HTextViewType;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
@@ -72,37 +66,37 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                     case R.id.scale:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
-                        hTextView.setAnimateType(new ScaleText());
+                        hTextView.setAnimateType(HTextViewType.SCALE);
                         break;
                     case R.id.evaporate:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
-                        hTextView.setAnimateType(new EvaporateText());
+                        hTextView.setAnimateType(HTextViewType.EVAPORATE);
                         break;
                     case R.id.fall:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
-                        hTextView.setAnimateType(new FallText());
+                        hTextView.setAnimateType(HTextViewType.FALL);
                         break;
                     case R.id.pixelate:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
-                        hTextView.setAnimateType(new PixelateText());
+                        hTextView.setAnimateType(HTextViewType.PIXELATE);
                         break;
                     case R.id.sparkle:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
-                        hTextView.setAnimateType(new SparkleText());
+                        hTextView.setAnimateType(HTextViewType.SPARKLE);
                         break;
                     case R.id.anvil:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
-                        hTextView.setAnimateType(new AnvilText());
+                        hTextView.setAnimateType(HTextViewType.ANVIL);
                         break;
                     case R.id.line:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
-                        hTextView.setAnimateType(new LineText());
+                        hTextView.setAnimateType(HTextViewType.LINE);
                         break;
                 }
 
@@ -110,10 +104,9 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             }
         });
 
-
         hTextView.setTextColor(Color.BLACK);
         hTextView.setBackgroundColor(Color.WHITE);
-        hTextView.setAnimateType(new ScaleText());
+        hTextView.setAnimateType(HTextViewType.SCALE);
         onClick(findViewById(R.id.scale));
     }
 
