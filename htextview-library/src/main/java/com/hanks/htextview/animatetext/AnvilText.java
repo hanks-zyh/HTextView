@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.view.animation.BounceInterpolator;
 
 import com.hanks.htextview.HTextView;
@@ -20,7 +21,7 @@ import java.util.List;
  * keynote 轰然坠落效果
  * Created by hanks on 15-12-14.
  */
-public class                                                                 AnvilText implements AnimateText {
+public class AnvilText implements AnimateText {
 
     Paint paint, oldPaint, bitmapPaint;
 
@@ -47,7 +48,7 @@ public class                                                                 Anv
     private float startY    = 0;
     private int textWidth;
 
-    public void init(HTextView hTextView) {
+    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
 
         mText = mHTextView.getText();
@@ -111,7 +112,7 @@ public class                                                                 Anv
             Bitmap smoke = smokes[i];
 
             int dstWidth = (int) (textWidth * 1.5f);
-            if(dstWidth<400) dstWidth = 400;
+            if (dstWidth < 400) dstWidth = 400;
             int dstHeight = (int) (smoke.getHeight() * 1f / smoke.getWidth() * dstWidth);
             smokes[i] = Bitmap.createScaledBitmap(smoke, dstWidth, dstHeight, false);
             smoke.recycle();

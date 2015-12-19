@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -50,7 +51,7 @@ public class SparkleText implements AnimateText {
 
     private Bitmap sparkBitmap;
 
-    public void init(HTextView hTextView) {
+    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
 
         mText = "";

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -251,7 +252,7 @@ public class PixelateText implements AnimateText {
 
     }
 
-    public void init(HTextView hTextView) {
+    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
 
         mText = "";

@@ -1,164 +1,144 @@
 package com.hanks.htextview.util;
-import android.content.res.TypedArray;
-import android.graphics.LinearGradient;
-import android.graphics.Matrix;
+import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Shader;
+import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
 import android.util.AttributeSet;
-import android.view.View;
 
-import com.hanks.htextview.R;
+import com.hanks.htextview.HTextView;
+import com.hanks.htextview.animatetext.AnimateText;
+import com.hanks.htextview.animatetext.CharacterDiffResult;
+
+import java.util.ArrayList;
+import java.util.List;
 /**
- *
+ * HTextViewHelper
  * Created by hanks on 15-12-18.
  */
-public class HTextViewHelper {
-    private static final int DEFAULT_REFLECTION_COLOR = 0xFFFFFFFF;
-    private View                   view;
-    private Paint                  paint;
-    // center position of the gradient
-    private float                  gradientX;
-    // shader applied on the text view
-    // only null until the first global layout
-    private LinearGradient         linearGradient;
-    // shader's local matrix
-    // never null
-    private Matrix                 linearGradientMatrix;
-    private int                    primaryColor;
-    // shimmer reflection color
-    private int                    reflectionColor;
-    // true when animating
-    private boolean                isShimmering;
-    // true after first global layout
-    private boolean                isSetUp;
-    // callback called after first global layout
-    private AnimationSetupCallback callback;
+public abstract class HTextViewHelper implements AnimateText {
 
-    public HTextViewHelper(View view, Paint paint, AttributeSet attributeSet) {
-        this.view = view;
-        this.paint = paint;
-        init(attributeSet);
-    }
+    public static final int ANIMATE_TYPE_SCALE     = 0;
+    public static final int ANIMATE_TYPE_EVAPORATE = 1;
+    public static final int ANIMATE_TYPE_FALL      = 2;
+    public static final int ANIMATE_TYPE_SPARKLE   = 3;
+    public static final int ANIMATE_TYPE_ANVIL     = 4;
+    public static final int ANIMATE_TYPE_LINE      = 5;
+    public static final int ANIMATE_TYPE_DEFAULT   = ANIMATE_TYPE_SCALE;
 
-    public float getGradientX() {
-        return gradientX;
-    }
+    private HTextView mHTextView;
+    private final float ANIMATE_DURATION = 400;
+    private final int   mostCount        = 20; // 最多10个字符同时动画
+    /**
+     * if the value is false , {@link HTextView} can be used as TextView
+     * 如果设置为false,HTextView将和TextView一样
+     */
+    public boolean isAnimate;
+    /**
+     * 动画进度 [0..1]
+     */
+    float progress = 0;
 
-    public void setGradientX(float gradientX) {
-        this.gradientX = gradientX;
-        view.invalidate();
-    }
+    Paint mPaint, mOldPaint;
 
-    public boolean isShimmering() {
-        return isShimmering;
-    }
+    private float[] gaps    = new float[100];
+    private float[] oldGaps = new float[100];
 
-    public void setShimmering(boolean isShimmering) {
-        this.isShimmering = isShimmering;
-    }
+    private float mTextSize;
 
-    public boolean isSetUp() {
-        return isSetUp;
-    }
+    private CharSequence mText;
+    private CharSequence mOldText;
 
-    public void setAnimationSetupCallback(AnimationSetupCallback callback) {
-        this.callback = callback;
-    }
+    private List<CharacterDiffResult> differentList = new ArrayList<>();
 
-    public int getPrimaryColor() {
-        return primaryColor;
-    }
+    private float oldStartX = 0; // 原来的字符串开始画的x位置
+    private float startX    = 0; // 新的字符串开始画的x位置
+    private float startY    = 0; // 字符串开始画的Y, baseline
 
-    public void setPrimaryColor(int primaryColor) {
-        this.primaryColor = primaryColor;
-        if (isSetUp) {
-            resetLinearGradient();
-        }
-    }
+    private HTextViewHelper mHTextViewHelper;
 
-    public int getReflectionColor() {
-        return reflectionColor;
-    }
+    /**
+     * animate type
+     */
+    private int mAnimateType;
 
-    public void setReflectionColor(int reflectionColor) {
-        this.reflectionColor = reflectionColor;
-        if (isSetUp) {
-            resetLinearGradient();
-        }
-    }
+    /**
+     * primaryColor is the value of android:textColor in xml
+     */
+    private int primaryColor;
 
-    private void init(AttributeSet attributeSet) {
 
-        reflectionColor = DEFAULT_REFLECTION_COLOR;
-
-        if (attributeSet != null) {
-            TypedArray a = view.getContext()
-                    .obtainStyledAttributes(attributeSet, R.styleable.HTextView, 0, 0);
-            if (a != null) {
-                try {
-                    reflectionColor =   DEFAULT_REFLECTION_COLOR;
-                } catch (Exception e) {
-                    android.util.Log.e("ShimmerTextView", "Error while creating the view:", e);
-                } finally {
-                    a.recycle();
-                }
-            }
-        }
-
-        linearGradientMatrix = new Matrix();
-    }
-
-    private void resetLinearGradient() {
-
-        // our gradient is a simple linear gradient from textColor to reflectionColor. its axis is at the center
-        // when it's outside of the view, the outer color (textColor) will be repeated (Shader.TileMode.CLAMP)
-        // initially, the linear gradient is positioned on the left side of the view
-        linearGradient = new LinearGradient(-view.getWidth(), 0, 0, 0, new int[]{primaryColor, reflectionColor, primaryColor,}, new float[]{0, 0.5f, 1}, Shader.TileMode.CLAMP);
-
-        paint.setShader(linearGradient);
-    }
-
-    public void onSizeChanged() {
-
-        resetLinearGradient();
-
-        if (!isSetUp) {
-            isSetUp = true;
-
-            if (callback != null) {
-                callback.onSetupAnimation(view);
-            }
-        }
+    private void init() {
+        mPaint = mHTextView.getPaint();
+        mOldPaint = new Paint(mPaint);
+        mText = "";
+        mOldText = "";
+        mTextSize = mHTextView.getTextSize();
+        initVariables();
     }
 
     /**
-     * content of the wrapping view's onDraw(Canvas)
-     * MUST BE CALLED BEFORE SUPER STATEMENT
+     * here subClass to childInitVariables
      */
-    public void onDraw() {
+    public abstract void initVariables();
 
-        // only draw the shader gradient over the text while animating
-        if (isShimmering) {
+    @Override public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
+        init();
+    }
 
-            // first onDraw() when shimmering
-            if (paint.getShader() == null) {
-                paint.setShader(linearGradient);
-            }
+    public void animateText(CharSequence text) {
+        mOldText = mText;
+        mText = text;
+        calc();
+    }
 
-            // translate the shader local matrix
-            linearGradientMatrix.setTranslate(2 * gradientX, 0);
+    private void calc() {
+        mTextSize = mHTextView.getTextSize();
 
-            // this is required in order to invalidate the shader's position
-            linearGradient.setLocalMatrix(linearGradientMatrix);
-
-        } else {
-            // we're not animating, remove the shader from the paint
-            paint.setShader(null);
+        mPaint.setTextSize(mTextSize);
+        for (int i = 0; i < mText.length(); i++) {
+            gaps[i] = mPaint.measureText(mText.charAt(i) + "");
         }
 
+        mOldPaint.setTextSize(mTextSize);
+        for (int i = 0; i < mOldText.length(); i++) {
+            oldGaps[i] = mOldPaint.measureText(mOldText.charAt(i) + "");
+        }
+
+        oldStartX = (mHTextView.getWidth() - mOldPaint.measureText(mOldText.toString())) / 2f;
+
+        startX = (mHTextView.getWidth() - mPaint.measureText(mText.toString())) / 2f;
+        startY = mHTextView.getBaseline();
+
+        differentList.clear();
+        differentList.addAll(CharacterUtils.diff(mOldText, mText));
     }
 
-    public interface AnimationSetupCallback {
-        void onSetupAnimation(View target);
+    public void onDraw(Canvas canvas) {
+        mHTextViewHelper.onDraw(canvas);
     }
+
+    public void reset(CharSequence text) {
+        mHTextViewHelper.reset(text);
+    }
+
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+
+    }
+
+
+
+
+    /**
+     * set different animate type
+     *
+     * @param mAnimateType see {@link HTextViewHelper}
+     */
+    public void setAnimateType(@IntRange(from = 0, to = 5) int mAnimateType) {
+        this.mAnimateType = mAnimateType;
+    }
+
+    public void setPrimaryColor(@ColorInt int primaryColor) {
+        this.primaryColor = primaryColor;
+    }
+
 }

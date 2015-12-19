@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -37,7 +38,7 @@ public class EvaporateText implements AnimateText {
     private float startX    = 0;
     private float startY    = 0;
 
-    public void init(HTextView hTextView) {
+    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
 
         mText = "";
