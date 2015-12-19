@@ -33,8 +33,7 @@
         android:id="@+id/typeGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp" >
 
         <RadioButton
             android:id="@+id/scale"
@@ -66,12 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sparkle"/>
-
-        <RadioButton
-            android:id="@+id/burn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Burn"/>
 
         <RadioButton
             android:id="@+id/anvil"

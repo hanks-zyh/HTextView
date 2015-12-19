@@ -16,13 +16,12 @@ import android.widget.ViewSwitcher;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.animatetext.AnvilText;
-import com.hanks.htextview.animatetext.BurnText;
 import com.hanks.htextview.animatetext.EvaporateText;
 import com.hanks.htextview.animatetext.FallText;
+import com.hanks.htextview.animatetext.LineText;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.ScaleText;
 import com.hanks.htextview.animatetext.SparkleText;
-import com.hanks.htextview.animatetext.LineText;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
@@ -95,11 +94,6 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new SparkleText());
                         break;
-                    case R.id.burn:
-                        hTextView.setTextColor(Color.WHITE);
-                        hTextView.setBackgroundColor(Color.BLACK);
-                        hTextView.setAnimateType(new BurnText());
-                        break;
                     case R.id.anvil:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
@@ -117,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         });
 
 
+        hTextView.setTextColor(Color.BLACK);
+        hTextView.setBackgroundColor(Color.WHITE);
+        hTextView.setAnimateType(new ScaleText());
+        onClick(findViewById(R.id.scale));
     }
 
     public void onClick(View v) {
