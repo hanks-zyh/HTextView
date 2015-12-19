@@ -23,7 +23,7 @@ import java.util.Random;
  * 蒸发效果
  * Created by hanks on 15-12-14.
  */
-public class BurnText implements AnimateText {
+public class BurnText implements IHText {
 
     float progress = 0;
     Paint paint, oldPaint;

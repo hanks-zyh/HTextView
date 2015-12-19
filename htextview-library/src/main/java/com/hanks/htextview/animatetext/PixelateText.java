@@ -22,7 +22,7 @@ import java.util.List;
  * 缩放动画
  * Created by hanks on 15-12-14.
  */
-public class PixelateText implements AnimateText {
+public class PixelateText implements IHText {
 
     //缩放系数
     public final static int SCALE = 8;

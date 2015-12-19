@@ -6,7 +6,7 @@ import android.support.annotation.IntRange;
 import android.util.AttributeSet;
 
 import com.hanks.htextview.HTextView;
-import com.hanks.htextview.animatetext.AnimateText;
+import com.hanks.htextview.animatetext.IHText;
 import com.hanks.htextview.animatetext.CharacterDiffResult;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
  * HTextViewHelper
  * Created by hanks on 15-12-18.
  */
-public abstract class HTextViewHelper implements AnimateText {
+public abstract class HTextViewHelper implements IHText {
 
     public static final int ANIMATE_TYPE_SCALE     = 0;
     public static final int ANIMATE_TYPE_EVAPORATE = 1;

@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.hanks.htextview.animatetext.AnimateText;
+import com.hanks.htextview.animatetext.IHText;
 import com.hanks.htextview.animatetext.FallText;
 
 /**
@@ -13,7 +13,7 @@ import com.hanks.htextview.animatetext.FallText;
  */
 public class HTextView extends TextView {
 
-    private AnimateText mAnimateText = new FallText();
+    private IHText mIHText = new FallText();
 
     public HTextView(Context context) {
         super(context);
@@ -32,23 +32,23 @@ public class HTextView extends TextView {
 
 
     private void init(AttributeSet attrs, int defStyle) {
-        mAnimateText.init(this, attrs, defStyle);
+        mIHText.init(this, attrs, defStyle);
     }
 
     public void animateText(CharSequence text) {
-        mAnimateText.animateText(text);
+        mIHText.animateText(text);
     }
 
     @Override protected void onDraw(Canvas canvas) {
-        mAnimateText.onDraw(canvas);
+        mIHText.onDraw(canvas);
     }
 
     public void reset(CharSequence text){
-        mAnimateText.reset(text);
+        mIHText.reset(text);
     }
 
-    public void setAnimateType(AnimateText animateText) {
-        this.mAnimateText = animateText;
+    public void setAnimateType(IHText IHText) {
+        this.mIHText = IHText;
         init(null,0);
     }
 }

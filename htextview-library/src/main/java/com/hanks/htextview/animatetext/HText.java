@@ -12,7 +12,7 @@ import java.util.List;
  * base class
  * Created by hanks on 15-12-19.
  */
-public abstract class HText implements AnimateText {
+public abstract class HText implements IHText {
 
     protected Paint mPaint, mOldPaint;
 
