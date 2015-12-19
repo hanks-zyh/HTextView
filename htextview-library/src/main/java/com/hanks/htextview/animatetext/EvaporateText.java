@@ -13,7 +13,8 @@ public class EvaporateText extends HText {
 
     float charTime  = 300; // 每个字符动画时间 500ms
     int   mostCount = 20; // 最多10个字符同时动画
-    private int upDistance;
+    private int   mTextHeight;
+    private float progress;
 
     @Override protected void initVariables() {
 
@@ -41,7 +42,7 @@ public class EvaporateText extends HText {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
-        upDistance = bounds.height();
+        mTextHeight = bounds.height();
     }
 
     @Override protected void drawFrame(Canvas canvas) {
@@ -71,7 +72,7 @@ public class EvaporateText extends HText {
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 } else {
                     mOldPaint.setAlpha((int) ((1 - pp) * 255));
-                    float y = startY - pp * upDistance;
+                    float y = startY - pp * mTextHeight;
                     float width = mOldPaint.measureText(mOldText.charAt(i) + "");
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, y, mOldPaint);
                 }
@@ -91,7 +92,7 @@ public class EvaporateText extends HText {
                     mPaint.setAlpha(alpha);
                     mPaint.setTextSize(mTextSize);
                     float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-                    float y = upDistance + startY - pp * upDistance;
+                    float y = mTextHeight + startY - pp * mTextHeight;
 
                     float width = mPaint.measureText(mText.charAt(i) + "");
                     canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, mPaint);

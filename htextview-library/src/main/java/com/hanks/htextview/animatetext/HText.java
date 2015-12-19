@@ -14,13 +14,6 @@ import java.util.List;
  */
 public abstract class HText implements AnimateText {
 
-    protected final float ANIMATE_DURATION = 400;
-
-    /**
-     * animate progress , values is [0..1]
-     */
-    protected float progress = 0;
-
     protected Paint mPaint, mOldPaint;
 
     /**
@@ -100,7 +93,6 @@ public abstract class HText implements AnimateText {
     }
 
     public void reset(CharSequence text) {
-        progress = 1;
         animatePrepare(text);
         mHTextView.invalidate();
     }

@@ -11,7 +11,9 @@ import com.hanks.htextview.util.CharacterUtils;
 public class ScaleText extends HText {
 
     float mostCount = 20;
+    float charTime = 400;
     private long duration;
+    private float progress;
 
     @Override protected void initVariables() {
 
@@ -21,7 +23,7 @@ public class ScaleText extends HText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
         // 计算动画总时间
-        duration = (long) (ANIMATE_DURATION + ANIMATE_DURATION / mostCount * (n - 1));
+        duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -73,11 +75,11 @@ public class ScaleText extends HText {
 
                 if (!CharacterUtils.stayHere(i, differentList)) {
 
-                    int alpha = (int) (255f / ANIMATE_DURATION * (progress - ANIMATE_DURATION * i / mostCount));
+                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
                     if(alpha > 255) alpha = 255;
                     if(alpha < 0) alpha =  0;
 
-                    float size = mTextSize * 1f / ANIMATE_DURATION * (progress - ANIMATE_DURATION * i / mostCount);
+                    float size = mTextSize * 1f / charTime * (progress - charTime * i / mostCount);
                     if (size > mTextSize) size = mTextSize;
                     if (size < 0) size = 0;
 
