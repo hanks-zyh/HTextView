@@ -57,7 +57,11 @@ public abstract class HText implements AnimateText {
         mTextSize = mHTextView.getTextSize();
 
         initVariables();
-        prepareAnimate();
+        mHTextView.postDelayed(new Runnable() {
+            @Override public void run() {
+                prepareAnimate();
+            }
+        },50);
 
     }
 
