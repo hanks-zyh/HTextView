@@ -1,5 +1,7 @@
 package com.hanks.htextview.util;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Canvas;
 /**
  * 单位转换
  * Created by hanks on 15-12-19.
@@ -7,6 +9,13 @@ import android.content.Context;
 public final class DisplayUtils {
     private DisplayUtils() {
     }
+
+    private static final float  DENSITY = Resources.getSystem().getDisplayMetrics().density;
+
+    public static int dp2Px(int dp) {
+        return Math.round(dp * DENSITY);
+    }
+
 
     public static int px2dp(Context ctx, float pxValue) {
         final float density = ctx.getResources().getDisplayMetrics().density;

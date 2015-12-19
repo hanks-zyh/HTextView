@@ -71,34 +71,42 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
             @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.scale:
+                        hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
                         hTextView.setAnimateType(new ScaleText());
                         break;
                     case R.id.evaporate:
+                        hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
                         hTextView.setAnimateType(new EvaporateText());
                         break;
                     case R.id.fall:
+                        hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
                         hTextView.setAnimateType(new FallText());
                         break;
                     case R.id.pixelate:
+                        hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
                         hTextView.setAnimateType(new PixelateText());
                         break;
                     case R.id.sparkle:
+                        hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new SparkleText());
                         break;
                     case R.id.burn:
+                        hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new BurnText());
                         break;
                     case R.id.anvil:
+                        hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new AnvilText());
                         break;
                     case R.id.line:
+                        hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(new LineText());
                         break;

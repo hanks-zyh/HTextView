@@ -19,7 +19,7 @@
         android:onClick="onClick"
         android:text="What is design?"
         android:background="#fff"
-        android:textColor="#666"
+        android:textColor="#fff"
         android:textSize="30sp"/>
 
     <SeekBar
