@@ -55,6 +55,7 @@ public abstract class HText implements AnimateText {
 
         mTextSize = mHTextView.getTextSize();
 
+        initVariables();
     }
 
     @Override public void animateText(CharSequence text) {
