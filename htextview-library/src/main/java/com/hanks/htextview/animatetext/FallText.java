@@ -10,18 +10,19 @@ import android.view.animation.OvershootInterpolator;
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
 /**
- * 蒸发效果
+ * 悬挂坠落效果
  * Created by hanks on 15-12-14.
  */
 public class FallText extends HText {
 
-    float charTime   = 400; // 每个字符动画时间 500ms
-    int   mostCount  = 20; // 最多10个字符同时动画
-    float upDistance = 0;
-    float progress;
+    private float charTime    = 400; // 每个字符动画时间 500ms
+    private int   mostCount   = 20; // 最多10个字符同时动画
+    private float mTextHeight = 0;
+    private float progress;
+    private OvershootInterpolator interpolator;
 
     @Override protected void initVariables() {
-
+        interpolator = new OvershootInterpolator();
     }
 
     @Override protected void animateStart(CharSequence text) {
@@ -46,7 +47,7 @@ public class FallText extends HText {
     @Override protected void animatePrepare(CharSequence text) {
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
-        upDistance = bounds.height();
+        mTextHeight = bounds.height();
     }
 
     @Override protected void drawFrame(Canvas canvas) {
@@ -79,7 +80,8 @@ public class FallText extends HText {
 
                     float p = percent * 1.4f;
                     p = p > 1 ? 1 : p;
-                    p = new OvershootInterpolator().getInterpolation(p);
+
+                    p = interpolator.getInterpolation(p);
                     double angle = (1 - p) * (Math.PI);
                     if (i % 2 == 0) {
                         angle = (p * Math.PI) + Math.PI;
@@ -100,7 +102,7 @@ public class FallText extends HText {
                         // 下落
                         float p2 = (float) ((percent - 0.7) / 0.3f);
                         mOldPaint.setAlpha((int) ((1 - p2) * 255));
-                        float y = (float) ((p2) * upDistance);
+                        float y = (float) ((p2) * mTextHeight);
                         HLog.i(y);
                         Path path2 = new Path();
                         path2.moveTo(disX, disY + y);
