@@ -1,6 +1,7 @@
 package com.hanks.htextview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import com.hanks.htextview.animatetext.SparkleText;
  */
 public class HTextView extends TextView {
 
-    private IHText mIHText = new FallText();
+    private IHText mIHText = new ScaleText();
 
     public HTextView(Context context) {
         super(context);
@@ -38,6 +39,41 @@ public class HTextView extends TextView {
 
 
     private void init(AttributeSet attrs, int defStyle) {
+
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView);
+        int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
+        switch (animateType){
+            case 0:
+                mIHText = new ScaleText();
+                break;
+            case 1:
+                mIHText = new EvaporateText();
+                break;
+            case 2:
+                mIHText = new FallText();
+                break;
+            case 3:
+                mIHText = new SparkleText();
+                break;
+            case 4:
+                mIHText = new AnvilText();
+                break;
+            case 5:
+                mIHText = new LineText();
+                break;
+            case 6:
+                mIHText = new PixelateText();
+                break;
+//            <enum name="scale" value="0"/>
+//            <enum name="evaporate" value="1"/>
+//            <enum name="fall" value="2"/>
+//            <enum name="sparkle" value="3"/>
+//            <enum name="anvil" value="4"/>
+//            <enum name="line" value="5"/>
+//            <enum name="pixelate" value="6"/
+        }
+        typedArray.recycle();
+
         mIHText.init(this, attrs, defStyle);
     }
 

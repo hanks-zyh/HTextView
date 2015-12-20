@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                 onClick(radioGroup.findViewById(checkedId));
             }
         });
-
-        hTextView.setTextColor(Color.BLACK);
-        hTextView.setBackgroundColor(Color.WHITE);
-        hTextView.setAnimateType(HTextViewType.SCALE);
-        onClick(findViewById(R.id.scale));
+//
+//        hTextView.setTextColor(Color.BLACK);
+//        hTextView.setBackgroundColor(Color.WHITE);
+//        hTextView.setAnimateType(HTextViewType.SCALE);
+//        onClick(findViewById(R.id.scale));
     }
 
     public void onClick(View v) {

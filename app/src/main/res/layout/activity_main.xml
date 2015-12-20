@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:htext="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextSwitcher
@@ -17,8 +18,9 @@
         android:clickable="true"
         android:gravity="center"
         android:onClick="onClick"
+        htext:animateType="fall"
         android:text="What is design?"
-        android:background="#fff"
+        android:background="#000"
         android:textColor="#fff"
         android:textSize="30sp"/>
 

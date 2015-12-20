@@ -8,6 +8,7 @@
             <enum name="sparkle" value="3"/>
             <enum name="anvil" value="4"/>
             <enum name="line" value="5"/>
+            <enum name="pixelate" value="6"/>
         </attr>
     </declare-styleable>
 </resources>
