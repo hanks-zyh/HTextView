@@ -9,6 +9,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ---
 
+## Screenshot
 [Default : Scale](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/ScaleText.java)
 
 ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo3.gif)
@@ -33,8 +34,29 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo2.gif)
 
+## Usage
 
-#License
+```
+compile 'hanks.xyz:htextview-library:0.1.1'
+```
+
+```
+<com.hanks.htextview.HTextView
+       android:id="@+id/htext"
+       android:layout_width="match_parent"
+       android:layout_height="100dp"
+       android:background="#000000"
+       android:gravity="center"
+       android:textColor="#FFFFFF"
+       android:textSize="30sp"
+       htext:animateType="anvil"
+       />
+```
+
+`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate`
+
+---
+## License
 
 This library is licensed under the [Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
