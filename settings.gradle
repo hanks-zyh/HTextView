@@ -1,1 +1,1 @@
-include ':app', ':htextview-library'
+include ':demo', ':htextview-library'
