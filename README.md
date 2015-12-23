@@ -55,6 +55,17 @@ compile 'hanks.xyz:htextview-library:0.1.1'
 
 `animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate`
 
+# Contact & Help
+
+Please fell free to contact me if there is any problem when using the library.
+
+- **email**: zhangyuhan2014@gmail.com
+- **twitter**: https://twitter.com/zhangyuhan3030
+- **weibo**: http://weibo.com/hanksZyh
+- **blog**: http://hanks.xyz
+
+welcome to commit [issue](https://github.com/hanks-zyh/HTextView/issues) & [pr](https://github.com/hanks-zyh/HTextView/pulls)
+
 ---
 ## License
 
