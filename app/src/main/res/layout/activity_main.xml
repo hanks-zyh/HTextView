@@ -18,7 +18,7 @@
         android:clickable="true"
         android:gravity="center"
         android:onClick="onClick"
-        htext:animateType="fall"
+        htext:animateType="scale"
         android:text="What is design?"
         android:background="#000"
         android:textColor="#fff"

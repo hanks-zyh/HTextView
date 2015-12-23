@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.hanks.htextview.animatetext.AnvilText;
 import com.hanks.htextview.animatetext.EvaporateText;
-import com.hanks.htextview.animatetext.IHText;
 import com.hanks.htextview.animatetext.FallText;
+import com.hanks.htextview.animatetext.IHText;
 import com.hanks.htextview.animatetext.LineText;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.ScaleText;
@@ -21,6 +21,8 @@ import com.hanks.htextview.animatetext.SparkleText;
 public class HTextView extends TextView {
 
     private IHText mIHText = new ScaleText();
+    private AttributeSet attrs;
+    private int defStyle;
 
     public HTextView(Context context) {
         super(context);
@@ -40,9 +42,11 @@ public class HTextView extends TextView {
 
     private void init(AttributeSet attrs, int defStyle) {
 
+        this.attrs = attrs;
+        this.defStyle = defStyle;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView);
         int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
-        switch (animateType){
+        switch (animateType) {
             case 0:
                 mIHText = new ScaleText();
                 break;
@@ -74,23 +78,29 @@ public class HTextView extends TextView {
         }
         typedArray.recycle();
 
+        initHText(attrs, defStyle);
+    }
+
+    private void initHText(AttributeSet attrs, int defStyle) {
         mIHText.init(this, attrs, defStyle);
     }
+
 
     public void animateText(CharSequence text) {
         mIHText.animateText(text);
     }
 
-    @Override protected void onDraw(Canvas canvas) {
+    @Override
+    protected void onDraw(Canvas canvas) {
         mIHText.onDraw(canvas);
     }
 
-    public void reset(CharSequence text){
+    public void reset(CharSequence text) {
         mIHText.reset(text);
     }
 
     public void setAnimateType(HTextViewType type) {
-        switch (type){
+        switch (type) {
             case SCALE:
                 mIHText = new ScaleText();
                 break;
@@ -114,7 +124,6 @@ public class HTextView extends TextView {
                 break;
         }
 
-
-        init(null,0);
+        initHText(attrs, defStyle);
     }
 }
