@@ -55,6 +55,14 @@ compile 'hanks.xyz:htextview-library:0.1.1'
 
 `animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate`
 
+
+```
+hTextView = (HTextView) findViewById(R.id.text);
+hTextView.setAnimateType(HTextViewType.LINE);
+hTextView.animateText("new simple string"); // animate
+```
+
+
 # Contact & Help
 
 Please fell free to contact me if there is any problem when using the library.
