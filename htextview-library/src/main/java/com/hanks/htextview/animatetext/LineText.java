@@ -42,7 +42,7 @@ public class LineText extends HText {
 
     @Override protected void initVariables() {
 
-        xLineWidth = DisplayUtils.dp2px(mHTextView.getContext(), 1.2f);
+        xLineWidth = DisplayUtils.dp2px(mHTextView.getContext(), 1.5f);
         padding = DisplayUtils.dp2px(mHTextView.getContext(), 15);
 
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -72,8 +72,8 @@ public class LineText extends HText {
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
 
-        distWidth = bounds.width() + padding * 2;
-        distHeight = bounds.height() + padding * 2;
+        distWidth = bounds.width() + padding * 2 + xLineWidth;
+        distHeight = bounds.height() + padding * 2 + xLineWidth;
 
         xLineLength = mHTextView.getWidth();
         yLineLength = mHTextView.getHeight();
@@ -86,20 +86,20 @@ public class LineText extends HText {
         xLineLength = (int) (mHTextView.getWidth() - (mHTextView.getWidth() - distWidth + gap) * percent);
         yLineLength = (int) (mHTextView.getHeight() - (mHTextView.getHeight() - distHeight + gap) * percent);
 
-        p1.x = (mHTextView.getWidth() / 2 + distWidth / 2 - gap) * percent;
+        p1.x = (mHTextView.getWidth() / 2 + distWidth / 2 - gap + xLineWidth/2) * percent;
         p1.y = (mHTextView.getHeight() - distHeight) / 2;
         canvas.drawLine(p1.x - xLineLength, p1.y, p1.x, p1.y, linePaint);
 
         p2.x = (mHTextView.getWidth() / 2 + distWidth / 2);
-        p2.y = (mHTextView.getHeight() / 2 + distHeight / 2 - gap) * percent;
+        p2.y = (mHTextView.getHeight() / 2 + distHeight / 2 - gap+xLineWidth/2) * percent;
         canvas.drawLine(p2.x, p2.y - yLineLength, p2.x, p2.y, linePaint);
 
-        p3.x = mHTextView.getWidth() - (mHTextView.getWidth() / 2 + distWidth / 2 - gap) * percent;
+        p3.x = mHTextView.getWidth() - (mHTextView.getWidth() / 2 + distWidth / 2 - gap + xLineWidth/2) * percent;
         p3.y = (mHTextView.getHeight() + distHeight) / 2;
         canvas.drawLine(p3.x + xLineLength, p3.y, p3.x, p3.y, linePaint);
 
         p4.x = (mHTextView.getWidth() / 2 - distWidth / 2);
-        p4.y = mHTextView.getHeight() - (mHTextView.getHeight() / 2 + distHeight / 2 - gap) * percent;
+        p4.y = mHTextView.getHeight() - (mHTextView.getHeight() / 2 + distHeight / 2 + gap + xLineWidth/2) * percent;
         canvas.drawLine(p4.x, p4.y + yLineLength, p4.x, p4.y, linePaint);
 
 
