@@ -67,6 +67,7 @@ public class AnvilText extends HText {
             smokes[i] = Bitmap.createScaledBitmap(smoke, dstWidth, dstHeight, false);
             smoke.recycle();
         }
+        System.gc();
     }
 
     @Override protected void animatePrepare(CharSequence text) {
