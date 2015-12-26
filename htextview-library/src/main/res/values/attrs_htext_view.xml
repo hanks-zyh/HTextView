@@ -9,6 +9,7 @@
             <enum name="anvil" value="4"/>
             <enum name="line" value="5"/>
             <enum name="pixelate" value="6"/>
+            <enum name="typer" value="7"/>
         </attr>
     </declare-styleable>
 </resources>

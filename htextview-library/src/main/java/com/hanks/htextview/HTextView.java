@@ -14,6 +14,7 @@ import com.hanks.htextview.animatetext.LineText;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.ScaleText;
 import com.hanks.htextview.animatetext.SparkleText;
+import com.hanks.htextview.animatetext.TyperText;
 
 /**
  * Animate TextView
@@ -68,6 +69,9 @@ public class HTextView extends TextView {
             case 6:
                 mIHText = new PixelateText();
                 break;
+            case 7:
+                mIHText = new TyperText();
+                break;
 //            <enum name="scale" value="0"/>
 //            <enum name="evaporate" value="1"/>
 //            <enum name="fall" value="2"/>
@@ -77,7 +81,6 @@ public class HTextView extends TextView {
 //            <enum name="pixelate" value="6"/
         }
         typedArray.recycle();
-
         initHText(attrs, defStyle);
     }
 
@@ -121,6 +124,9 @@ public class HTextView extends TextView {
                 break;
             case LINE:
                 mIHText = new LineText();
+                break;
+            case TYPER:
+                mIHText = new TyperText();
                 break;
         }
 

@@ -79,6 +79,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Line"/>
+        <RadioButton
+            android:id="@+id/typer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Typer"/>
     </RadioGroup>
 
 </LinearLayout>

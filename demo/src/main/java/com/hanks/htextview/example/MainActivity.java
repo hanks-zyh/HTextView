@@ -98,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(HTextViewType.LINE);
                         break;
+                    case R.id.typer:
+                        hTextView.setTextColor(Color.WHITE);
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(HTextViewType.TYPER);
+                        break;
                 }
 
                 onClick(radioGroup.findViewById(checkedId));
