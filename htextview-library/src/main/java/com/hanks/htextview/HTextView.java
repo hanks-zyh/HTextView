@@ -12,6 +12,7 @@ import com.hanks.htextview.animatetext.FallText;
 import com.hanks.htextview.animatetext.IHText;
 import com.hanks.htextview.animatetext.LineText;
 import com.hanks.htextview.animatetext.PixelateText;
+import com.hanks.htextview.animatetext.RainBowText;
 import com.hanks.htextview.animatetext.ScaleText;
 import com.hanks.htextview.animatetext.SparkleText;
 import com.hanks.htextview.animatetext.TyperText;
@@ -72,6 +73,9 @@ public class HTextView extends TextView {
             case 7:
                 mIHText = new TyperText();
                 break;
+            case 8:
+                mIHText = new RainBowText();
+                break;
 //            <enum name="scale" value="0"/>
 //            <enum name="evaporate" value="1"/>
 //            <enum name="fall" value="2"/>
@@ -127,6 +131,9 @@ public class HTextView extends TextView {
                 break;
             case TYPER:
                 mIHText = new TyperText();
+                break;
+            case RAINBOW:
+                mIHText = new RainBowText();
                 break;
         }
 

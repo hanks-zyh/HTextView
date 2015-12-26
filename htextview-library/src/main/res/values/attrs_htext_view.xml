@@ -10,6 +10,7 @@
             <enum name="line" value="5"/>
             <enum name="pixelate" value="6"/>
             <enum name="typer" value="7"/>
+            <enum name="rainbow" value="8"/>
         </attr>
     </declare-styleable>
 </resources>
