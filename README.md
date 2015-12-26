@@ -64,7 +64,7 @@ compile 'hanks.xyz:htextview-library:0.1.3'
        />
 ```
 
-`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate`
+`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate` `typer` `rainbow`
 
 
 ```
