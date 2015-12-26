@@ -48,7 +48,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ## Usage
 
 ```
-compile 'hanks.xyz:htextview-library:0.1.2'
+compile 'hanks.xyz:htextview-library:0.1.3'
 ```
 
 ```
