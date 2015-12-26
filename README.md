@@ -34,6 +34,17 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo2.gif)
 
+
+[Typer](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/TyperText.java)
+
+![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/typer.gif)
+
+
+[Rainbow](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/RainBowText.java)
+
+![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/rainbow.gif)
+
+
 ## Usage
 
 ```
