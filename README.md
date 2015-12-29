@@ -47,13 +47,17 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ## Usage
 
-```
+```groovy
 compile 'hanks.xyz:htextview-library:0.1.3'
 ```
 
+```xml
+xmlns:htext="http://schemas.android.com/apk/res-auto"
 ```
+
+```xml
 <com.hanks.htextview.HTextView
-       android:id="@+id/htext"
+       android:id="@+id/text"
        android:layout_width="match_parent"
        android:layout_height="100dp"
        android:background="#000000"
@@ -67,7 +71,7 @@ compile 'hanks.xyz:htextview-library:0.1.3'
 `animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate` `typer` `rainbow`
 
 
-```
+```java
 hTextView = (HTextView) findViewById(R.id.text);
 hTextView.setAnimateType(HTextViewType.LINE);
 hTextView.animateText("new simple string"); // animate
