@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.R;
+import com.hanks.htextview.util.CharacterDiffResult;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.ArrayList;

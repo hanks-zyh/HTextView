@@ -1,4 +1,4 @@
-package com.hanks.htextview.animatetext;
+package com.hanks.htextview.util;
 
 /**
  * 记录重复字符的信息

@@ -1,7 +1,5 @@
 package com.hanks.htextview.util;
 
-import com.hanks.htextview.animatetext.CharacterDiffResult;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

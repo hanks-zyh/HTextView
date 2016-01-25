@@ -15,13 +15,13 @@ import com.hanks.htextview.util.DisplayUtils;
  */
 public class LineText extends IHTextImpl {
 
-    float progress = 0;
-    float ANIMA_DURATION = 800;
+    public final float ANIMATE_DURATION = 800;
 
-    float mTextHeight = 0;
+    private float progress = 0;
 
-    Paint linePaint;
-    float padding; // distance between text and line
+    private Paint linePaint;
+    // distance between text and line
+    float padding;
     float gap;
     PointF p1 = new PointF();
     PointF p2 = new PointF();
@@ -39,9 +39,6 @@ public class LineText extends IHTextImpl {
     private float yLineLength;
     private float xLineWidth;
 
-    private int yLineShort;
-    private int xLineShort;
-
     @Override
     protected void initVariables() {
 
@@ -56,9 +53,9 @@ public class LineText extends IHTextImpl {
     }
 
     @Override
-    protected void animateStart( ) {
+    protected void animateStart() {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1)
-                .setDuration((long) ANIMA_DURATION);
+                .setDuration((long) ANIMATE_DURATION);
         valueAnimator.setInterpolator(new DecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -72,11 +69,10 @@ public class LineText extends IHTextImpl {
     }
 
     @Override
-    protected void animatePrepare( ) {
+    protected void animatePrepare() {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
-        mTextHeight = bounds.height();
 
         distWidth = bounds.width() + padding * 2 + xLineWidth;
         distHeight = bounds.height() + padding * 2 + xLineWidth;
@@ -111,8 +107,8 @@ public class LineText extends IHTextImpl {
 
 
         // 离开的线条
-        xLineShort = (int) ((distWidth + gap) * (1 - percent));
-        yLineShort = (int) ((distHeight + gap) * (1 - percent));
+        int xLineShort = (int) ((distWidth + gap) * (1 - percent));
+        int yLineShort = (int) ((distHeight + gap) * (1 - percent));
 
         p5.x = (mHTextView.getWidth() / 2 + distWidth / 2);
         p5.y = (mHTextView.getHeight() - distHeight) / 2;

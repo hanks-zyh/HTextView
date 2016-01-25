@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.HTextView;
+import com.hanks.htextview.util.CharacterDiffResult;
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
 

@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.hanks.htextview.HTextView;
+import com.hanks.htextview.util.CharacterDiffResult;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.ArrayList;
