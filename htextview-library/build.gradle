@@ -40,7 +40,8 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'Less Code For Android'                                   // #CONFIG# // project title
+                name 'Less Code For Android'
+                // #CONFIG# // project title
                 url siteUrl
                 // Set your license
                 licenses {
@@ -51,9 +52,12 @@ install {
                 }
                 developers {
                     developer {
-                        id 'hanks'                                           // #CONFIG# // your user id (you can write your nickname)
-                        name 'hanks'                                       // #CONFIG# // your user name
-                        email 'zhangyuhan2014@gmail.com'                               // #CONFIG# // your email
+                        id 'hanks'
+                        // #CONFIG# // your user id (you can write your nickname)
+                        name 'hanks'
+                        // #CONFIG# // your user name
+                        email 'zhangyuhan2014@gmail.com'
+                        // #CONFIG# // your email
                     }
                 }
                 scm {

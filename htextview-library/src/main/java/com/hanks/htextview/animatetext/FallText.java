@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,24 +10,27 @@ import android.view.animation.OvershootInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
+
 /**
  * 悬挂坠落效果
  * Created by hanks on 15-12-14.
  */
-public class FallText extends HText {
+public class FallText extends IHTextImpl {
 
-    private float charTime    = 400; // 每个字符动画时间 500ms
-    private int   mostCount   = 20; // 最多10个字符同时动画
+    private float charTime = 400; // 每个字符动画时间 500ms
+    private int mostCount = 20; // 最多10个字符同时动画
     private float mTextHeight = 0;
-    private float progress ;
+    private float progress;
     private OvershootInterpolator interpolator;
 
-    @Override protected void initVariables() {
+    @Override
+    protected void initVariables() {
         interpolator = new OvershootInterpolator();
 
     }
 
-    @Override protected void animateStart(CharSequence text) {
+    @Override
+    protected void animateStart(CharSequence text) {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
@@ -37,7 +41,8 @@ public class FallText extends HText {
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -45,13 +50,15 @@ public class FallText extends HText {
         valueAnimator.start();
     }
 
-    @Override protected void animatePrepare(CharSequence text) {
+    @Override
+    protected void animatePrepare(CharSequence text) {
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }
 
-    @Override protected void drawFrame(Canvas canvas) {
+    @Override
+    protected void drawFrame(Canvas canvas) {
 
         float offset = startX;
         float oldOffset = oldStartX;

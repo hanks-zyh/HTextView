@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,21 +13,22 @@ import com.hanks.htextview.R;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.lang.reflect.Field;
+
 /**
  * keynote 轰然坠落效果
  * Created by hanks on 15-12-14.
  */
-public class AnvilText extends HText {
+public class AnvilText extends IHTextImpl {
 
     private Paint bitmapPaint;
     private Bitmap[] smokes = new Bitmap[50];
-    private float ANIMA_DURATION = 800; // 每个字符动画时间 500ms
-    private int   mTextHeight    = 0;
-    private int   mTextWidth;
+    public final float ANIMA_DURATION = 800; // 每个字符动画时间 500ms
+    private int mTextHeight = 0;
+    private int mTextWidth;
     private float progress;
 
-    @Override protected void initVariables() {
-
+    @Override
+    protected void initVariables() {
         bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bitmapPaint.setColor(Color.WHITE);
         bitmapPaint.setStyle(Paint.Style.FILL);
@@ -49,11 +51,12 @@ public class AnvilText extends HText {
         }
     }
 
-    @Override protected void animateStart(CharSequence text) {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1)
-                .setDuration((long) ANIMA_DURATION);
+    @Override
+    protected void animateStart(CharSequence text) {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration((long) ANIMA_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -70,15 +73,16 @@ public class AnvilText extends HText {
         System.gc();
     }
 
-    @Override protected void animatePrepare(CharSequence text) {
-
+    @Override
+    protected void animatePrepare(CharSequence text) {
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
         mTextWidth = bounds.width();
     }
 
-    @Override protected void drawFrame(Canvas canvas) {
+    @Override
+    protected void drawFrame(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 
@@ -138,7 +142,6 @@ public class AnvilText extends HText {
     }
 
     /**
-     *
      * @param canvas 画布
      * @param x      中心点x坐标
      * @param y      中心点Y坐标

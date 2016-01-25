@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,23 +12,25 @@ import com.hanks.htextview.R;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.Random;
+
 /**
  * 蒸发效果
  * Created by hanks on 15-12-14.
  */
-public class SparkleText extends HText {
+public class SparkleText extends IHTextImpl {
 
     float progress = 0;
 
-    float charTime  = 400; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime = 400; // 每个字符动画时间 500ms
+    int mostCount = 20; // 最多10个字符同时动画
 
     float upDistance = 0;
 
-    private Paint  backPaint;
+    private Paint backPaint;
     private Bitmap sparkBitmap;
 
-    @Override protected void initVariables() {
+    @Override
+    protected void initVariables() {
 
         backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
@@ -37,7 +40,8 @@ public class SparkleText extends HText {
 
     }
 
-    @Override protected void animateStart(CharSequence text) {
+    @Override
+    protected void animateStart(CharSequence text) {
 
         int n = mText.length();
         n = n <= 0 ? 1 : n;
@@ -47,7 +51,8 @@ public class SparkleText extends HText {
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -56,14 +61,16 @@ public class SparkleText extends HText {
 
     }
 
-    @Override protected void animatePrepare(CharSequence text) {
+    @Override
+    protected void animatePrepare(CharSequence text) {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
     }
 
-    @Override protected void drawFrame(Canvas canvas) {
+    @Override
+    protected void drawFrame(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 

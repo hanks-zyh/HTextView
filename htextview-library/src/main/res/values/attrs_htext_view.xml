@@ -1,16 +1,16 @@
 <resources>
     <declare-styleable name="HTextView">
-        <attr name="isAnimate" format="boolean"/>
+        <attr name="isAnimate" format="boolean" />
         <attr name="animateType" format="enum">
-            <enum name="scale" value="0"/>
-            <enum name="evaporate" value="1"/>
-            <enum name="fall" value="2"/>
-            <enum name="sparkle" value="3"/>
-            <enum name="anvil" value="4"/>
-            <enum name="line" value="5"/>
-            <enum name="pixelate" value="6"/>
-            <enum name="typer" value="7"/>
-            <enum name="rainbow" value="8"/>
+            <enum name="scale" value="0" />
+            <enum name="evaporate" value="1" />
+            <enum name="fall" value="2" />
+            <enum name="sparkle" value="3" />
+            <enum name="anvil" value="4" />
+            <enum name="line" value="5" />
+            <enum name="pixelate" value="6" />
+            <enum name="typer" value="7" />
+            <enum name="rainbow" value="8" />
         </attr>
     </declare-styleable>
 </resources>

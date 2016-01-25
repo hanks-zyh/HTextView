@@ -22,6 +22,16 @@ import com.hanks.htextview.animatetext.TyperText;
  */
 public class HTextView extends TextView {
 
+    private static final int SCALE = 0;
+    private static final int EVAPORATE = 1;
+    private static final int FALL = 2;
+    private static final int SPARKLE = 3;
+    private static final int ANVIL = 4;
+    private static final int LINE = 5;
+    private static final int PIXELATE = 6;
+    private static final int TYPER = 7;
+    private static final int RAINBOW = 8;
+
     private IHText mIHText = new ScaleText();
     private AttributeSet attrs;
     private int defStyle;
@@ -43,46 +53,38 @@ public class HTextView extends TextView {
 
 
     private void init(AttributeSet attrs, int defStyle) {
-
         this.attrs = attrs;
         this.defStyle = defStyle;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView);
-        int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
+        int animateType = typedArray.getInt(R.styleable.HTextView_animateType, SCALE);
         switch (animateType) {
-            case 0:
+            case SCALE:
                 mIHText = new ScaleText();
                 break;
-            case 1:
+            case EVAPORATE:
                 mIHText = new EvaporateText();
                 break;
-            case 2:
+            case FALL:
                 mIHText = new FallText();
                 break;
-            case 3:
+            case SPARKLE:
                 mIHText = new SparkleText();
                 break;
-            case 4:
+            case ANVIL:
                 mIHText = new AnvilText();
                 break;
-            case 5:
+            case LINE:
                 mIHText = new LineText();
                 break;
-            case 6:
+            case PIXELATE:
                 mIHText = new PixelateText();
                 break;
-            case 7:
+            case TYPER:
                 mIHText = new TyperText();
                 break;
-            case 8:
+            case RAINBOW:
                 mIHText = new RainBowText();
                 break;
-//            <enum name="scale" value="0"/>
-//            <enum name="evaporate" value="1"/>
-//            <enum name="fall" value="2"/>
-//            <enum name="sparkle" value="3"/>
-//            <enum name="anvil" value="4"/>
-//            <enum name="line" value="5"/>
-//            <enum name="pixelate" value="6"/
         }
         typedArray.recycle();
         initHText(attrs, defStyle);
@@ -136,7 +138,6 @@ public class HTextView extends TextView {
                 mIHText = new RainBowText();
                 break;
         }
-
         initHText(attrs, defStyle);
     }
 }

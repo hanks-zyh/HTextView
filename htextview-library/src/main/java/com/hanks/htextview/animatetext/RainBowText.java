@@ -11,7 +11,7 @@ import com.hanks.htextview.util.DisplayUtils;
  * from http://wuxiaolong.me/2015/11/16/LinearGradientTextView/
  * Created by hanks on 15/12/26.
  */
-public class RainBowText extends HText {
+public class RainBowText extends IHTextImpl {
     private int mTextWidth;
     private LinearGradient mLinearGradient;
     private Matrix mMatrix;

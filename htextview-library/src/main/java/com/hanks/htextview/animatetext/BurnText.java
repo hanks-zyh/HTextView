@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import com.hanks.htextview.util.CharacterUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * 蒸发效果
  * Created by hanks on 15-12-14.
@@ -27,23 +29,23 @@ public class BurnText implements IHText {
 
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 5000; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime = 5000; // 每个字符动画时间 500ms
+    int mostCount = 20; // 最多10个字符同时动画
     HTextView mHTextView;
     float upDistance = 0;
 
     int textColor = Color.WHITE;
     Paint backPaint;
-    private float[] gaps    = new float[100];
+    private float[] gaps = new float[100];
     private float[] oldGaps = new float[100];
     private DisplayMetrics metrics;
-    private float          textSize;
+    private float textSize;
     private CharSequence mText;
     private CharSequence mOldText;
     private List<CharacterDiffResult> differentList = new ArrayList<>();
     private float oldStartX = 0;
-    private float startX    = 0;
-    private float startY    = 0;
+    private float startX = 0;
+    private float startY = 0;
     private Bitmap sparkBitmap;
 
     public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
@@ -61,7 +63,7 @@ public class BurnText implements IHText {
         oldPaint.setStyle(Paint.Style.FILL);
 
         backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        backPaint.setColor(((ColorDrawable)mHTextView.getBackground()).getColor());
+        backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
         backPaint.setStyle(Paint.Style.FILL);
 
         metrics = new DisplayMetrics();
@@ -74,13 +76,15 @@ public class BurnText implements IHText {
         sparkBitmap = BitmapFactory.decodeResource(hTextView.getResources(), R.drawable.fire);
     }
 
-    @Override public void reset(CharSequence text) {
+    @Override
+    public void reset(CharSequence text) {
         progress = 1;
         calc();
         mHTextView.invalidate();
     }
 
-    @Override public void animateText(CharSequence text) {
+    @Override
+    public void animateText(CharSequence text) {
         mOldText = mText;
         mText = text;
 
@@ -94,7 +98,8 @@ public class BurnText implements IHText {
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -102,7 +107,8 @@ public class BurnText implements IHText {
         valueAnimator.start();
     }
 
-    @Override public void onDraw(Canvas canvas) {
+    @Override
+    public void onDraw(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 
@@ -120,7 +126,7 @@ public class BurnText implements IHText {
                     paint.setTextSize(textSize);
                     float width = paint.measureText(mText.charAt(i) + "");
                     canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, paint);
-                    canvas.drawRect(offset, startY*1.2f - (1 - percent) * (upDistance+startY*0.2f), offset + gaps[i], startY *1.2f, backPaint);
+                    canvas.drawRect(offset, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset + gaps[i], startY * 1.2f, backPaint);
                     if (percent < 1) {
                         drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
                     }
@@ -158,7 +164,7 @@ public class BurnText implements IHText {
     private void drawSparkle(Canvas canvas, float offset, float startY, float width) {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
-            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (startY -  random.nextGaussian() * Math.sqrt(upDistance)), paint);
+            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (startY - random.nextGaussian() * Math.sqrt(upDistance)), paint);
         }
     }
 

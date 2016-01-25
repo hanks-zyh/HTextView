@@ -32,11 +32,11 @@ public class BestBlur {
 
     public static final int MAX_SUPPORTED_BLUR_PIXELS = 25;
 
-    private RenderScript               mRS;
-    private ScriptIntrinsicBlur        mSIBlur;
+    private RenderScript mRS;
+    private ScriptIntrinsicBlur mSIBlur;
     private ScriptIntrinsicColorMatrix mSIGrey;
-    private Allocation                 mTmp1;
-    private Allocation                 mTmp2;
+    private Allocation mTmp1;
+    private Allocation mTmp2;
 
     public BestBlur(Context context) {
         mRS = RenderScript.create(context);

@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import com.hanks.htextview.util.HLog;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 缩放动画
  * Created by hanks on 15-12-14.
@@ -28,15 +30,15 @@ public class PixelateText implements IHText {
     public final static int SCALE = 8;
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 2000; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime = 2000; // 每个字符动画时间 500ms
+    int mostCount = 20; // 最多10个字符同时动画
     HTextView mHTextView;
 
-    private float[] gaps    = new float[100];
+    private float[] gaps = new float[100];
     private float[] oldGaps = new float[100];
 
     private DisplayMetrics metrics;
-    private float          textSize;
+    private float textSize;
 
     private CharSequence mText;
     private CharSequence mOldText;
@@ -44,12 +46,12 @@ public class PixelateText implements IHText {
     private List<CharacterDiffResult> differentList = new ArrayList<>();
 
     private float oldStartX = 0;
-    private float startX    = 0;
-    private float startY    = 0;
+    private float startX = 0;
+    private float startY = 0;
 
     private Bitmap bitmap;
     private Matrix matrix;
-    private Paint  pixPaint;
+    private Paint pixPaint;
     private Canvas pixCanvas;
 
     public static Bitmap fastBlur(Bitmap sbitmap, float radiusf) {
@@ -284,13 +286,15 @@ public class PixelateText implements IHText {
         pixCanvas = new Canvas(bitmap);
     }
 
-    @Override public void reset(CharSequence text) {
+    @Override
+    public void reset(CharSequence text) {
         progress = 1;
         calc();
         mHTextView.invalidate();
     }
 
-    @Override public void animateText(CharSequence text) {
+    @Override
+    public void animateText(CharSequence text) {
         mOldText = mText;
         mText = text;
         calc();
@@ -304,7 +308,8 @@ public class PixelateText implements IHText {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -312,7 +317,8 @@ public class PixelateText implements IHText {
         valueAnimator.start();
     }
 
-    @Override public void onDraw(Canvas canvas) {
+    @Override
+    public void onDraw(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 

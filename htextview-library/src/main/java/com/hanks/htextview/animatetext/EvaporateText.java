@@ -1,26 +1,30 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
+
 /**
  * 蒸发效果
  * Created by hanks on 15-12-14.
  */
-public class EvaporateText extends HText {
+public class EvaporateText extends IHTextImpl {
 
-    float charTime  = 300; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
-    private int   mTextHeight;
+    float charTime = 300; // 每个字符动画时间 500ms
+    int mostCount = 20; // 最多10个字符同时动画
+    private int mTextHeight;
     private float progress;
 
-    @Override protected void initVariables() {
+    @Override
+    protected void initVariables() {
 
     }
 
-    @Override protected void animateStart(CharSequence text) {
+    @Override
+    protected void animateStart(CharSequence text) {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
@@ -30,7 +34,8 @@ public class EvaporateText extends HText {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -38,18 +43,21 @@ public class EvaporateText extends HText {
         valueAnimator.start();
     }
 
-    @Override protected void animatePrepare(CharSequence text) {
+    @Override
+    protected void animatePrepare(CharSequence text) {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }
 
-    @Override protected void drawFrame(Canvas canvas) {
+    @Override
+    protected void drawFrame(Canvas canvas) {
 
     }
 
-    @Override public void onDraw(Canvas canvas) {
+    @Override
+    public void onDraw(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 
