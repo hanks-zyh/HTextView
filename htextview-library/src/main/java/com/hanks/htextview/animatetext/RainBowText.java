@@ -25,13 +25,12 @@ public class RainBowText extends IHTextImpl {
     }
 
     @Override
-    protected void animateStart(CharSequence text) {
-
+    protected void animateStart( ) {
         mHTextView.invalidate();
     }
 
     @Override
-    protected void animatePrepare(CharSequence text) {
+    protected void animatePrepare( ) {
         mTextWidth = (int) mPaint.measureText(mText, 0, mText.length());
         mTextWidth = Math.max(DisplayUtils.dp2Px(100), mTextWidth);
         if (mTextWidth > 0) {

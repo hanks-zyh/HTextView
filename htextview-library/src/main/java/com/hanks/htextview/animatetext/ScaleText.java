@@ -18,12 +18,7 @@ public class ScaleText extends IHTextImpl {
     private float progress;
 
     @Override
-    protected void initVariables() {
-
-    }
-
-    @Override
-    protected void animateStart(CharSequence text) {
+    protected void animateStart() {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
         // 计算动画总时间
@@ -38,10 +33,6 @@ public class ScaleText extends IHTextImpl {
             }
         });
         valueAnimator.start();
-    }
-
-    @Override
-    protected void animatePrepare(CharSequence text) {
     }
 
     @Override

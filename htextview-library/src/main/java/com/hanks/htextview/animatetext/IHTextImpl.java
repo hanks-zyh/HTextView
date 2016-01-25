@@ -73,8 +73,8 @@ public abstract class IHTextImpl implements IHText {
         mOldText = mText;
         mText = text;
         prepareAnimate();
-        animatePrepare(text);
-        animateStart(text);
+        animatePrepare();
+        animateStart();
     }
 
     @Override
@@ -106,28 +106,27 @@ public abstract class IHTextImpl implements IHText {
     }
 
     public void reset(CharSequence text) {
-        animatePrepare(text);
+        animatePrepare();
         mHTextView.invalidate();
     }
 
     /**
      * 类被实例化时初始化
      */
-    protected abstract void initVariables();
+    protected void initVariables() {
+
+    }
 
     /**
      * 具体实现动画
-     *
-     * @param text 动画的名字
      */
-    protected abstract void animateStart(CharSequence text);
+    protected abstract void animateStart();
 
     /**
      * 每次动画前初始化调用
-     *
-     * @param text
      */
-    protected abstract void animatePrepare(CharSequence text);
+    protected void animatePrepare() {
+    }
 
     /**
      * 动画每次刷新界面时调用

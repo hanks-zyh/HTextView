@@ -15,13 +15,13 @@ public class TyperText extends IHTextImpl {
     }
 
     @Override
-    protected void animateStart(CharSequence text) {
+    protected void animateStart( ) {
         currentLength = 0;
         mHTextView.invalidate();
     }
 
     @Override
-    protected void animatePrepare(CharSequence text) {
+    protected void animatePrepare( ) {
 
     }
 

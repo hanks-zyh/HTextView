@@ -24,7 +24,7 @@ public class EvaporateText extends IHTextImpl {
     }
 
     @Override
-    protected void animateStart(CharSequence text) {
+    protected void animateStart() {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
@@ -44,7 +44,7 @@ public class EvaporateText extends IHTextImpl {
     }
 
     @Override
-    protected void animatePrepare(CharSequence text) {
+    protected void animatePrepare() {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);

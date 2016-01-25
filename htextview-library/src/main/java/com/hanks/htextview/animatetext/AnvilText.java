@@ -52,7 +52,7 @@ public class AnvilText extends IHTextImpl {
     }
 
     @Override
-    protected void animateStart(CharSequence text) {
+    protected void animateStart() {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration((long) ANIMA_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -74,7 +74,7 @@ public class AnvilText extends IHTextImpl {
     }
 
     @Override
-    protected void animatePrepare(CharSequence text) {
+    protected void animatePrepare() {
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
