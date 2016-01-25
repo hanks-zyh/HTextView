@@ -22,7 +22,7 @@ public class AnvilText extends IHTextImpl {
 
     private Paint bitmapPaint;
     private Bitmap[] smokes = new Bitmap[50];
-    public final float ANIMA_DURATION = 800; // 每个字符动画时间 500ms
+    public final float ANIMATE_DURATION = 800; // 每个字符动画时间 500ms
     private int mTextHeight = 0;
     private int mTextWidth;
     private float progress;
@@ -32,7 +32,7 @@ public class AnvilText extends IHTextImpl {
         bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bitmapPaint.setColor(Color.WHITE);
         bitmapPaint.setStyle(Paint.Style.FILL);
-        // load drawable
+        //通过反射获取到图片资源
         try {
             R.drawable d = new R.drawable();
             for (int j = 0; j < 50; j++) {
@@ -53,7 +53,7 @@ public class AnvilText extends IHTextImpl {
 
     @Override
     protected void animateStart() {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration((long) ANIMA_DURATION);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration((long) ANIMATE_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
