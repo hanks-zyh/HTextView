@@ -76,8 +76,10 @@ public class ScaleText extends IHTextImpl {
 
             //画新的字符串
             if (i < mText.length()) {
+                //如果新旧字符都在这个位置，不做处理
                 if (CharacterUtils.stayHere(i, differentList))
                     continue;
+                //如果不是，那么这里需要淡入一个新的字符
                 int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
                 if (alpha > 255) alpha = 255;
                 if (alpha < 0) alpha = 0;
@@ -92,5 +94,4 @@ public class ScaleText extends IHTextImpl {
             }
         }
     }
-
 }
