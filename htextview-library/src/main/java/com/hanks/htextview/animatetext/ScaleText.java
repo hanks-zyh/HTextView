@@ -45,7 +45,7 @@ public class ScaleText extends IHTextImpl {
         for (int i = 0; i < mOldText.length(); ++i) {
             float percent = progress / duration;
             int move = CharacterUtils.needMove(i, differentList);
-            if (move != -1) {
+            if (move != CharacterUtils.NEED_TO_DISCUSS) {
                 mOldPaint.setTextSize(mTextSize);
                 mOldPaint.setAlpha(255);
                 float progress2X = percent > 0.5 ? 1 : percent * 2;

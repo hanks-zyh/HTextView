@@ -94,7 +94,7 @@ public class AnvilText extends IHTextImpl {
             int move = CharacterUtils.needMove(i, differentList);
             float progress2X = progress > 0.5 ? 1 : progress * 2;
             // 新的Text里有这个字符，将这个字符移动到新的位置
-            if (move != -1) {
+            if (move != CharacterUtils.NEED_TO_DISCUSS) {
                 //旧的Text需要在一半的时间内走完动画
                 float distX = CharacterUtils.getOffset(i, move, progress2X, startX, oldStartX, gaps, oldGaps);
                 mOldPaint.setAlpha(255);

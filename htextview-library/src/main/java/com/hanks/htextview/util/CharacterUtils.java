@@ -11,6 +11,8 @@ import java.util.Set;
  */
 public class CharacterUtils {
 
+    public static final int NEED_TO_DISCUSS = -1;
+
     /**
      * 对比新的字符串和旧的,返回需要保留的字符,以及移动的位置
      *
@@ -40,15 +42,29 @@ public class CharacterUtils {
         return differentList;
     }
 
+    /**
+     * 判断这个旧的字符需要移动多少个位置以构成新的Text
+     *
+     * @param index         新的字符的位置
+     * @param differentList 比较列表
+     * @return 需要移动的位置，如果这个旧字符需要丢弃，返回-1
+     */
     public static int needMove(int index, List<CharacterDiffResult> differentList) {
         for (CharacterDiffResult different : differentList) {
             if (different.fromIndex == index) {
                 return different.moveIndex;
             }
         }
-        return -1;
+        return NEED_TO_DISCUSS;
     }
 
+    /**
+     * 判断是否有旧的字符可以移到该位置
+     *
+     * @param index         新字符的位置
+     * @param differentList 比较列表
+     * @return 是否有旧的字符可以移到该位置
+     */
     public static boolean stayHere(int index, List<CharacterDiffResult> differentList) {
         for (CharacterDiffResult different : differentList) {
             if (different.moveIndex == index) {
