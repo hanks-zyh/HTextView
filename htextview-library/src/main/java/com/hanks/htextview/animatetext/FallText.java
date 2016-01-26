@@ -10,7 +10,7 @@ import android.view.animation.OvershootInterpolator;
 
 import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
-import com.hanks.htextview.util.HLog;
+import com.hanks.htextview.util.MathUtils;
 
 /**
  * 悬挂坠落效果
@@ -18,26 +18,18 @@ import com.hanks.htextview.util.HLog;
  */
 public class FallText extends IHTextImpl {
 
-    private float charTime = 400; // 每个字符动画时间 500ms
-    private int mostCount = 20; // 最多10个字符同时动画
-    private float mTextHeight = 0;
+    private static final float CHAR_TIME = 400; // 每个字符动画时间 400ms
+    private static final int MOST_COUNT = 20; // 最多20个字符同时动画
+    private float mTextHeight;
     private float progress;
-    private OvershootInterpolator interpolator;
-
-    @Override
-    protected void initVariables() {
-        interpolator = new OvershootInterpolator();
-
-    }
+    private OvershootInterpolator interpolator = new OvershootInterpolator();
+    private Path path = new Path();
 
     @Override
     protected void animateStart() {
-        int n = mText.length();
-        n = n <= 0 ? 1 : n;
-
+        int n = mText.length() < 1 ? 1 : mText.length();
         // 计算动画总时间
-        long duration = (long) (charTime + charTime / mostCount * (n - 1));
-
+        long duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (n - 1));
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -60,91 +52,70 @@ public class FallText extends IHTextImpl {
 
     @Override
     protected void drawFrame(Canvas canvas) {
-
         float offset = startX;
+        float percent = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
+        // draw old text
         float oldOffset = oldStartX;
-
-        int maxLength = Math.max(mText.length(), mOldText.length());
-
-        for (int i = 0; i < maxLength; i++) {
-
-            // draw old text
-            if (i < mOldText.length()) {
-                //
-                float percent = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-
-                mOldPaint.setTextSize(mTextSize);
-                int move = CharacterUtils.needMove(i, differentList);
-                if (move != -1) {
-                    mOldPaint.setAlpha(255);
-                    float p = percent * 2f;
-                    p = p > 1 ? 1 : p;
-                    float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
-                } else {
-
-                    mOldPaint.setAlpha(255);
-                    float centerX = oldOffset + oldGaps[i] / 2;
-                    float width = mOldPaint.measureText(mOldText.charAt(i) + "");
-
-                    float p = percent * 1.4f;
-                    p = p > 1 ? 1 : p;
-
-                    p = interpolator.getInterpolation(p);
-                    double angle = (1 - p) * (Math.PI);
-                    if (i % 2 == 0) {
-                        angle = (p * Math.PI) + Math.PI;
-                    }
-                    float disX = centerX + (float) (width / 2 * Math.cos(angle));
-                    float disY = startY + (float) (width / 2 * Math.sin(angle));
-                    mOldPaint.setStyle(Paint.Style.STROKE);
-                    Path path = new Path();
-                    path.moveTo(disX, disY);
-                    //求点A（m,n)关于点P(a,b)的对称点B(x,y)
-                    // (m+x)/2=a ,x=2a-m
-                    // (n+y)/2=b ,y=2b-n
-                    path.lineTo(2 * centerX - disX, 2 * startY - disY);
-                    if (percent <= 0.7) {
-                        // 旋转
-                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, mOldPaint);
-                    } else {
-                        // 下落
-                        float p2 = (float) ((percent - 0.7) / 0.3f);
-                        mOldPaint.setAlpha((int) ((1 - p2) * 255));
-                        float y = (float) ((p2) * mTextHeight);
-                        HLog.i(y);
-                        Path path2 = new Path();
-                        path2.moveTo(disX, disY + y);
-                        path2.lineTo(2 * centerX - disX, 2 * startY - disY + y);
-                        canvas.drawTextOnPath(mOldText.charAt(i) + "", path2, 0, 0, mOldPaint);
-                    }
-
-                }
+        for (int i = 0; i < mOldText.length(); ++i) {
+            mOldPaint.setTextSize(mTextSize);
+            mOldPaint.setAlpha(255);
+            int move = CharacterUtils.needMove(i, differentList);
+            if (move != -1) {
+                float p = percent > 0.5f ? 1 : percent * 2f;
+                float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
+                canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
+                continue;
             }
+            float centerX = oldOffset + oldGaps[i] / 2;
+            float width = mOldPaint.measureText(mOldText.charAt(i) + "");
+            float percentX = percent * 1.4f;
+            percentX = percentX > 1 ? 1 : percentX;
+            float interpolation = interpolator.getInterpolation(percentX);
+            double angle = (1 - interpolation) * (Math.PI);
+            if (i % 2 == 0) {
+                angle = (interpolation * Math.PI) + Math.PI;
+            }
+            float disX = centerX + (float) (width / 2 * Math.cos(angle));
+            float disY = startY + (float) (width / 2 * Math.sin(angle));
+            mOldPaint.setStyle(Paint.Style.STROKE);
+            path.reset();
+            path.moveTo(disX, disY);
+            //求点A（m,n)关于点P(a,b)的对称点B(x,y)
+            // (m+x)/2=a ,x=2a-m
+            // (n+y)/2=b ,y=2b-n
+            path.lineTo(2 * centerX - disX, 2 * startY - disY);
+            oldOffset += oldGaps[i];
+            // 旋转
+            if (percent <= 0.7f) {
+                canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, mOldPaint);
+                continue;
+            }
+            // 下落
+            float p2 = (percent - 0.7f) / 0.3f;
+            float y = (p2) * mTextHeight;
+            mOldPaint.setAlpha((int) ((1 - p2) * 255));
+            path.reset();
+            path.moveTo(disX, disY + y);
+            path.lineTo(2f * centerX - disX, 2f * startY - disY + y);
+            canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, mOldPaint);
+        }
 
-            // draw new text
-            if (i < mText.length()) {
-
-                if (!CharacterUtils.stayHere(i, differentList)) {
-
-                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
-                    alpha = alpha > 255 ? 255 : alpha;
-                    alpha = alpha < 0 ? 0 : alpha;
-
-                    float size = mTextSize * 1f / charTime * (progress - charTime * i / mostCount);
-                    size = size > mTextSize ? mTextSize : size;
-                    size = size < 0 ? 0 : size;
-
-                    mPaint.setAlpha(alpha);
-                    mPaint.setTextSize(size);
-                    float width = mPaint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
-                }
-
+        // draw new text
+        for (int i = 0; i < mText.length(); ++i) {
+            if (CharacterUtils.stayHere(i, differentList)) {
                 offset += gaps[i];
+                continue;
             }
+            float width = mPaint.measureText(mText.charAt(i) + "");
+            int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
+            float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
+            alpha = MathUtils.constrain(0, 255, alpha);
+            size = MathUtils.constrain(0, mTextSize, size);
+            mPaint.setAlpha(alpha);
+            mPaint.setTextSize(size);
+            canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
+            offset += gaps[i];
         }
     }
-
 }

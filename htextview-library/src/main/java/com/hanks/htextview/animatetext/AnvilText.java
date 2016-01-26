@@ -12,6 +12,7 @@ import android.view.animation.BounceInterpolator;
 import com.hanks.htextview.R;
 import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
+import com.hanks.htextview.util.MathUtils;
 
 import java.lang.reflect.Field;
 
@@ -24,10 +25,11 @@ public class AnvilText extends IHTextImpl {
     private Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Bitmap[] smokes = new Bitmap[50];
     // 每个字符动画时间 800ms
-    public final float ANIMATE_DURATION = 800;
+    public static final long ANIMATE_DURATION = 800;
     private int mTextHeight;
     private int mTextWidth;
     private float progress;
+    private Rect bounds = new Rect();
 
     {
         bitmapPaint.setColor(Color.WHITE);
@@ -53,7 +55,7 @@ public class AnvilText extends IHTextImpl {
 
     @Override
     protected void animateStart() {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration((long) ANIMATE_DURATION);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration(ANIMATE_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -66,7 +68,7 @@ public class AnvilText extends IHTextImpl {
             //这里必须有一个Temp，要不然会有Bitmap内存泄漏
             Bitmap temp = smokes[i];
             //把原来的图片按原长宽比例扩大1.5倍，限制扩大后最大宽度为400px
-            int dstWidth = (int) (mTextWidth * 1.5);
+            int dstWidth = (int) (mTextWidth * 1.5f);
             if (dstWidth < 400) dstWidth = 400;
             int dstHeight = (int) ((float) temp.getHeight() / temp.getWidth() * dstWidth);
             smokes[i] = Bitmap.createScaledBitmap(temp, dstWidth, dstHeight, false);
@@ -78,7 +80,6 @@ public class AnvilText extends IHTextImpl {
     @Override
     protected void animatePrepare() {
         //获取画出新的Text需要的最小矩形，保存在bounds中
-        Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
         mTextWidth = bounds.width();
@@ -92,7 +93,7 @@ public class AnvilText extends IHTextImpl {
         mOldPaint.setTextSize(mTextSize);
         for (int i = 0; i < mOldText.length(); ++i) {
             int move = CharacterUtils.needMove(i, differentList);
-            float progress2X = progress > 0.5 ? 1 : progress * 2;
+            float progress2X = progress > 0.5f ? 1 : progress * 2f;
             // 新的Text里有这个字符，将这个字符移动到新的位置
             if (move != CharacterUtils.NEED_TO_DISCUSS) {
                 //旧的Text需要在一半的时间内走完动画
@@ -140,9 +141,7 @@ public class AnvilText extends IHTextImpl {
      * @param y      中心点Y坐标
      */
     private void drawSmokes(Canvas canvas, float x, float y, float percent) {
-        int index = (int) (50 * percent);
-        index = index < 0 ? 0 : index;
-        index = index > 49 ? 49 : index;
+        int index = MathUtils.constrain(0, 49, (int) (50 * percent));
         if (smokes[index] != null) {
             float left = x - smokes[index].getWidth() / 2;
             float top = y - smokes[index].getHeight() / 2;

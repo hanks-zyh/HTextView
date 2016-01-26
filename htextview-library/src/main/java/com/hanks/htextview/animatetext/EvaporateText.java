@@ -17,6 +17,7 @@ public class EvaporateText extends IHTextImpl {
 
     private static final float CHAR_TIME = 300; // 每个字符动画时间 300ms
     private static final int MOST_COUNT = 20; // 最多20个字符同时动画
+    private Rect bounds = new Rect();
     private int mTextHeight;
     private float progress;
 
@@ -39,7 +40,6 @@ public class EvaporateText extends IHTextImpl {
 
     @Override
     protected void animatePrepare() {
-        Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }
