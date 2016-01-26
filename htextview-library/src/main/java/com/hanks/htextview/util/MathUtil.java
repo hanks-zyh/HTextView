@@ -22,6 +22,10 @@ public class MathUtil {
         return Math.max(min, Math.min(max, v));
     }
 
+    public static int constrain(int min, int max, int v) {
+        return Math.max(min, Math.min(max, v));
+    }
+
     public static float interpolate(float x1, float x2, float f) {
         return x1 + (x2 - x1) * f;
     }

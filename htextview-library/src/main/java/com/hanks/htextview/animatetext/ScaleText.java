@@ -6,7 +6,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
+import com.hanks.htextview.util.MathUtil;
 
+/**
+ * keynote 默认变小然后淡出效果
+ * Created by hanks on 15-12-14.
+ */
 public class ScaleText extends IHTextImpl {
 
     private static final float MOST_COUNT = 20;
@@ -14,13 +19,12 @@ public class ScaleText extends IHTextImpl {
     private long duration;
     private float progress;
 
-
     @Override
     protected void animateStart() {
-        int n = mText.length();
-        n = n <= 0 ? 1 : n;
+        int textLength = mText.length();
+        textLength = textLength < 1 ? 1 : textLength;
         // 计算动画总时间
-        duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (n - 1));
+        duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (textLength - 1));
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         //插值，两头慢中间快
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -36,18 +40,16 @@ public class ScaleText extends IHTextImpl {
 
     @Override
     public void drawFrame(Canvas canvas) {
-        float offset = startX;
-        float oldOffset = oldStartX;
         // draw old text
+        float oldOffset = oldStartX;
         for (int i = 0; i < mOldText.length(); ++i) {
             float percent = progress / duration;
             int move = CharacterUtils.needMove(i, differentList);
             if (move != -1) {
                 mOldPaint.setTextSize(mTextSize);
                 mOldPaint.setAlpha(255);
-                float p = percent * 2f;
-                p = p > 1 ? 1 : p;
-                float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
+                float progress2X = progress > 0.5 ? 1 : progress * 2;
+                float distX = CharacterUtils.getOffset(i, move, progress2X, startX, oldStartX, gaps, oldGaps);
                 canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
                 continue;
@@ -60,19 +62,18 @@ public class ScaleText extends IHTextImpl {
         }
 
         // draw new text
+        float offset = startX;
         for (int i = 0; i < mText.length(); ++i) {
-            if (!CharacterUtils.stayHere(i, differentList)) {
-                int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
-                if (alpha > 255) alpha = 255;
-                if (alpha < 0) alpha = 0;
-                float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
-                if (size > mTextSize) size = mTextSize;
-                if (size < 0) size = 0;
-                mPaint.setAlpha(alpha);
-                mPaint.setTextSize(size);
-                float width = mPaint.measureText(mText.charAt(i) + "");
-                canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
+            if (CharacterUtils.stayHere(i, differentList)) {
+                offset += gaps[i];
+                continue;
             }
+            int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
+            float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
+            float width = mPaint.measureText(mText.charAt(i) + "");
+            mPaint.setAlpha(MathUtil.constrain(0, 255, alpha));
+            mPaint.setTextSize(MathUtil.constrain(0, size, mTextSize));
+            canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
             offset += gaps[i];
         }
     }
