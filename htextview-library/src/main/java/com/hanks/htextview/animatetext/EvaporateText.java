@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
 
 /**
@@ -17,11 +18,6 @@ public class EvaporateText extends IHTextImpl {
     int mostCount = 20; // 最多10个字符同时动画
     private int mTextHeight;
     private float progress;
-
-    @Override
-    protected void initVariables() {
-
-    }
 
     @Override
     protected void animateStart() {

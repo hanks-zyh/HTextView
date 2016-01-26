@@ -1,4 +1,4 @@
-package com.hanks.htextview.animatetext;
+package com.hanks.htextview.animatetext.base;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -112,6 +112,22 @@ public abstract class IHTextImpl implements IHText {
     }
 
     /**
+     * 具体实现动画
+     */
+    protected abstract void animateStart();
+
+    /**
+     * 动画每次刷新界面时调用
+     *
+     * @param canvas 画布
+     */
+    protected void drawFrame(Canvas canvas) {
+
+    }
+
+
+
+    /**
      * 类被实例化时初始化
      */
     protected void initVariables() {
@@ -119,22 +135,10 @@ public abstract class IHTextImpl implements IHText {
     }
 
     /**
-     * 具体实现动画
-     */
-    protected abstract void animateStart();
-
-    /**
      * 每次动画前初始化调用
      */
     protected void animatePrepare() {
     }
-
-    /**
-     * 动画每次刷新界面时调用
-     *
-     * @param canvas
-     */
-    protected abstract void drawFrame(Canvas canvas);
 
 
 }

@@ -2,6 +2,8 @@ package com.hanks.htextview.animatetext;
 
 import android.graphics.Canvas;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
+
 /**
  * 打字机效果
  * Created by hanks on 15/12/26.

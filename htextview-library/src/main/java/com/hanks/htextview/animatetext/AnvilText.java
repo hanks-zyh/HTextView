@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.view.animation.BounceInterpolator;
 
 import com.hanks.htextview.R;
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.lang.reflect.Field;
@@ -43,7 +44,8 @@ public class AnvilText extends IHTextImpl {
                     drawable = "wenzi00" + j;
                 }
                 Field fieldImgId = d.getClass().getDeclaredField(drawable);
-                int imgId = (Integer) fieldImgId.get(d);//这个ID就是每个图片资源ID
+                //这个ID就是每个图片资源ID
+                int imgId = (Integer) fieldImgId.get(d);
                 smokes[j] = BitmapFactory.decodeResource(mHTextView.getResources(), imgId);
             }
         } catch (Exception e) {

@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
 import com.hanks.htextview.util.HLog;
 

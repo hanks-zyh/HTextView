@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.hanks.htextview.animatetext.AnvilText;
 import com.hanks.htextview.animatetext.EvaporateText;
 import com.hanks.htextview.animatetext.FallText;
-import com.hanks.htextview.animatetext.IHText;
+import com.hanks.htextview.animatetext.base.IHText;
 import com.hanks.htextview.animatetext.LineText;
 import com.hanks.htextview.animatetext.PixelateText;
 import com.hanks.htextview.animatetext.RainBowText;

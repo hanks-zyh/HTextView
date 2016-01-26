@@ -1,4 +1,4 @@
-package com.hanks.htextview.animatetext;
+package com.hanks.htextview.animatetext.base;
 
 import android.graphics.Canvas;
 import android.util.AttributeSet;

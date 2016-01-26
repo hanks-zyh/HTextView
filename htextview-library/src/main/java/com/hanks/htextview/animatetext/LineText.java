@@ -7,6 +7,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.view.animation.DecelerateInterpolator;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.DisplayUtils;
 
 /**

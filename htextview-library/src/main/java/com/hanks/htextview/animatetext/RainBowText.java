@@ -5,6 +5,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Shader;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.DisplayUtils;
 
 /**

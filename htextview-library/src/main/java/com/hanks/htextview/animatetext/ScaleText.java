@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
 
 public class ScaleText extends IHTextImpl {

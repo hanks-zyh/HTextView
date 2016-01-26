@@ -5,6 +5,7 @@ import android.util.Log;
 import com.hanks.htextview.BuildConfig;
 
 /**
+ * Logger
  * Created by hanks on 15-12-14.
  */
 public class HLog {
