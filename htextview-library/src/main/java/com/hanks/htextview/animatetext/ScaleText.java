@@ -38,44 +38,42 @@ public class ScaleText extends IHTextImpl {
     public void drawFrame(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
-        int maxLength = Math.max(mText.length(), mOldText.length());
-        for (int i = 0; i < maxLength; i++) {
-            // draw old text
-            if (i < mOldText.length()) {
-                float percent = progress / duration;
-                int move = CharacterUtils.needMove(i, differentList);
-                if (move != -1) {
-                    mOldPaint.setTextSize(mTextSize);
-                    mOldPaint.setAlpha(255);
-                    float p = percent * 2f;
-                    p = p > 1 ? 1 : p;
-                    float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
-                } else {
-                    mOldPaint.setAlpha((int) ((1 - percent) * 255));
-                    mOldPaint.setTextSize(mTextSize * (1 - percent));
-                    float width = mOldPaint.measureText(mOldText.charAt(i) + "");
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, startY, mOldPaint);
-                }
+        // draw old text
+        for (int i = 0; i < mOldText.length(); ++i) {
+            float percent = progress / duration;
+            int move = CharacterUtils.needMove(i, differentList);
+            if (move != -1) {
+                mOldPaint.setTextSize(mTextSize);
+                mOldPaint.setAlpha(255);
+                float p = percent * 2f;
+                p = p > 1 ? 1 : p;
+                float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
+                canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
+                continue;
             }
+            mOldPaint.setAlpha((int) ((1 - percent) * 255));
+            mOldPaint.setTextSize(mTextSize * (1 - percent));
+            float width = mOldPaint.measureText(mOldText.charAt(i) + "");
+            canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, startY, mOldPaint);
+            oldOffset += oldGaps[i];
+        }
 
-            // draw new text
-            if (i < mText.length()) {
-                if (!CharacterUtils.stayHere(i, differentList)) {
-                    int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
-                    if (alpha > 255) alpha = 255;
-                    if (alpha < 0) alpha = 0;
-                    float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
-                    if (size > mTextSize) size = mTextSize;
-                    if (size < 0) size = 0;
-                    mPaint.setAlpha(alpha);
-                    mPaint.setTextSize(size);
-                    float width = mPaint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
-                }
-                offset += gaps[i];
+        // draw new text
+        for (int i = 0; i < mText.length(); ++i) {
+            if (!CharacterUtils.stayHere(i, differentList)) {
+                int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
+                if (alpha > 255) alpha = 255;
+                if (alpha < 0) alpha = 0;
+                float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
+                if (size > mTextSize) size = mTextSize;
+                if (size < 0) size = 0;
+                mPaint.setAlpha(alpha);
+                mPaint.setTextSize(size);
+                float width = mPaint.measureText(mText.charAt(i) + "");
+                canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
             }
+            offset += gaps[i];
         }
     }
 }
