@@ -70,13 +70,13 @@ public class BestBlur {
 
         if (radius > 0f && desaturateAmount > 0f) {
             doBlur(radius, mTmp1, mTmp2);
-            doDesaturate(MathUtil.constrain(0, 1, desaturateAmount), mTmp2, mTmp1);
+            doDesaturate(MathUtils.constrain(0, 1, desaturateAmount), mTmp2, mTmp1);
             mTmp1.copyTo(dest);
         } else if (radius > 0f) {
             doBlur(radius, mTmp1, mTmp2);
             mTmp2.copyTo(dest);
         } else {
-            doDesaturate(MathUtil.constrain(0, 1, desaturateAmount), mTmp1, mTmp2);
+            doDesaturate(MathUtils.constrain(0, 1, desaturateAmount), mTmp1, mTmp2);
             mTmp2.copyTo(dest);
         }
         return dest;
@@ -89,11 +89,11 @@ public class BestBlur {
     }
 
     private void doDesaturate(float normalizedAmount, Allocation input, Allocation output) {
-        Matrix3f m = new Matrix3f(new float[]{MathUtil.interpolate(1, 0.299f, normalizedAmount), MathUtil.interpolate(0, 0.299f, normalizedAmount), MathUtil.interpolate(0, 0.299f, normalizedAmount),
+        Matrix3f m = new Matrix3f(new float[]{MathUtils.interpolate(1, 0.299f, normalizedAmount), MathUtils.interpolate(0, 0.299f, normalizedAmount), MathUtils.interpolate(0, 0.299f, normalizedAmount),
 
-                MathUtil.interpolate(0, 0.587f, normalizedAmount), MathUtil.interpolate(1, 0.587f, normalizedAmount), MathUtil.interpolate(0, 0.587f, normalizedAmount),
+                MathUtils.interpolate(0, 0.587f, normalizedAmount), MathUtils.interpolate(1, 0.587f, normalizedAmount), MathUtils.interpolate(0, 0.587f, normalizedAmount),
 
-                MathUtil.interpolate(0, 0.114f, normalizedAmount), MathUtil.interpolate(0, 0.114f, normalizedAmount), MathUtil.interpolate(1, 0.114f, normalizedAmount),});
+                MathUtils.interpolate(0, 0.114f, normalizedAmount), MathUtils.interpolate(0, 0.114f, normalizedAmount), MathUtils.interpolate(1, 0.114f, normalizedAmount),});
         mSIGrey.setColorMatrix(m);
         mSIGrey.forEach(input, output);
     }

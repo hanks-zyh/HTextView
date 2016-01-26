@@ -6,7 +6,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
-import com.hanks.htextview.util.MathUtil;
+import com.hanks.htextview.util.MathUtils;
 
 /**
  * keynote 默认变小然后淡出效果
@@ -48,7 +48,7 @@ public class ScaleText extends IHTextImpl {
             if (move != -1) {
                 mOldPaint.setTextSize(mTextSize);
                 mOldPaint.setAlpha(255);
-                float progress2X = progress > 0.5 ? 1 : progress * 2;
+                float progress2X = percent > 0.5 ? 1 : percent * 2;
                 float distX = CharacterUtils.getOffset(i, move, progress2X, startX, oldStartX, gaps, oldGaps);
                 canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
@@ -71,8 +71,8 @@ public class ScaleText extends IHTextImpl {
             int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
             float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
             float width = mPaint.measureText(mText.charAt(i) + "");
-            mPaint.setAlpha(MathUtil.constrain(0, 255, alpha));
-            mPaint.setTextSize(MathUtil.constrain(0, size, mTextSize));
+            mPaint.setAlpha(MathUtils.constrain(0, 255, alpha));
+            mPaint.setTextSize(MathUtils.constrain(0, size, mTextSize));
             canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, startY, mPaint);
             offset += gaps[i];
         }

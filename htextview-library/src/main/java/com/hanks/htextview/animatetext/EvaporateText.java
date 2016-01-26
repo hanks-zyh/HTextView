@@ -14,19 +14,16 @@ import com.hanks.htextview.util.CharacterUtils;
  */
 public class EvaporateText extends IHTextImpl {
 
-    float charTime = 300; // 每个字符动画时间 500ms
-    int mostCount = 20; // 最多10个字符同时动画
+    private static final float CHAR_TIME = 300; // 每个字符动画时间 300ms
+    private static final int MOST_COUNT = 20; // 最多10个字符同时动画
     private int mTextHeight;
     private float progress;
 
     @Override
     protected void animateStart() {
-        int n = mText.length();
-        n = n <= 0 ? 1 : n;
-
+        int textLength = mText.length();
         // 计算动画总时间
-        long duration = (long) (charTime + charTime / mostCount * (n - 1));
-
+        long duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (textLength - 1));
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -41,30 +38,21 @@ public class EvaporateText extends IHTextImpl {
 
     @Override
     protected void animatePrepare() {
-
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }
 
     @Override
-    protected void drawFrame(Canvas canvas) {
-
-    }
-
-    @Override
     public void onDraw(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
-
         int maxLength = Math.max(mText.length(), mOldText.length());
-
         for (int i = 0; i < maxLength; i++) {
-
             // draw old text
             if (i < mOldText.length()) {
                 //
-                float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
+                float pp = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
 
                 mOldPaint.setTextSize(mTextSize);
                 int move = CharacterUtils.needMove(i, differentList);
@@ -88,14 +76,14 @@ public class EvaporateText extends IHTextImpl {
 
                 if (!CharacterUtils.stayHere(i, differentList)) {
 
-                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
+                    int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
                     alpha = alpha > 255 ? 255 : alpha;
                     alpha = alpha < 0 ? 0 : alpha;
 
 
                     mPaint.setAlpha(alpha);
                     mPaint.setTextSize(mTextSize);
-                    float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
+                    float pp = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
                     float y = mTextHeight + startY - pp * mTextHeight;
 
                     float width = mPaint.measureText(mText.charAt(i) + "");

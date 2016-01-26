@@ -14,8 +14,8 @@ package com.hanks.htextview.util;/*
  * limitations under the License.
  */
 
-public class MathUtil {
-    private MathUtil() {
+public class MathUtils {
+    private MathUtils() {
     }
 
     public static float constrain(float min, float max, float v) {
