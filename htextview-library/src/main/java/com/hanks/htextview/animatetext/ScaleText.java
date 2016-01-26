@@ -9,8 +9,8 @@ import com.hanks.htextview.util.CharacterUtils;
 
 public class ScaleText extends IHTextImpl {
 
-    float mostCount = 20;
-    float charTime = 400;
+    private static final float MOST_COUNT = 20;
+    private static final float CHAR_TIME = 400;
     private long duration;
     private float progress;
 
@@ -20,8 +20,9 @@ public class ScaleText extends IHTextImpl {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
         // 计算动画总时间
-        duration = (long) (charTime + charTime / mostCount * (n - 1));
+        duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (n - 1));
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
+        //插值，两头慢中间快
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -62,10 +63,10 @@ public class ScaleText extends IHTextImpl {
             // draw new text
             if (i < mText.length()) {
                 if (!CharacterUtils.stayHere(i, differentList)) {
-                    int alpha = (int) (255f / charTime * (progress - charTime * i / mostCount));
+                    int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
                     if (alpha > 255) alpha = 255;
                     if (alpha < 0) alpha = 0;
-                    float size = mTextSize * 1f / charTime * (progress - charTime * i / mostCount);
+                    float size = mTextSize * 1f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT);
                     if (size > mTextSize) size = mTextSize;
                     if (size < 0) size = 0;
                     mPaint.setAlpha(alpha);
