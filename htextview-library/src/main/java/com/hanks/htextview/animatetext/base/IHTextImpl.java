@@ -23,9 +23,7 @@ public abstract class IHTextImpl implements IHText {
     protected float[] gaps = new float[100];
     protected float[] oldGaps = new float[100];
 
-    /**
-     * current text size
-     */
+    //当前字体大小
     protected float mTextSize;
 
     protected CharSequence mText;
@@ -33,9 +31,12 @@ public abstract class IHTextImpl implements IHText {
 
     protected List<CharacterDiffResult> differentList = new ArrayList<>();
 
-    protected float oldStartX = 0; // 原来的字符串开始画的x位置
-    protected float startX = 0; // 新的字符串开始画的x位置
-    protected float startY = 0; // 字符串开始画的y, baseline
+    // 原来的字符串开始画的x位置
+    protected float oldStartX = 0;
+    // 新的字符串开始画的x位置
+    protected float startX = 0;
+    // 字符串开始画的y, baseline
+    protected float startY = 0;
 
     protected HTextView mHTextView;
 
@@ -138,6 +139,7 @@ public abstract class IHTextImpl implements IHText {
      * 每次动画前初始化调用
      */
     protected void animatePrepare() {
+
     }
 
 
