@@ -7,6 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.animatetext.base.IHTextImpl;
 import com.hanks.htextview.util.CharacterUtils;
+import com.hanks.htextview.util.MathUtils;
 
 /**
  * 蒸发效果
@@ -46,53 +47,39 @@ public class EvaporateText extends IHTextImpl {
     @Override
     public void onDraw(Canvas canvas) {
         float offset = startX;
+        // draw old text
         float oldOffset = oldStartX;
-        int maxLength = Math.max(mText.length(), mOldText.length());
-        for (int i = 0; i < maxLength; i++) {
-            // draw old text
-            if (i < mOldText.length()) {
-                //
-                float pp = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
-
-                mOldPaint.setTextSize(mTextSize);
-                int move = CharacterUtils.needMove(i, differentList);
-                if (move != -1) {
-                    mOldPaint.setAlpha(255);
-                    float p = pp * 2f;
-                    p = p > 1 ? 1 : p;
-                    float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
-                } else {
-                    mOldPaint.setAlpha((int) ((1 - pp) * 255));
-                    float y = startY - pp * mTextHeight;
-                    float width = mOldPaint.measureText(mOldText.charAt(i) + "");
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, y, mOldPaint);
-                }
+        float pp = progress / (CHAR_TIME + CHAR_TIME * mText.length() / MOST_COUNT);
+        for (int i = 0; i < mOldText.length(); ++i) {
+            mOldPaint.setTextSize(mTextSize);
+            int move = CharacterUtils.needMove(i, differentList);
+            if (move != -1) {
+                mOldPaint.setAlpha(255);
+                float p = pp > 0.5 ? 1 : pp * 2;
+                float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
+                canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
+                continue;
             }
-
-            // draw new text
-            if (i < mText.length()) {
-
-                if (!CharacterUtils.stayHere(i, differentList)) {
-
-                    int alpha = (int) (255f / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
-                    alpha = alpha > 255 ? 255 : alpha;
-                    alpha = alpha < 0 ? 0 : alpha;
-
-
-                    mPaint.setAlpha(alpha);
-                    mPaint.setTextSize(mTextSize);
-                    float pp = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
-                    float y = mTextHeight + startY - pp * mTextHeight;
-
-                    float width = mPaint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, mPaint);
-                }
-
+            mOldPaint.setAlpha((int) ((1 - pp) * 255));
+            float y = startY - pp * mTextHeight;
+            float width = mOldPaint.measureText(mOldText.charAt(i) + "");
+            canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGaps[i] - width) / 2, y, mOldPaint);
+            oldOffset += oldGaps[i];
+        }
+        // draw new text
+        for (int i = 0; i < mText.length(); ++i) {
+            if (CharacterUtils.stayHere(i, differentList)) {
                 offset += gaps[i];
+                continue;
             }
+            int alpha = (int) (255 / CHAR_TIME * (progress - CHAR_TIME * i / MOST_COUNT));
+            mPaint.setAlpha(MathUtils.constrain(0, 255, alpha));
+            mPaint.setTextSize(mTextSize);
+            float y = mTextHeight + startY - pp * mTextHeight;
+            float width = mPaint.measureText(mText.charAt(i) + "");
+            canvas.drawText(mText.charAt(i) + "", 0, 1, offset + (gaps[i] - width) / 2, y, mPaint);
+            offset += gaps[i];
         }
     }
-
 }
