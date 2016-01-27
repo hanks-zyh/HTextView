@@ -44,6 +44,10 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/rainbow.gif)
 
+[Burn](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/BurnText.java)
+
+![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/burn.gif)
+
 
 ## Usage
 
@@ -68,7 +72,7 @@ xmlns:htext="http://schemas.android.com/apk/res-auto"
        />
 ```
 
-`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate` `typer` `rainbow`
+`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate` `typer` `rainbow` `burn`
 
 
 ```java
