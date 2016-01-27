@@ -94,6 +94,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rainbow" />
+
+            <RadioButton
+                android:id="@+id/burn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Burn" />
         </RadioGroup>
 
     </LinearLayout>

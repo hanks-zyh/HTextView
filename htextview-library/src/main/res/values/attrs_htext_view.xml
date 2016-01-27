@@ -11,6 +11,7 @@
             <enum name="pixelate" value="6" />
             <enum name="typer" value="7" />
             <enum name="rainbow" value="8" />
+            <enum name="burn" value="9" />
         </attr>
     </declare-styleable>
 </resources>

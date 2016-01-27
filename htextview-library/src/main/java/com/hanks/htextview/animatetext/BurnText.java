@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 蒸发效果
+ * 蒸发效果 此处去掉了前面的黑块，如果要加上，去掉那部分的注释即可
  * Created by hanks on 15-12-14.
  */
 public class BurnText implements IHText {
@@ -72,6 +72,7 @@ public class BurnText implements IHText {
     public void animateText(CharSequence text) {
         mOldText = mText == null ? "" : mText;
         mText = text;
+
         calculate();
         int textLength = mText.length();
         textLength = textLength <= 0 ? 1 : textLength;

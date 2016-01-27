@@ -32,6 +32,7 @@ public class HTextView extends TextView {
     private static final int PIXELATE = 6;
     private static final int TYPER = 7;
     private static final int RAINBOW = 8;
+    private static final int BURN = 9;
 
     private IHText mIHText = new ScaleText();
     private AttributeSet attrs;
@@ -86,6 +87,8 @@ public class HTextView extends TextView {
             case RAINBOW:
                 mIHText = new RainBowText();
                 break;
+            case BURN:
+                mIHText = new BurnText();
         }
         typedArray.recycle();
         initHText(attrs, defStyle);
@@ -133,10 +136,13 @@ public class HTextView extends TextView {
                 mIHText = new LineText();
                 break;
             case TYPER:
-                mIHText = new BurnText();
+                mIHText = new TyperText();
                 break;
             case RAINBOW:
                 mIHText = new RainBowText();
+                break;
+            case BURN:
+                mIHText = new BurnText();
                 break;
         }
         initHText(attrs, defStyle);
