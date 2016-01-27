@@ -48,7 +48,7 @@ public class EvaporateText extends IHTextImpl {
     public void onDraw(Canvas canvas) {
         // draw old text
         float oldOffset = oldStartX;
-        float percent = progress / (CHAR_TIME + CHAR_TIME * mText.length() / MOST_COUNT);
+        float percent = progress / (CHAR_TIME + CHAR_TIME * (mText.length() - 1) / MOST_COUNT);
         for (int i = 0; i < mOldText.length(); ++i) {
             mOldPaint.setTextSize(mTextSize);
             int move = CharacterUtils.needMove(i, differentList);

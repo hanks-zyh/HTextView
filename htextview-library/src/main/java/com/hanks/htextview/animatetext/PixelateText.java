@@ -1,15 +1,12 @@
 package com.hanks.htextview.animatetext;
 
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.HTextView;
@@ -57,11 +54,6 @@ public class PixelateText implements IHText {
         pixPaint.setColor(Color.BLACK);
         pixPaint.setStyle(Paint.Style.FILL);
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        WindowManager windowManger = (WindowManager) hTextView.getContext()
-                .getSystemService(Context.WINDOW_SERVICE);
-        windowManger.getDefaultDisplay().getMetrics(metrics);
-
         textSize = hTextView.getTextSize();
     }
 
@@ -96,7 +88,7 @@ public class PixelateText implements IHText {
     public void onDraw(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
-        float percent = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * mText.length());
+        float percent = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
         int alpha = (int) (255 * percent);
         int oldAlpha = (int) (255 * (1 - percent));
         alpha = MathUtils.constrain(0, 255, alpha);

@@ -19,7 +19,7 @@ public class LineText extends IHTextImpl {
     public static final long ANIMATE_DURATION = 800;
     public static final float GAP = 0f;
     private float progress = 0;
-    private Paint linePaint;
+    private Paint linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     // distance between text and line
     private float padding;
     private PointF p1 = new PointF();
@@ -41,7 +41,6 @@ public class LineText extends IHTextImpl {
     protected void initVariables() {
         xLineWidth = DisplayUtils.dp2px(mHTextView.getContext(), 1.5f);
         padding = DisplayUtils.dp2px(mHTextView.getContext(), 15);
-        linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setColor(mHTextView.getCurrentTextColor());
         linePaint.setStyle(Paint.Style.FILL);
         linePaint.setStrokeWidth(xLineWidth);

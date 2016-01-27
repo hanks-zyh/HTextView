@@ -20,36 +20,30 @@ import java.util.Random;
  */
 public class SparkleText extends IHTextImpl {
 
-    float progress = 0;
+    private static final float CHAR_TIME = 400; // 每个字符动画时间 400ms
+    private static final int MOST_COUNT = 20; // 最多20个字符同时动画
 
-    float charTime = 400; // 每个字符动画时间 500ms
-    int mostCount = 20; // 最多10个字符同时动画
+    private float upDistance;
+    private float progress;
 
-    float upDistance = 0;
-
-    private Paint backPaint;
+    private Paint backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Bitmap sparkBitmap;
+    private Rect bounds = new Rect();
 
     @Override
     protected void initVariables() {
-
-        backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
         backPaint.setStyle(Paint.Style.FILL);
-
+        mPaint.setAlpha(255);
         sparkBitmap = BitmapFactory.decodeResource(mHTextView.getResources(), R.drawable.sparkle);
-
     }
 
     @Override
-    protected void animateStart( ) {
-
-        int n = mText.length();
-        n = n <= 0 ? 1 : n;
-
+    protected void animateStart() {
+        int textLength = mText.length();
+        textLength = textLength <= 0 ? 1 : textLength;
         // 计算动画总时间
-        long duration = (long) (charTime + charTime / mostCount * (n - 1));
-
+        long duration = (long) (CHAR_TIME + CHAR_TIME / MOST_COUNT * (textLength - 1));
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -59,80 +53,70 @@ public class SparkleText extends IHTextImpl {
             }
         });
         valueAnimator.start();
-
     }
 
     @Override
-    protected void animatePrepare( ) {
-
-        Rect bounds = new Rect();
+    protected void animatePrepare() {
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
     }
 
     @Override
     protected void drawFrame(Canvas canvas) {
-        float offset = startX;
-        float oldOffset = oldStartX;
 
-        int maxLength = Math.max(mText.length(), mOldText.length());
-        float percent = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-
-        mPaint.setAlpha(255);
+        float percent = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
         mPaint.setTextSize(mTextSize);
 
-        for (int i = 0; i < maxLength; i++) {
-            // draw new text
-            if (i < mText.length()) {
-
-                if (!CharacterUtils.stayHere(i, differentList)) {
-
-                    float width = mPaint.measureText(mText.charAt(i) + "");
-                    canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, mPaint);
-                    if (percent < 1) {
-                        drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
-                    }
-
-                    canvas.drawRect(offset, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset + gaps[i], startY * 1.2f, backPaint);
-                }
+        // draw new text
+        float offset = startX;
+        for (int i = 0; i < mText.length(); ++i) {
+            if (CharacterUtils.stayHere(i, differentList)) {
                 offset += gaps[i];
+                continue;
             }
-            // draw old text
-            if (i < mOldText.length()) {
-                //
-                float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
+            float width = mPaint.measureText(mText.charAt(i) + "");
+            canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, mPaint);
+            if (percent < 1) {
+                drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
+            }
+            canvas.drawRect(offset, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset + gaps[i], startY * 1.2f, backPaint);
+            offset += gaps[i];
+        }
 
-                mOldPaint.setTextSize(mTextSize);
-                int move = CharacterUtils.needMove(i, differentList);
-                if (move != -1) {
-                    mOldPaint.setAlpha(255);
-                    float p = pp * 2f;
-                    p = p > 1 ? 1 : p;
-                    float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gaps, oldGaps);
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
-                } else {
-
-                    float p = pp * 3.5f;
-                    p = p > 1 ? 1 : p;
-                    mOldPaint.setAlpha((int) (255 * (1 - p)));
-                    canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset, startY, mOldPaint);
-                }
+        // draw old text
+        float oldOffset = oldStartX;
+        for (int i = 0; i < mOldText.length(); ++i) {
+            mOldPaint.setTextSize(mTextSize);
+            int move = CharacterUtils.needMove(i, differentList);
+            if (move != -1) {
+                mOldPaint.setAlpha(255);
+                float percent2X = percent > 0.5f ? 1 : percent * 2f;
+                float distX = CharacterUtils.getOffset(i, move, percent2X, startX, oldStartX, gaps, oldGaps);
+                canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 oldOffset += oldGaps[i];
+                continue;
             }
-
+            float p = percent * 3.5f;
+            p = p > 1 ? 1 : p;
+            mOldPaint.setAlpha((int) (255 * (1 - p)));
+            canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset, startY, mOldPaint);
+            oldOffset += oldGaps[i];
         }
     }
 
     private void drawSparkle(Canvas canvas, float offset, float startY, float width) {
         Random random = new Random();
         for (int i = 0; i < 8; i++) {
-            canvas.drawBitmap(getRandomSpark(random), (float) (offset + random.nextDouble() * width), (float) (startY - random
+            //这里加一个Temp避免OOM
+            Bitmap temp = getRandomSpark(random);
+            canvas.drawBitmap(temp, (float) (offset + random.nextDouble() * width), (float) (startY - random
                     .nextGaussian() * Math.sqrt(upDistance)), mPaint);
+            temp.recycle();
         }
     }
 
     private Bitmap getRandomSpark(Random random) {
-        int dstWidth = random.nextInt(12) + 1;
-        return Bitmap.createScaledBitmap(sparkBitmap, dstWidth, dstWidth, false);
+        int dstWidthAndHeight = random.nextInt(12) + 1;
+        return Bitmap.createScaledBitmap(sparkBitmap, dstWidthAndHeight, dstWidthAndHeight, false);
     }
 }

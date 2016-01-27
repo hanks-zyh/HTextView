@@ -24,6 +24,7 @@ public class FallText extends IHTextImpl {
     private float progress;
     private OvershootInterpolator interpolator = new OvershootInterpolator();
     private Path path = new Path();
+    private Rect bounds = new Rect();
 
     @Override
     protected void animateStart() {
@@ -45,7 +46,6 @@ public class FallText extends IHTextImpl {
 
     @Override
     protected void animatePrepare() {
-        Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }

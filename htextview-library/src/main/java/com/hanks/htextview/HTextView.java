@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.hanks.htextview.animatetext.AnvilText;
+import com.hanks.htextview.animatetext.BurnText;
 import com.hanks.htextview.animatetext.EvaporateText;
 import com.hanks.htextview.animatetext.FallText;
 import com.hanks.htextview.animatetext.base.IHText;
@@ -132,7 +133,7 @@ public class HTextView extends TextView {
                 mIHText = new LineText();
                 break;
             case TYPER:
-                mIHText = new TyperText();
+                mIHText = new BurnText();
                 break;
             case RAINBOW:
                 mIHText = new RainBowText();
