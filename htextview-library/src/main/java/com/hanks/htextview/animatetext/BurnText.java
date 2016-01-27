@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
 import com.hanks.htextview.HTextView;
@@ -26,21 +25,20 @@ import java.util.Random;
  */
 public class BurnText implements IHText {
 
-    private static final int MOST_COUNT = 20; // 最多20个字符同时动画
     private static final float CHAR_TIME = 500; // 每个字符动画时间 500ms
+    private static final int MOST_COUNT = 20; // 最多20个字符同时动画
     private float progress;
-    private Paint paint, oldPaint, backPaint;
-    private HTextView mHTextView;
-    float upDistance = 0;
-
+    private float upDistance;
+    private float oldStartX, startX, startY;
     private float[] gaps = new float[100];
     private float[] oldGaps = new float[100];
     private float textSize;
+    private Paint paint, oldPaint;
+    //我觉得没有黑块更好看
+    //private Paint backPaint;
+    private HTextView mHTextView;
     private CharSequence mText, mOldText;
     private List<CharacterDiffResult> differentList = new ArrayList<>();
-    private float oldStartX = 0;
-    private float startX = 0;
-    private float startY = 0;
     private Bitmap sparkBitmap;
     private Rect bounds = new Rect();
 
@@ -55,9 +53,9 @@ public class BurnText implements IHText {
         oldPaint.setColor(Color.WHITE);
         oldPaint.setStyle(Paint.Style.FILL);
 
-        backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
-        backPaint.setStyle(Paint.Style.FILL);
+        //backPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //backPaint.setColor(((ColorDrawable) mHTextView.getBackground()).getColor());
+        //backPaint.setStyle(Paint.Style.FILL);
 
         textSize = hTextView.getTextSize();
         sparkBitmap = BitmapFactory.decodeResource(hTextView.getResources(), R.drawable.fire);
@@ -92,30 +90,31 @@ public class BurnText implements IHText {
 
     @Override
     public void onDraw(Canvas canvas) {
-        float offset = startX;
-        float oldOffset = oldStartX;
         float percent = progress / (CHAR_TIME + CHAR_TIME / MOST_COUNT * (mText.length() - 1));
-        paint.setAlpha(255);
-        oldPaint.setAlpha(255);
-        oldPaint.setTextSize(textSize);
-        paint.setTextSize(textSize);
+
         // draw new text
-        for (int i = 0; i < mText.length(); ++i) {
+        float offset = startX;
+        paint.setAlpha(255);
+        paint.setTextSize(textSize);
+        for (int i = 0; i < mText.length(); i++) {
             if (CharacterUtils.stayHere(i, differentList)) {
                 offset += gaps[i];
                 continue;
             }
             float width = paint.measureText(mText.charAt(i) + "");
             canvas.drawText(mText.charAt(i) + "", 0, 1, offset, startY, paint);
-            canvas.drawRect(offset, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset + gaps[i], startY * 1.2f, backPaint);
+            //canvas.drawRect(offset, startY * 1.2f - (1 - percent) * (upDistance + startY * 0.2f), offset + gaps[i], startY * 1.2f, backPaint);
+            //在动画完成之后不需要画火花
             if (percent < 1) {
                 drawSparkle(canvas, offset, startY - (1 - percent) * upDistance, width);
             }
             offset += gaps[i];
         }
         // draw old text
+        float oldOffset = oldStartX;
+        oldPaint.setTextSize(textSize);
         for (int i = 0; i < mOldText.length(); ++i) {
-            canvas.save();
+            oldPaint.setAlpha(255);
             int move = CharacterUtils.needMove(i, differentList);
             if (move != -1) {
                 float p = percent * 7f;
@@ -151,17 +150,22 @@ public class BurnText implements IHText {
         textSize = mHTextView.getTextSize();
         paint.setTextSize(textSize);
         oldPaint.setTextSize(textSize);
+
         for (int i = 0; i < mText.length(); i++) {
             gaps[i] = paint.measureText(mText.charAt(i) + "");
         }
         for (int i = 0; i < mOldText.length(); i++) {
             oldGaps[i] = oldPaint.measureText(mOldText.charAt(i) + "");
         }
+
         oldStartX = (mHTextView.getWidth() - oldPaint.measureText(mOldText.toString())) / 2f;
+
         startX = (mHTextView.getWidth() - paint.measureText(mText.toString())) / 2f;
         startY = (int) ((mHTextView.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2));
+
         differentList.clear();
         differentList.addAll(CharacterUtils.diff(mOldText, mText));
+
         paint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         upDistance = bounds.height();
     }
