@@ -22,22 +22,19 @@ import java.lang.reflect.Field;
  */
 public class AnvilText extends IHTextImpl {
 
-    private Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Bitmap[] smokes = new Bitmap[50];
     // 每个字符动画时间 800ms
     public static final long ANIMATE_DURATION = 800;
+    private Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Bitmap[] smokes = new Bitmap[50];
     private int mTextHeight;
     private int mTextWidth;
     private float progress;
     private Rect bounds = new Rect();
 
-    {
-        bitmapPaint.setColor(Color.WHITE);
-        bitmapPaint.setStyle(Paint.Style.FILL);
-    }
-
     @Override
     protected void initVariables() {
+        bitmapPaint.setColor(Color.WHITE);
+        bitmapPaint.setStyle(Paint.Style.FILL);
         //通过反射获取到图片资源
         try {
             R.drawable d = new R.drawable();
