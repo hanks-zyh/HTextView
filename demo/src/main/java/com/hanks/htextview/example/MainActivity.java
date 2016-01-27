@@ -19,19 +19,22 @@ import com.hanks.htextview.HTextViewType;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
-    String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
+
     private int mCounter = 10;
     private TextSwitcher textSwitcher;
-    private HTextView    hTextView;
-
-    private SeekBar    seekBar;
+    private HTextView hTextView;
+    private CharSequence[] sentences;
     private RadioGroup radioGroup;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         textSwitcher = (TextSwitcher) findViewById(R.id.text);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekbar);
+        hTextView = (HTextView) findViewById(R.id.text2);
+
+        sentences = getResources().getTextArray(R.array.Text);
         textSwitcher.setFactory(this);
 
         Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
@@ -39,21 +42,21 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         textSwitcher.setInAnimation(in);
         textSwitcher.setOutAnimation(out);
 
-        hTextView = (HTextView) findViewById(R.id.text2);
-
-        seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setMax(20);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 + progress);
                 hTextView.reset(hTextView.getText());
             }
 
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
@@ -61,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
 
         radioGroup = (RadioGroup) findViewById(R.id.typeGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.scale:
                         hTextView.setTextColor(Color.BLACK);
@@ -108,12 +112,16 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                         hTextView.setBackgroundColor(Color.BLACK);
                         hTextView.setAnimateType(HTextViewType.RAINBOW);
                         break;
+                    case R.id.burn:
+                        hTextView.setTextColor(Color.WHITE);
+                        hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setAnimateType(HTextViewType.BURN);
+                        break;
                 }
 
                 onClick(radioGroup.findViewById(checkedId));
             }
         });
-//
 //        hTextView.setTextColor(Color.BLACK);
 //        hTextView.setBackgroundColor(Color.WHITE);
 //        hTextView.setAnimateType(HTextViewType.SCALE);
@@ -130,11 +138,11 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         hTextView.animateText(sentences[mCounter]);
     }
 
-    @Override public View makeView() {
-
-        TextView t = new TextView(this);
-        t.setGravity(Gravity.CENTER);
-        t.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-        return t;
+    @Override
+    public View makeView() {
+        TextView textView = new TextView(this);
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+        return textView;
     }
 }

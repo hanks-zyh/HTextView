@@ -1,94 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:htext="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextSwitcher
-        android:id="@+id/text"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.hanks.htextview.HTextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:onClick="onClick"
-        htext:animateType="scale"
-        android:text="What is design?"
-        android:background="#000"
-        android:textColor="#fff"
-        android:textSize="30sp"/>
+        <TextSwitcher
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
 
-    <SeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        <com.hanks.htextview.HTextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#000"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="What is design?"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            htext:animateType="scale" />
 
-
-    <RadioGroup
-        android:id="@+id/typeGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
-
-        <RadioButton
-            android:id="@+id/scale"
-            android:layout_width="wrap_content"
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Scale"/>
+            android:layout_marginTop="20dp" />
 
-        <RadioButton
-            android:id="@+id/evaporate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Evaporate"/>
 
-        <RadioButton
-            android:id="@+id/fall"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/typeGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fall"/>
+            android:layout_marginTop="10dp">
 
-        <RadioButton
-            android:id="@+id/pixelate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pixelate"/>
+            <RadioButton
+                android:id="@+id/scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Scale" />
 
-        <RadioButton
-            android:id="@+id/sparkle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sparkle"/>
+            <RadioButton
+                android:id="@+id/evaporate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evaporate" />
 
-        <RadioButton
-            android:id="@+id/anvil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Anvil"/>
+            <RadioButton
+                android:id="@+id/fall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fall" />
 
-        <RadioButton
-            android:id="@+id/line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Line"/>
-        <RadioButton
-            android:id="@+id/typer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Typer"/>
-        <RadioButton
-            android:id="@+id/rainbow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rainbow"/>
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/pixelate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pixelate" />
 
-</LinearLayout>
+            <RadioButton
+                android:id="@+id/sparkle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sparkle" />
+
+            <RadioButton
+                android:id="@+id/anvil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anvil" />
+
+            <RadioButton
+                android:id="@+id/line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Line" />
+
+            <RadioButton
+                android:id="@+id/typer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Typer" />
+
+            <RadioButton
+                android:id="@+id/rainbow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rainbow" />
+
+            <RadioButton
+                android:id="@+id/burn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Burn" />
+        </RadioGroup>
+
+    </LinearLayout>
+</ScrollView>

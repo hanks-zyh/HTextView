@@ -1,0 +1,563 @@
+[33mcommit 4e43509364961fb5e62dcc7cf5d03ae23275c8f4[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Wed Jan 27 20:39:06 2016 +0800
+
+    refactor of BurnText
+
+[33mcommit ce5836343e2e6a0406a5fa30599ec53dd1bdd8dc[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Wed Jan 27 08:22:03 2016 +0800
+
+    refactor of PixelateText and Change the CHAR_TIME to 1000
+
+[33mcommit 8a3d9b36c452e0a2d309dbe80ec799d7f20c9c5a[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Wed Jan 27 07:58:08 2016 +0800
+
+    refactor of LineText
+
+[33mcommit 2ed11e3faa43ef4f96c92579f7bbba2afa4815d6[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Wed Jan 27 07:19:46 2016 +0800
+
+    refactor FallText
+
+[33mcommit c8cd07ecf3b396ac25d230d4fed99d96b0ab07a2[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 22:26:38 2016 +0800
+
+    refactor EvaporateText
+
+[33mcommit f6470cc578e6bf8cba9a1c4bc6e095dfb567ced6[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 22:13:20 2016 +0800
+
+    refactor
+
+[33mcommit a1e8764d6b19a094041cee3be2961b790eac6394[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 22:02:54 2016 +0800
+
+    refactor of ScaleText
+
+[33mcommit ae7f9b951e309e6d7d789ddf60f98137cca0598c[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 21:44:03 2016 +0800
+
+    refactor of AnvilText
+
+[33mcommit 6d6eb86d82984396a258f82b23bdfe202bf97b79[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 18:34:05 2016 +0800
+
+    refactor
+
+[33mcommit c8c6648a0ef2cd71957e1c3ab15374cce8a802da[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 08:18:13 2016 +0800
+
+    refactor
+
+[33mcommit fde5fe3b20dc48fabcf3d419ffcd10e253dc3370[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 08:09:06 2016 +0800
+
+    fix demo layout bug
+
+[33mcommit 7aa8484f0d517c637927a7e8f7fe1a56a277785c[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Tue Jan 26 07:53:15 2016 +0800
+
+    refactor
+
+[33mcommit ffe9af72b008a1fa2179edfcaf812ff36de49409[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Mon Jan 25 22:17:28 2016 +0800
+
+    refactor
+
+[33mcommit 5f46dff438e06eae1481a40182f70aaf507ce987[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Mon Jan 25 21:52:27 2016 +0800
+
+    refactor
+
+[33mcommit bc7ab4a69f9bde597e43cd4ced30acb5adc288fa[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Mon Jan 25 21:28:56 2016 +0800
+
+    refactor
+
+[33mcommit c0fe398313921eabcecb5a656a604a111d5bed61[m
+Author: xhinliang <xhinliang@gmail.com>
+Date:   Mon Jan 25 21:11:51 2016 +0800
+
+    refactor
+
+[33mcommit fcfee76e57386363622f520c1f6571ba1df668e8[m
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Tue Dec 29 11:12:15 2015 +0800
+
+    update code hightlight ; add namspace in Usage
+
+[33mcommit d4e0b5d6e5ace039baee1f1077d64339fe91de4a[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 27 00:01:52 2015 +0800
+
+    update Usage in README
+
+[33mcommit 083baf5133cbd36b2e8744a534ce125f48ee2c01[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 26 23:59:23 2015 +0800
+
+    upgrade version 0.1.2 -> 0.1.3
+
+[33mcommit 01c14ec8ad7ee3dc28552afe4ced79032e0d01b5[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 26 23:54:13 2015 +0800
+
+    manage log
+
+[33mcommit bdbe4b545d9a2aed51badd8207e2ba3c797922c7[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 26 23:52:15 2015 +0800
+
+    add Typer & Rainbow to README
+
+[33mcommit 6f61cc9fc3329b9531b14bfe24d264d45c63db78[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 26 23:49:12 2015 +0800
+
+    add RainBow effect
+
+[33mcommit d53bd5595be3cfef49eaf6abd256830af006c134[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 26 21:41:04 2015 +0800
+
+    add Typer Effect
+
+[33mcommit 698583b2c8a7ed14659c4933c68a195b07efa45b[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Fri Dec 25 00:03:32 2015 +0800
+
+    upgrade version 0.1.1 -> 0.1.2
+
+[33mcommit 6a7153c765c4fe96e6fdc6e421a9d7358cf40abc[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 24 23:37:26 2015 +0800
+
+    fix bug:
+    LineText Effect: line can't join when line  width is big
+
+[33mcommit f411a0df1a4bd7c58365ce66b2739f4233186087[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 24 13:39:21 2015 +0800
+
+    add java code to 'usage'
+
+[33mcommit 5c20d85166118c17036df45eaf350f907c31c505[m
+Merge: aed624a 2a29349
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Thu Dec 24 13:23:33 2015 +0800
+
+    Merge pull request #2 from JohnTsaiAndroid/master
+    
+    fix the OOM exception
+
+[33mcommit 2a29349f487f566ec6ae2e35feab8e8078cfaf10[m
+Author: JohnTsai <johntsai.work@gmail.com>
+Date:   Thu Dec 24 10:55:07 2015 +0800
+
+    fix the OOM exception
+
+[33mcommit 7690c7a45ed80d2f7ba437e60d6ddda51c2a8a77[m
+Author: JohnTsai <johntsai.work@gmail.com>
+Date:   Thu Dec 24 10:36:02 2015 +0800
+
+    fix the OOM exception
+
+[33mcommit aed624aa04010d1247426682ac3de39858a32d6a[m
+Merge: 95683a5 433306a
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 23 18:58:27 2015 +0800
+
+    Merge branch 'master' of github.com:hanks-zyh/HTextView
+
+[33mcommit 95683a5e823eda7c2f90392ec2d1033aaa00461c[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 23 17:42:10 2015 +0800
+
+    add demo.apk
+
+[33mcommit 9c66f95b2eb8cf22ab8c2a0fe704ae4c9a4dcd37[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 23 17:37:46 2015 +0800
+
+    rename app -> demo
+
+[33mcommit a4fadb9e206a0465d0290506c2db4f4d3da2aea2[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 23 17:33:16 2015 +0800
+
+    fix bug: demo apk cant choose animation type
+
+[33mcommit 433306a9b724d4bb21f606290d740c4188d01efd[m
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Wed Dec 23 11:03:43 2015 +0800
+
+    update contact in readme
+
+[33mcommit 45fb15aba4ca434de976692c570f0e5b2d5c5c8c[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 21 12:37:45 2015 +0800
+
+    add Usage to Readme
+    upgrade version 0.1.0 -> 0.1.1
+
+[33mcommit 847480de346b35cc50a2a2b39434b19ad123d1c3[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 18:41:56 2015 +0800
+
+    change attr.xml to add animateType
+    use attr in HTextView.java to change animate type so that it can be used in xml
+
+[33mcommit a39946d022abbf6cb0639360225361b11ff359d0[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 18:04:49 2015 +0800
+
+    remove unused module
+
+[33mcommit e35deb2cc8c93f0ddc5f8c8f73cdd28dcd90c465[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 18:03:19 2015 +0800
+
+    add gradle task 'install' 'bintrayupload' to generate jar jardoc ,and upload aar
+
+[33mcommit 84edbaae006b73b8e66e5d57d29494031ebf65fd[m
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Sun Dec 20 15:36:15 2015 +0800
+
+    Update README.md
+
+[33mcommit 3760d1a5622c4c76789f157e7e2738e7dd801a3e[m
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Sun Dec 20 15:34:53 2015 +0800
+
+    Delete .README.md.swp
+
+[33mcommit aad7c3cc0ab9d435628f00935f59b631bfe9e5cd[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 15:32:03 2015 +0800
+
+    update README , add description to every effect
+
+[33mcommit 3c21d3636d213fb8107f0d6ad462270a271dfb18[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 15:22:52 2015 +0800
+
+    add demo.gif to README
+
+[33mcommit 7b7eb6f4d17cade6fd498b74cd9ec9f44d322be2[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 15:04:47 2015 +0800
+
+    add screenshot
+
+[33mcommit 0f83406664bc50b9912e21bdc48eac58b585d604[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:58:55 2015 +0800
+
+    fix  EvaporateTlext() ->  EvaporateText();
+
+[33mcommit 52bbce6ea213deca00b41b52192a0f252b1abac2[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:56:25 2015 +0800
+
+    use enum type to control setAnimateType
+
+[33mcommit afecebebf5cd5cc55382dba497d54c09a6ac448f[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:44:23 2015 +0800
+
+    rename AnimateText to IHText
+
+[33mcommit 096b325dbcc485e688af5c007425f181cadcf3b0[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:39:10 2015 +0800
+
+    remove brun in MainActivity
+
+[33mcommit bf1681e24c95f57fddb95d932a3a33be156da2ae[m
+Merge: f04c255 7c9a69d
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:36:31 2015 +0800
+
+    pull form remote github
+
+[33mcommit 7c9a69d8d77b20d4b7708a41bc0d049e8c651a63[m
+Author: hanks-zyh <hanks-zyh@users.noreply.github.com>
+Date:   Sun Dec 20 00:34:59 2015 +0800
+
+    Initial commit
+
+[33mcommit f04c255651f75054faa5ad027aa429833bc77f0d[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 20 00:30:22 2015 +0800
+
+    recover SparkleText to use sparkle.png drawbitamp
+
+[33mcommit 3fa86e2ade7ab8a41c3fa2d3f8caa9bcee86b584[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 15:56:57 2015 +0800
+
+    fix problem
+
+[33mcommit eeb654a3a3dd898fff461c045258139c7a0702af[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 15:55:29 2015 +0800
+
+    find problem: cant show text when init
+
+[33mcommit c79fe5d1b4edd2666c80216b4936a26d3043f789[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 15:02:26 2015 +0800
+
+    change LineText to extend HText
+
+[33mcommit 42af32515582d439ce652c0bfd8a3dbf5f6e7714[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 14:38:23 2015 +0800
+
+    add comment to methods in HText
+    move LineText to animatetext package
+
+[33mcommit 8769e35f158f31addcbfb7d244f31d91926939e4[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 14:35:11 2015 +0800
+
+    fix bug:
+    the method not call in HText
+    
+    change AnvilText to extend HText
+
+[33mcommit 68b48049472ed7806c3868db479279467d0c05e4[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 14:20:43 2015 +0800
+
+    format FallText
+
+[33mcommit b01ff3e325bd2b076f80725376b6dfaa7a65d3ae[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 14:17:45 2015 +0800
+
+    change FallText to extend HText
+    remove ANIMAT_DURATION and progress in HText
+
+[33mcommit 142828f2b77e6b8a5f1498b19d7c57d661db5cbd[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 14:08:20 2015 +0800
+
+    change EvaporateText to extend HText
+    remove unused code
+
+[33mcommit a0d49c417b28b3f7736e101a38d4a2f753093b54[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 13:24:01 2015 +0800
+
+    fix bug:
+    ScaleText can't show newText
+    progress int ScaleText
+
+[33mcommit 08426c710fe46917e3755c3eaba675daa35f8560[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sat Dec 19 13:03:39 2015 +0800
+
+    new abstract class HText, do some base action
+    use AnimateText interface to change Animate Type
+
+[33mcommit 39a97cf4dd0df0b25acd548b9765180987bf88f3[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Fri Dec 18 21:20:33 2015 +0800
+
+    add Shimmer,source from github
+
+[33mcommit b4c884f8d463b37a26ee57821d486ff8a08d2815[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 22:22:03 2015 +0800
+
+    add animatetext package
+
+[33mcommit d957b71f5df65655f9cd46561362b8ec813fe4b5[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 22:18:27 2015 +0800
+
+    reset sparkle.png
+
+[33mcommit c195adbb7878306445f8745094d9a274b2771cd4[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 22:14:56 2015 +0800
+
+    add Anvil scale bitmap
+
+[33mcommit ac8db099b0edea55c703dfaaad52a955afdb7a9a[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 01:27:53 2015 +0800
+
+    finish line exit effect
+
+[33mcommit c5fa0fe6d1616611e0e0b9c4e30b5189f8c75a37[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 01:11:11 2015 +0800
+
+    finish line run effect
+
+[33mcommit 3a7d2c402c3b28b167ca7d45cb149f27586c7f24[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 00:24:24 2015 +0800
+
+    add LineText
+
+[33mcommit 8927dcf648fcb76cf4f466e771c0c84c7cbac268[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Thu Dec 17 00:10:09 2015 +0800
+
+    clean SparkleText
+
+[33mcommit 74ff4a19aaf185d1abb0d4aeb7d5914ab8ba98a8[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 16 22:34:32 2015 +0800
+
+    update AnvilText
+
+[33mcommit b1549601fba4f986fdbf5c7d2eb13e2e890f9ff7[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 16 15:51:10 2015 +0800
+
+    add overscroll to fall effect
+
+[33mcommit 837218a78bdeb41f43f58dfb407f10413672bd40[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 16 15:16:49 2015 +0800
+
+    add anvil effect
+
+[33mcommit cc223821f67197cba5036a246ee6c1227477e5f3[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Wed Dec 16 10:54:57 2015 +0800
+
+    add draw module
+
+[33mcommit 66678b863e9b97473434a14c164e7be55b8cdf5e[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Tue Dec 15 18:15:42 2015 +0800
+
+    update launcher icon
+    add AnvilText.png
+
+[33mcommit 560ef0cd45af1340342d622db90dedd2cee3ab89[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Tue Dec 15 11:03:24 2015 +0800
+
+    add Anvil radiobutton in main_activity.xml
+
+[33mcommit 77ee8dadd3acc1b6dd96b8ddf4aa99e14b4f4609[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Tue Dec 15 11:02:19 2015 +0800
+
+    add AnvilText.java
+
+[33mcommit 396046ffd4e1a017424db0eda2160ee377f0130d[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Tue Dec 15 11:00:21 2015 +0800
+
+    add burntext fire.png
+
+[33mcommit 96c00688b88686599a46ba9300538f548d4af8f6[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Tue Dec 15 00:16:14 2015 +0800
+
+    add burntext
+
+[33mcommit 77c4cc481924db34c47f1f3e6e52930e50b8671f[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 23:27:42 2015 +0800
+
+    add radioGroup to select type, show case
+
+[33mcommit 363e1e5105abec7964f2902cf38b06eebd7620f6[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 23:18:40 2015 +0800
+
+    add radioGroup to select type
+
+[33mcommit db61c2c030f67c5270f500ce99a3aabd37b95287[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 23:07:32 2015 +0800
+
+    add text click
+
+[33mcommit 6f35deeb25f73a5cc28a6624670f007747a66299[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 23:03:49 2015 +0800
+
+    resize sparkle.png
+
+[33mcommit d00ba7d9acf2bac13fb637f52c20e95fef52c8e4[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 23:00:44 2015 +0800
+
+    add SparkleText
+
+[33mcommit c2600f1a53482240d104d1b207cd916e7acd6071[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 20:58:00 2015 +0800
+
+    rename png
+
+[33mcommit c9b2e8976c680ae4c86816a11705801f3b64187f[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 20:34:31 2015 +0800
+
+    add png
+
+[33mcommit 5a34549f927bf85ad72e210a43ba959866062e7d[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 20:33:48 2015 +0800
+
+    add PixelateText (not finish effect)
+
+[33mcommit 73290d75985dd366db9b87852759dbc090f62432[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 16:05:32 2015 +0800
+
+    add FallText
+
+[33mcommit 6ac429459a9027bff8125de49e4a3c486acfc3fb[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 11:55:47 2015 +0800
+
+    add EvaporateText animation
+
+[33mcommit af4ba23f3ea6b677a387642ff754344c8543f0ed[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 11:28:18 2015 +0800
+
+    add AnimateText interface
+
+[33mcommit 0186e46cdccf9abaa8ed6a0afce6e888d03ac371[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Mon Dec 14 00:41:20 2015 +0800
+
+    finish scale animation
+
+[33mcommit db7ed5cb4dc8a8d3e553e14f0e5bc84a5449cc9f[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 13 21:50:18 2015 +0800
+
+    add scale animation
+
+[33mcommit f6fc47cec3d4d6a0dc8b4b82559e2e60acba155d[m
+Author: hanks-zyh <zhangyuhan2014@gmail.com>
+Date:   Sun Dec 13 13:27:17 2015 +0800
+
+    init project

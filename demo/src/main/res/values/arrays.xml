@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="Text" >
+        <item>What is design?</item>
+        <item>Design</item>
+        <item>Design is not just</item>
+        <item>what it looks like</item>
+        <item>and feels like.</item>
+        <item>Design is how it works.</item>
+        <item>- Steve Jobs</item>
+        <item>Older people</item>
+        <item>sit down and ask,</item>
+        <item>What is it?</item>
+        <item>but the boy asks,</item>
+        <item>\'What can I do with it?\'.</item>
+        <item>Swift</item>
+        <item>Objective-C</item>
+        <item>iPhone</item>
+        <item>iPad</item>
+        <item>Mac Mini</item>
+        <item>MacBook Pro</item>
+        <item>Mac Pro</item>
+        <item>爱老婆</item>
+        <item>老婆和女儿</item>
+    </array>
+</resources>

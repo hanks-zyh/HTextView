@@ -14,11 +14,15 @@ package com.hanks.htextview.util;/*
  * limitations under the License.
  */
 
-public class MathUtil {
-    private MathUtil() {
+public class MathUtils {
+    private MathUtils() {
     }
 
     public static float constrain(float min, float max, float v) {
+        return Math.max(min, Math.min(max, v));
+    }
+
+    public static int constrain(int min, int max, int v) {
         return Math.max(min, Math.min(max, v));
     }
 
