@@ -89,6 +89,10 @@ Please fell free to contact me if there is any problem when using the library.
 
 welcome to commit [issue](https://github.com/hanks-zyh/HTextView/issues) & [pr](https://github.com/hanks-zyh/HTextView/pulls)
 
+
+thanks [Skykai521](https://github.com/Skykai521) wirte an article about HTextView:
+[HTextView源代码分析](http://skykai521.github.io/2016/01/30/HTextView%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/)
+
 ---
 ## License
 
