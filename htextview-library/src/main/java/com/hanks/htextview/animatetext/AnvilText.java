@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.animation.BounceInterpolator;
@@ -24,6 +25,8 @@ public class AnvilText extends HText {
     private int   mTextHeight    = 0;
     private int   mTextWidth;
     private float progress;
+    private Matrix mMatrix;
+    private float dstWidth;
 
     @Override protected void initVariables() {
 
@@ -47,6 +50,7 @@ public class AnvilText extends HText {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mMatrix = new Matrix();
     }
 
     @Override protected void animateStart(CharSequence text) {
@@ -59,15 +63,12 @@ public class AnvilText extends HText {
             }
         });
         valueAnimator.start();
-        for (int i = 0; i < smokes.length; i++) {
-            Bitmap smoke = smokes[i];
-            int dstWidth = (int) (mTextWidth * 1.5f);
-            if (dstWidth < 400) dstWidth = 400;
-            int dstHeight = (int) (smoke.getHeight() * 1f / smoke.getWidth() * dstWidth);
-            smokes[i] = Bitmap.createScaledBitmap(smoke, dstWidth, dstHeight, false);
-            smoke.recycle();
+        if (smokes.length > 0) {
+            mMatrix.reset();
+            dstWidth = mTextWidth * 1.2f;
+            if (dstWidth < 404f) dstWidth = 404f;
+            mMatrix.postScale(dstWidth / (float) smokes[0].getWidth(), 1f);
         }
-        System.gc();
     }
 
     @Override protected void animatePrepare(CharSequence text) {
@@ -154,10 +155,9 @@ public class AnvilText extends HText {
             e.printStackTrace();
         }
         if (b != null) {
-            int w = b.getWidth();
-            int h = b.getHeight();
-            canvas.drawBitmap(b, x - w / 2, y - h / 2, bitmapPaint);
+            float dx = (mHTextView.getWidth() - dstWidth) / 2 > 0 ? (mHTextView.getWidth() - dstWidth) / 2 : 0;
+            canvas.translate( dx, (mHTextView.getHeight() - b.getHeight()) / 2);
+            canvas.drawBitmap(b, mMatrix, bitmapPaint);
         }
     }
-
 }

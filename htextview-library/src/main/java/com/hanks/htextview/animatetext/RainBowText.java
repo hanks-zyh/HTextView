@@ -45,9 +45,6 @@ public class RainBowText extends HText {
     protected void drawFrame(Canvas canvas) {
         if (mMatrix != null) {
             mTranslate += dx;
-            if (mTranslate > 2 * mTextWidth) {
-                mTranslate = -mTextWidth;
-            }
             mMatrix.setTranslate(mTranslate, 0);
             mLinearGradient.setLocalMatrix(mMatrix);
             canvas.drawText(mText, 0, mText.length(), startX, startY, mPaint);
