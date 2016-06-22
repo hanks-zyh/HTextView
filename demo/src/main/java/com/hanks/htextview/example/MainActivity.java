@@ -1,6 +1,7 @@
 package com.hanks.htextview.example;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -16,6 +17,7 @@ import android.widget.ViewSwitcher;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
+import com.hanks.htextview.util.FontManager;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
@@ -66,46 +68,55 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
                     case R.id.scale:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/Lato-Black.ttf"));
                         hTextView.setAnimateType(HTextViewType.SCALE);
                         break;
                     case R.id.evaporate:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/PoiretOne-Regular.ttf"));
                         hTextView.setAnimateType(HTextViewType.EVAPORATE);
                         break;
                     case R.id.fall:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/Mirza-Regular.ttf"));
                         hTextView.setAnimateType(HTextViewType.FALL);
                         break;
                     case R.id.pixelate:
                         hTextView.setTextColor(Color.BLACK);
                         hTextView.setBackgroundColor(Color.WHITE);
+                        hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/AmaticaSC-Regular.ttf"));
                         hTextView.setAnimateType(HTextViewType.PIXELATE);
                         break;
                     case R.id.sparkle:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setTypeface(null);
                         hTextView.setAnimateType(HTextViewType.SPARKLE);
                         break;
                     case R.id.anvil:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setTypeface(null);
                         hTextView.setAnimateType(HTextViewType.ANVIL);
                         break;
                     case R.id.line:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setTypeface(null);
                         hTextView.setAnimateType(HTextViewType.LINE);
                         break;
                     case R.id.typer:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setTypeface(null);
                         hTextView.setAnimateType(HTextViewType.TYPER);
                         break;
                     case R.id.rainbow:
                         hTextView.setTextColor(Color.WHITE);
                         hTextView.setBackgroundColor(Color.BLACK);
+                        hTextView.setTypeface(null);
                         hTextView.setAnimateType(HTextViewType.RAINBOW);
                         break;
                 }
