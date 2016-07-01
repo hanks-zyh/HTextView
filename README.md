@@ -18,8 +18,8 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 | type  | gif |
 | :-- | :-- |
 | [Scale(Default)](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/ScaleText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo3.gif) |
-| [Fall](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/FallText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo6.gif) |
 | [EvaporateText](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/EvaporateText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo5.gif) |
+| [Fall](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/FallText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo6.gif) |
 | [Line](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/LineText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo7.gif) |
 | [Sparkle](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/SparkleText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo8.gif) |
 | [Typer](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/TyperText.java) |  ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/typer.gif) |
