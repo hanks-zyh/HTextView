@@ -12,5 +12,6 @@
             <enum name="typer" value="7"/>
             <enum name="rainbow" value="8"/>
         </attr>
+        <attr name="fontAsset" format="string"/>
     </declare-styleable>
 </resources>

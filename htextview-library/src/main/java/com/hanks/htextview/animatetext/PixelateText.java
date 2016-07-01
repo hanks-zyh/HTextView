@@ -261,10 +261,12 @@ public class PixelateText implements IHText {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL);
+        paint.setTypeface(hTextView.getTypeface());
 
         oldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         oldPaint.setColor(Color.BLACK);
         oldPaint.setStyle(Paint.Style.FILL);
+        oldPaint.setTypeface(hTextView.getTypeface());
 
         pixPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         pixPaint.setColor(Color.BLACK);

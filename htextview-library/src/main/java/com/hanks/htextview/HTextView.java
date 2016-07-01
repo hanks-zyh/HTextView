@@ -3,6 +3,7 @@ package com.hanks.htextview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -46,8 +47,17 @@ public class HTextView extends TextView {
 
         this.attrs = attrs;
         this.defStyle = defStyle;
+
+        // Get the attributes array
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView);
-        int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
+        final int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
+        final String fontAsset = typedArray.getString(R.styleable.HTextView_fontAsset);
+
+        // Set custom typeface
+        if (fontAsset != null && !fontAsset.trim().isEmpty()) {
+            setTypeface(Typeface.createFromAsset(getContext().getAssets(), fontAsset));
+        }
+
         switch (animateType) {
             case 0:
                 mIHText = new ScaleText();

@@ -22,6 +22,7 @@
         android:text="What is design?"
         android:background="#000"
         android:textColor="#fff"
+        htext:fontAsset="fonts/Lato-Black.ttf"
         android:textSize="30sp"/>
 
     <SeekBar
@@ -42,53 +43,53 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Scale"/>
+            android:text="Scale (Lato Black)"/>
 
         <RadioButton
             android:id="@+id/evaporate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Evaporate"/>
+            android:text="Evaporate (Poiret One)"/>
 
         <RadioButton
             android:id="@+id/fall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fall"/>
+            android:text="Fall (Mirza)"/>
 
         <RadioButton
             android:id="@+id/pixelate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pixelate"/>
+            android:text="Pixelate (Amatica SC)"/>
 
         <RadioButton
             android:id="@+id/sparkle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sparkle"/>
+            android:text="Sparkle (Roboto)"/>
 
         <RadioButton
             android:id="@+id/anvil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anvil"/>
+            android:text="Anvil (Roboto)"/>
 
         <RadioButton
             android:id="@+id/line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Line"/>
+            android:text="Line (Roboto)"/>
         <RadioButton
             android:id="@+id/typer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Typer"/>
+            android:text="Typer (Roboto)"/>
         <RadioButton
             android:id="@+id/rainbow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rainbow"/>
+            android:text="Rainbow (Roboto)"/>
     </RadioGroup>
 
 </LinearLayout>

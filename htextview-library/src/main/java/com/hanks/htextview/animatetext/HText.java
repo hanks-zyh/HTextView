@@ -46,10 +46,12 @@ public abstract class HText implements IHText {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(mHTextView.getCurrentTextColor());
         mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setTypeface(mHTextView.getTypeface());
 
         mOldPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mOldPaint.setColor(mHTextView.getCurrentTextColor());
         mOldPaint.setStyle(Paint.Style.FILL);
+        mOldPaint.setTypeface(mHTextView.getTypeface());
 
         mText = mHTextView.getText();
         mOldText = mHTextView.getText();

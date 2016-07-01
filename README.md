@@ -1,5 +1,5 @@
 # HTextView
-Animation effects to TextView
+Animation effects with custom font support to TextView
 
 ![](https://img.shields.io/hexpm/l/plug.svg)
 ![](https://img.shields.io/badge/Platform-Android-brightgreen.svg)
@@ -47,13 +47,13 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ## Usage
 
+### Add library dependency to project:
+
 ```groovy
 compile 'hanks.xyz:htextview-library:0.1.3'
 ```
 
-```xml
-xmlns:htext="http://schemas.android.com/apk/res-auto"
-```
+### Add HTextView to your layout:
 
 ```xml
 <com.hanks.htextview.HTextView
@@ -65,14 +65,24 @@ xmlns:htext="http://schemas.android.com/apk/res-auto"
        android:textColor="#FFFFFF"
        android:textSize="30sp"
        htext:animateType="anvil"
-       />
+       htext:fontAsset="fonts/font-name.ttf" />
 ```
 
-`animateType` can be `scale`   `evaporate`  `fall`  `sparkle`  `anvil`  `line` `pixelate` `typer` `rainbow`
+- `animateType` can be `scale`, `evaporate`, `fall`, `sparkle`, `anvil`, `line`, `pixelate`, `typer`, or `rainbow`.
+- `fontAsset` is optional. It indicates what is the path of true type font to be used. If not set, the default TextView font will be used.
 
+Don't forget to set the layout namespace to res-auto:
+
+```xml
+xmlns:htext="http://schemas.android.com/apk/res-auto"
+```
+
+### Customize HTextView in runtime:
 
 ```java
 hTextView = (HTextView) findViewById(R.id.text);
+hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/font-name.ttf")); 
+// be sure to set custom typeface before setting the animate type, otherwise the font may not be updated.
 hTextView.setAnimateType(HTextViewType.LINE);
 hTextView.animateText("new simple string"); // animate
 ```
