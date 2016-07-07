@@ -12,7 +12,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ## Screenshot
 
 <div  style="text-align:center;">
-  <img src="https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo.gif" width="400px"/> 
+  <img src="https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo.gif" width="400px"/>
 </div>
 
 | type  | gif |
@@ -32,7 +32,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ### Add library dependency to project:
 
 ```groovy
-compile 'hanks.xyz:htextview-library:0.1.3'
+compile 'hanks.xyz:htextview-library:0.1.4'
 ```
 
 ### Add HTextView to your layout:
@@ -63,7 +63,7 @@ xmlns:htext="http://schemas.android.com/apk/res-auto"
 
 ```java
 hTextView = (HTextView) findViewById(R.id.text);
-hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/font-name.ttf")); 
+hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/font-name.ttf"));
 // be sure to set custom typeface before setting the animate type, otherwise the font may not be updated.
 hTextView.setAnimateType(HTextViewType.LINE);
 hTextView.animateText("new simple string"); // animate
@@ -89,7 +89,7 @@ Thank [Skykai521](https://github.com/Skykai521) for writing an article about HTe
 
 :point_right:[HTextView源代码分析](http://skykai521.github.io/2016/01/30/HTextView%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/)
 
- 
+
 ## License
 
 This library is licensed under the [Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
