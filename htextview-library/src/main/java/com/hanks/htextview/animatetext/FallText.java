@@ -8,15 +8,14 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
-import com.hanks.htextview.util.HLog;
+
 /**
- * 悬挂坠落效果
  * Created by hanks on 15-12-14.
  */
 public class FallText extends HText {
 
-    private float charTime    = 400; // 每个字符动画时间 500ms
-    private int   mostCount   = 20; // 最多10个字符同时动画
+    private float charTime    = 400;
+    private int   mostCount   = 20;
     private float mTextHeight = 0;
     private float progress ;
     private OvershootInterpolator interpolator;
@@ -30,7 +29,6 @@ public class FallText extends HText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
-        // 计算动画总时间
         long duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
@@ -92,19 +90,15 @@ public class FallText extends HText {
                     mOldPaint.setStyle(Paint.Style.STROKE);
                     Path path = new Path();
                     path.moveTo(disX, disY);
-                    //求点A（m,n)关于点P(a,b)的对称点B(x,y)
                     // (m+x)/2=a ,x=2a-m
                     // (n+y)/2=b ,y=2b-n
                     path.lineTo(2 * centerX - disX, 2 * startY - disY);
                     if (percent <= 0.7) {
-                        // 旋转
                         canvas.drawTextOnPath(mOldText.charAt(i) + "", path, 0, 0, mOldPaint);
                     } else {
-                        // 下落
                         float p2 = (float) ((percent - 0.7) / 0.3f);
                         mOldPaint.setAlpha((int) ((1 - p2) * 255));
                         float y = (float) ((p2) * mTextHeight);
-                        HLog.i(y);
                         Path path2 = new Path();
                         path2.moveTo(disX, disY + y);
                         path2.lineTo(2 * centerX - disX, 2 * startY - disY + y);

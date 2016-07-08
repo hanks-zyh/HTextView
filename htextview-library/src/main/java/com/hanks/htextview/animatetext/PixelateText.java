@@ -14,7 +14,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.util.CharacterUtils;
-import com.hanks.htextview.util.HLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,11 @@ import java.util.List;
  */
 public class PixelateText implements IHText {
 
-    //缩放系数
     public final static int SCALE = 8;
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 2000; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime  = 2000;
+    int   mostCount = 20;
     HTextView mHTextView;
 
     private float[] gaps    = new float[100];
@@ -300,7 +298,6 @@ public class PixelateText implements IHText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
-        // 计算动画总时间
         long duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
@@ -319,8 +316,6 @@ public class PixelateText implements IHText {
         float oldOffset = oldStartX;
 
         float pp = progress / (charTime + charTime / mostCount * (mText.length() - 1));
-
-        HLog.i(pp);
 
         int alpha = (int) (255 * pp);
         int oldAlpha = (int) (255 * (1 - pp));

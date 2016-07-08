@@ -8,7 +8,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import com.hanks.htextview.util.DisplayUtils;
 /**
- * 线条边框流动
  * Created by hanks on 15-12-17.
  */
 public class LineText extends HText {
@@ -82,7 +81,6 @@ public class LineText extends HText {
     @Override protected void drawFrame(Canvas canvas) {
         float percent = progress;
 
-        // 计算横向 和 纵向 线条的最终宽度
         xLineLength = (int) (mHTextView.getWidth() - (mHTextView.getWidth() - distWidth + gap) * percent);
         yLineLength = (int) (mHTextView.getHeight() - (mHTextView.getHeight() - distHeight + gap) * percent);
 
@@ -103,7 +101,6 @@ public class LineText extends HText {
         canvas.drawLine(p4.x, p4.y + yLineLength, p4.x, p4.y, linePaint);
 
 
-        // 离开的线条
         xLineShort = (int) ((distWidth + gap) * (1 - percent));
         yLineShort = (int) ((distHeight + gap) * (1 - percent));
 

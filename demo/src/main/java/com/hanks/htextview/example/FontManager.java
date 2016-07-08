@@ -1,4 +1,4 @@
-package com.hanks.htextview.util;
+package com.hanks.htextview.example;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Just a simple singleton class to manage font loading from assets.
  * Original source: <a href="http://stackoverflow.com/a/29134056">http://stackoverflow.com/a/29134056</a>
- *
+ * <p/>
  * Created by mathias.berwig on 22/06/2016.
  */
 public class FontManager {

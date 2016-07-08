@@ -14,14 +14,13 @@ import com.hanks.htextview.util.CharacterUtils;
 
 import java.lang.reflect.Field;
 /**
- * keynote 轰然坠落效果
  * Created by hanks on 15-12-14.
  */
 public class AnvilText extends HText {
 
     private Paint bitmapPaint;
     private Bitmap[] smokes = new Bitmap[50];
-    private float ANIMA_DURATION = 800; // 每个字符动画时间 500ms
+    private float ANIMA_DURATION = 800;
     private int   mTextHeight    = 0;
     private int   mTextWidth;
     private float progress;
@@ -85,7 +84,7 @@ public class AnvilText extends HText {
 
         int maxLength = Math.max(mText.length(), mOldText.length());
 
-        float percent = progress; // 动画进行的百分比 0~1
+        float percent = progress;
         boolean showSmoke = false;
         for (int i = 0; i < maxLength; i++) {
 
@@ -138,12 +137,7 @@ public class AnvilText extends HText {
         }
     }
 
-    /**
-     *
-     * @param canvas 画布
-     * @param x      中心点x坐标
-     * @param y      中心点Y坐标
-     */
+
     private void drawSmokes(Canvas canvas, float x, float y, float percent) {
         Bitmap b = smokes[0];
         try {

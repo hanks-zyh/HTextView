@@ -32,7 +32,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ### Add library dependency to project:
 
 ```groovy
-compile 'hanks.xyz:htextview-library:0.1.4'
+compile 'hanks.xyz:htextview-library:0.1.5'
 ```
 
 ### Add HTextView to your layout:

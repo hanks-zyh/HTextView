@@ -3,7 +3,6 @@ package com.hanks.htextview.animatetext;
 import android.graphics.Canvas;
 
 /**
- * 打字机效果
  * Created by hanks on 15/12/26.
  */
 public class TyperText extends HText {

@@ -1,7 +1,6 @@
 package com.hanks.htextview.example;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -17,16 +16,15 @@ import android.widget.ViewSwitcher;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
-import com.hanks.htextview.util.FontManager;
 
 public class MainActivity extends AppCompatActivity implements ViewSwitcher.ViewFactory {
 
     String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
     private int mCounter = 10;
     private TextSwitcher textSwitcher;
-    private HTextView    hTextView;
+    private HTextView hTextView;
 
-    private SeekBar    seekBar;
+    private SeekBar seekBar;
     private RadioGroup radioGroup;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements ViewSwitcher.View
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setMax(20);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 hTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 + progress);
                 hTextView.reset(hTextView.getText());
             }

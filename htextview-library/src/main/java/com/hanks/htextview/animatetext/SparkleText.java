@@ -12,15 +12,14 @@ import com.hanks.htextview.util.CharacterUtils;
 
 import java.util.Random;
 /**
- * 蒸发效果
  * Created by hanks on 15-12-14.
  */
 public class SparkleText extends HText {
 
     float progress = 0;
 
-    float charTime  = 400; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime  = 400;
+    int   mostCount = 20;
 
     float upDistance = 0;
 
@@ -42,7 +41,6 @@ public class SparkleText extends HText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
-        // 计算动画总时间
         long duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);

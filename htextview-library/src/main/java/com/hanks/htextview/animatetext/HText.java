@@ -32,9 +32,9 @@ public abstract class HText implements IHText {
 
     protected List<CharacterDiffResult> differentList = new ArrayList<>();
 
-    protected float oldStartX = 0; // 原来的字符串开始画的x位置
-    protected float startX    = 0; // 新的字符串开始画的x位置
-    protected float startY    = 0; // 字符串开始画的y, baseline
+    protected float oldStartX = 0;
+    protected float startX    = 0;
+    protected float startY    = 0;
 
     protected HTextView mHTextView;
 
@@ -108,26 +108,9 @@ public abstract class HText implements IHText {
         mHTextView.invalidate();
     }
 
-    /**
-     * 类被实例化时初始化
-     */
     protected abstract void initVariables();
-    /**
-     * 具体实现动画
-     * @param text
-     */
     protected abstract void animateStart(CharSequence text);
-
-    /**
-     * 每次动画前初始化调用
-     * @param text
-     */
     protected abstract void animatePrepare(CharSequence text);
-
-    /**
-     * 动画每次刷新界面时调用
-     * @param canvas
-     */
     protected abstract void drawFrame(Canvas canvas);
 
 

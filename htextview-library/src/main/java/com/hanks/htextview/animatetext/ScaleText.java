@@ -5,7 +5,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.util.CharacterUtils;
 /**
- * 缩放动画
  * Created by hanks on 15-12-14.
  */
 public class ScaleText extends HText {
@@ -22,7 +21,6 @@ public class ScaleText extends HText {
     @Override protected void animateStart(CharSequence text) {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
-        // 计算动画总时间
         duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);

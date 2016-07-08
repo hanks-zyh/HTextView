@@ -20,15 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 /**
- * 蒸发效果
  * Created by hanks on 15-12-14.
  */
 public class BurnText implements IHText {
 
     float progress = 0;
     Paint paint, oldPaint;
-    float charTime  = 5000; // 每个字符动画时间 500ms
-    int   mostCount = 20; // 最多10个字符同时动画
+    float charTime  = 5000;
+    int   mostCount = 20;
     HTextView mHTextView;
     float upDistance = 0;
 
@@ -89,7 +88,6 @@ public class BurnText implements IHText {
         int n = mText.length();
         n = n <= 0 ? 1 : n;
 
-        // 计算动画总时间
         long duration = (long) (charTime + charTime / mostCount * (n - 1));
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, duration).setDuration(duration);
