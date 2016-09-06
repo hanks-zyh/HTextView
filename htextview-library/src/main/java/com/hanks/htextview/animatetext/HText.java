@@ -77,12 +77,13 @@ public abstract class HText implements IHText {
     }
 
     @Override public void onDraw(Canvas canvas) {
+        mPaint.setColor(mHTextView.getCurrentTextColor());
+        mOldPaint.setColor(mHTextView.getCurrentTextColor());
         drawFrame(canvas);
     }
 
     private void prepareAnimate() {
         mTextSize = mHTextView.getTextSize();
-
         mPaint.setTextSize(mTextSize);
         for (int i = 0; i < mText.length(); i++) {
             gaps[i] = mPaint.measureText(mText.charAt(i) + "");

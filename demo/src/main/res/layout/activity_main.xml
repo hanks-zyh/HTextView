@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:htext="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:htext="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextSwitcher
+    <View
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
@@ -15,15 +15,15 @@
         android:id="@+id/text2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="#000"
         android:clickable="true"
         android:gravity="center"
         android:onClick="onClick"
-        htext:animateType="scale"
         android:text="What is design?"
-        android:background="#000"
         android:textColor="#fff"
-        htext:fontAsset="fonts/Lato-Black.ttf"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        htext:animateType="fall"
+        htext:fontAsset="fonts/Lato-Black.ttf"/>
 
     <SeekBar
         android:id="@+id/seekbar"
@@ -36,7 +36,7 @@
         android:id="@+id/typeGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp">
 
         <RadioButton
             android:id="@+id/scale"
@@ -80,11 +80,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Line (Roboto)"/>
+
         <RadioButton
             android:id="@+id/typer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Typer (Roboto)"/>
+
         <RadioButton
             android:id="@+id/rainbow"
             android:layout_width="wrap_content"

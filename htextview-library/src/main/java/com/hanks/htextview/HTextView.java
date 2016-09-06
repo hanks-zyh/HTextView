@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class HTextView extends TextView {
     private IHText mIHText = new ScaleText();
     private AttributeSet attrs;
     private int defStyle;
+    private int animateType;
 
     public HTextView(Context context) {
         super(context);
@@ -42,7 +45,6 @@ public class HTextView extends TextView {
         init(attrs, defStyle);
     }
 
-
     private void init(AttributeSet attrs, int defStyle) {
 
         this.attrs = attrs;
@@ -50,13 +52,16 @@ public class HTextView extends TextView {
 
         // Get the attributes array
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HTextView);
-        final int animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
+        animateType = typedArray.getInt(R.styleable.HTextView_animateType, 0);
         final String fontAsset = typedArray.getString(R.styleable.HTextView_fontAsset);
 
-        // Set custom typeface
-        if (fontAsset != null && !fontAsset.trim().isEmpty()) {
-            setTypeface(Typeface.createFromAsset(getContext().getAssets(), fontAsset));
+        if (!this.isInEditMode()) {
+            // Set custom typeface
+            if (fontAsset != null && !fontAsset.trim().isEmpty()) {
+                setTypeface(Typeface.createFromAsset(getContext().getAssets(), fontAsset));
+            }
         }
+
 
         switch (animateType) {
             case 0:
@@ -86,13 +91,13 @@ public class HTextView extends TextView {
             case 8:
                 mIHText = new RainBowText();
                 break;
-//            <enum name="scale" value="0"/>
-//            <enum name="evaporate" value="1"/>
-//            <enum name="fall" value="2"/>
-//            <enum name="sparkle" value="3"/>
-//            <enum name="anvil" value="4"/>
-//            <enum name="line" value="5"/>
-//            <enum name="pixelate" value="6"/
+            //            <enum name="scale" value="0"/>
+            //            <enum name="evaporate" value="1"/>
+            //            <enum name="fall" value="2"/>
+            //            <enum name="sparkle" value="3"/>
+            //            <enum name="anvil" value="4"/>
+            //            <enum name="line" value="5"/>
+            //            <enum name="pixelate" value="6"/
         }
         typedArray.recycle();
         initHText(attrs, defStyle);
@@ -101,7 +106,6 @@ public class HTextView extends TextView {
     private void initHText(AttributeSet attrs, int defStyle) {
         mIHText.init(this, attrs, defStyle);
     }
-
 
     public void animateText(CharSequence text) {
         mIHText.animateText(text);
@@ -149,4 +153,57 @@ public class HTextView extends TextView {
 
         initHText(attrs, defStyle);
     }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState state = new SavedState(superState);
+        state.animateType = animateType;
+        return state;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(state);
+        animateType = ss.animateType;
+    }
+
+    public static class SavedState extends BaseSavedState {
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+        int animateType;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            animateType = source.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(animateType);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+    }
+
 }
