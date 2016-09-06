@@ -2,13 +2,11 @@ package com.hanks.htextview.example;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.TextSwitcher;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
@@ -17,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
     private int mCounter = 10;
-    private TextSwitcher textSwitcher;
     private HTextView hTextView;
 
     private SeekBar seekBar;
@@ -27,16 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         hTextView = (HTextView) findViewById(R.id.text2);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                hTextView.setTextColor(Color.RED);
-            }
-        }, 4000);
 
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setMax(20);

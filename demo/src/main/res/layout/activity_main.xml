@@ -22,7 +22,7 @@
         android:text="What is design?"
         android:textColor="#fff"
         android:textSize="30sp"
-        htext:animateType="fall"
+        htext:animateType="rainbow"
         htext:fontAsset="fonts/Lato-Black.ttf"/>
 
     <SeekBar
