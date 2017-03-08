@@ -157,8 +157,8 @@ public class HTextView extends TextView {
     
     @Override
     public void setTextColor(@ColorInt int color) {
-        //Check for SparkleText. Do not alter color if on that type due to paint conflicts
-        if(animateType != 3){
+        //Check for RainbowText. Do not alter color if on that type due to paint conflicts
+        if(animateType != 8){
             super.setTextColor(color);
         }
     }
