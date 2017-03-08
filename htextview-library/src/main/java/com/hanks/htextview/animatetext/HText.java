@@ -82,6 +82,10 @@ public abstract class HText implements IHText {
         drawFrame(canvas);
     }
 
+    public void setTextColor(int color){
+        mHTextView.setTextColor(color);
+    }
+    
     private void prepareAnimate() {
         mTextSize = mHTextView.getTextSize();
         mPaint.setTextSize(mTextSize);
