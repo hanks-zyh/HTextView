@@ -110,6 +110,13 @@ public class HTextView extends TextView {
     public void animateText(CharSequence text) {
         mIHText.animateText(text);
     }
+    
+    public void animateText(CharSequence text, int colors[]){
+        if (mIHText instanceof RainBowText) {
+            ((RainBowText) mIHText).setColors(colors);
+        }
+        mIHText.animateText(text);
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {

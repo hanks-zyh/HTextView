@@ -17,11 +17,17 @@ public class RainBowText extends HText {
     private Matrix mMatrix;
     private float mTranslate;
     private int dx;
+    private int [] colors = 
+        new int[]{0xFFFF2B22, 0xFFFF7F22, 0xFFEDFF22, 0xFF22FF22, 0xFF22F4FF, 0xFF2239FF, 0xFF5400F7};
 
     @Override
     protected void initVariables() {
         mMatrix = new Matrix();
         dx = DisplayUtils.dp2Px(7);
+    }
+    
+    public void setColors(int colors[]){
+        this.colors = colors;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class RainBowText extends HText {
         mTextWidth = Math.max(DisplayUtils.dp2Px(100), mTextWidth);
         if (mTextWidth > 0) {
             mLinearGradient = new LinearGradient(0, 0, mTextWidth, 0,
-                    new int[]{0xFFFF2B22, 0xFFFF7F22, 0xFFEDFF22, 0xFF22FF22, 0xFF22F4FF, 0xFF2239FF, 0xFF5400F7}, null, Shader.TileMode.MIRROR);
+                    colors, null, Shader.TileMode.MIRROR);
             mPaint.setShader(mLinearGradient);
         }
     }
