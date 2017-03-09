@@ -161,6 +161,15 @@ public class HTextView extends TextView {
         initHText(attrs, defStyle);
     }
 
+    
+    @Override
+    public void setTextColor(@ColorInt int color) {
+        //Check for RainbowText. Do not alter color if on that type due to paint conflicts
+        if(animateType != 8){
+            super.setTextColor(color);
+        }
+    }
+    
     @Override
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
