@@ -19,17 +19,17 @@ android {
 
 dependencies {
     compile "com.android.support:appcompat-v7:$support_version"
-    compile(project(':htextview-base')) { transitive = true }
+    compile project(':htextview-base')
 }
 
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.1"
+version = "0.1.0"
 group = "com.hanks"
 
-def projectName = "LineTextView"
+def projectName = "RainbowTextView"
 def siteUrl = 'https://github.com/hanks-zyh/HTextView'                    // #CONFIG# // project homepage
 def gitUrl = 'https://github.com/hanks-zyh/HTextView.git'                // #CONFIG# // project git
 
@@ -39,8 +39,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'Less Code For Android'
-                // #CONFIG# // project title
+                name 'Less Code For Android'                                   // #CONFIG# // project title
                 url siteUrl
                 // Set your license
                 licenses {
@@ -51,12 +50,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'hanks'
-                        // #CONFIG# // your user id (you can write your nickname)
-                        name 'hanks'
-                        // #CONFIG# // your user name
-                        email 'zhangyuhan2014@gmail.com'
-                        // #CONFIG# // your email
+                        id 'hanks'                                           // #CONFIG# // your user id (you can write your nickname)
+                        name 'hanks'                                       // #CONFIG# // your user name
+                        email 'zhangyuhan2014@gmail.com'                               // #CONFIG# // your email
                     }
                 }
                 scm {

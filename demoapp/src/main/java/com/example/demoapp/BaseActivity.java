@@ -3,9 +3,8 @@ package com.example.demoapp;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hanks.htextview.line.LineTextView;
+import com.hanks.htextview.base.HTextView;
 
-import xyz.hanks.base.HTextView;
 
 /**
  * Created by hanks on 2017/3/14.

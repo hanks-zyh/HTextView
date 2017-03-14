@@ -7,12 +7,13 @@ import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
+import com.hanks.htextview.base.HText;
+import com.hanks.htextview.base.HTextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import xyz.hanks.base.HText;
-import xyz.hanks.base.HTextView;
 
 /**
  * fade effect

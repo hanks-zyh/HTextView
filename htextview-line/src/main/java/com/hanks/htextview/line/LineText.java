@@ -8,9 +8,10 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
-import xyz.hanks.base.DisplayUtils;
-import xyz.hanks.base.HText;
-import xyz.hanks.base.HTextView;
+import com.hanks.htextview.base.DisplayUtils;
+import com.hanks.htextview.base.HText;
+import com.hanks.htextview.base.HTextView;
+
 
 /**
  * line effect

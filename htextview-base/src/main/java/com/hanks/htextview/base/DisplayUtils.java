@@ -1,4 +1,4 @@
-package xyz.hanks.base;
+package com.hanks.htextview.base;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

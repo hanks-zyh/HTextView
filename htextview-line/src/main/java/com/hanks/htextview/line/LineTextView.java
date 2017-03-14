@@ -6,7 +6,8 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
-import xyz.hanks.base.HTextView;
+import com.hanks.htextview.base.HTextView;
+
 
 /**
  * line effect view

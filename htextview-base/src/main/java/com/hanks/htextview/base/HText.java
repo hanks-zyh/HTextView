@@ -1,4 +1,4 @@
-package xyz.hanks.base;
+package com.hanks.htextview.base;
 
 import android.graphics.Canvas;
 import android.os.Build;

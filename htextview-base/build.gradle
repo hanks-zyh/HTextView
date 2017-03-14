@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion compile_version
     buildToolsVersion build_tool_version
@@ -18,5 +17,15 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
+}
+
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'hanks'
+    groupId = 'com.hanks'
+    artifactId = 'htextview_base'
+    version = '0.1.0'
+    description = 'Base library for HTextView'
+    website = 'https://github.com/hanks-zyh/HTextView'
 }
