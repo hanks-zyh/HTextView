@@ -7,26 +7,9 @@ import android.widget.SeekBar;
 
 import com.hanks.htextview.line.LineTextView;
 
-public class LineTextViewActivity extends AppCompatActivity {
-
-    String[] sentences = {"What is design?",
-            "Design",
-            "Design is not just",
-            "what it looks like and feels like.",
-            "Design is how it works. \n- Steve Jobs",
-            "Older people",
-            "sit down and ask,",
-            "'What is it?'",
-            "but the boy asks,",
-            "'What can I do with it?'. \n- Steve Jobs",
-            "Swift",
-            "Objective-C",
-            "iPhone",
-            "iPad",
-            "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
+public class LineTextViewActivity extends BaseActivity {
 
     private LineTextView hTextView, hTextView2, hTextView3, hTextView4;
-    private int index;
     private SeekBar seekBar;
 
     @Override
@@ -66,19 +49,5 @@ public class LineTextViewActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    class ClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            if (v instanceof LineTextView) {
-                if (index + 1 >= sentences.length) {
-                    index = 0;
-                }
-                ((LineTextView) v).animateText(sentences[index++]);
-            }
-        }
-    }
-
 
 }

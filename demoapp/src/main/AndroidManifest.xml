@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LineTextViewActivity">
+
+        </activity>
+        <activity android:name=".FadeTextViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

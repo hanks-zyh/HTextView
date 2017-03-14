@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
@@ -39,7 +38,7 @@ public class LineText extends HText {
     private int lineColor;
     private Paint mLinePaint;
 
-    public void setLineColor(@ColorInt int color) {
+    public void setLineColor(int color) {
         this.lineColor = color;
     }
 

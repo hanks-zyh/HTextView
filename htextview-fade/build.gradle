@@ -23,15 +23,19 @@ dependencies {
 }
 
 
+
+
+
+
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 version = "0.1.0"
 group = "com.hanks"
 
-def projectName = "LineTextView"
-def siteUrl = 'https://github.com/hanks-zyh/HTextView'                    // #CONFIG# // project homepage
-def gitUrl = 'https://github.com/hanks-zyh/HTextView.git'                // #CONFIG# // project git
+def projectName = "FadeTextView"
+def siteUrl = 'https://github.com/hanks-zyh/HTextView'        // #CONFIG# // project homepage
+def gitUrl = 'https://github.com/hanks-zyh/HTextView.git'     // #CONFIG# // project git
 
 install {
     repositories.mavenInstaller {
@@ -94,7 +98,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = projectName     // #CONFIG# project name in jcenter
+        name = projectName
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

@@ -22,5 +22,6 @@ public abstract class HTextView extends android.support.v7.widget.AppCompatTextV
         super(context, attrs, defStyleAttr);
     }
 
-    protected abstract void setProgress(float progress);
+    public abstract void setProgress(float progress);
+    public abstract void animateText(CharSequence text);
 }

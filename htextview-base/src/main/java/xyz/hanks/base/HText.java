@@ -34,6 +34,7 @@ public abstract class HText implements IHText {
         mText = mOldText = hTextView.getText();
 
         mPaint = hTextView.getPaint();
+        mPaint.setColor(hTextView.getCurrentTextColor());
         mOldPaint = new TextPaint(mPaint);
 
         initVariables();
@@ -63,11 +64,16 @@ public abstract class HText implements IHText {
         CharSequence text = mHTextView.getText();
         float textSize = mHTextView.getTextSize();
         mPaint.setTextSize(textSize);
+        mPaint.setColor(mHTextView.getCurrentTextColor());
+
+        gapList.clear();
         for (int i = 0; i < text.length(); i++) {
             gapList.add(mPaint.measureText(String.valueOf(text.charAt(i))));
         }
 
         mOldPaint.setTextSize(textSize);
+        mOldPaint.setColor(mHTextView.getCurrentTextColor());
+        oldGapList.clear();
         for (int i = 0; i < text.length(); i++) {
             oldGapList.add(mOldPaint.measureText(String.valueOf(text.charAt(i))));
         }
