@@ -14,9 +14,11 @@
         <activity android:name=".FadeTextViewActivity">
         </activity>
         <activity android:name=".RainbowTextViewActivity">
-
         </activity>
         <activity android:name=".TyperTextViewActivity">
+
+        </activity>
+        <activity android:name=".ScaleTextViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.demoapp.ScaleTextViewActivity">
+
+    <com.hanks.htextview.scale.ScaleTextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2f00"
+        android:letterSpacing="0.1"
+        android:text="@string/initStr"
+        android:textSize="16sp"/>
+
+    <com.hanks.htextview.scale.ScaleTextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#2f00"
+        android:gravity="right"
+        android:letterSpacing="0.1"
+        android:text="@string/initStr"
+        android:textSize="16sp"/>
+
+    <com.hanks.htextview.scale.ScaleTextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#2f00"
+        android:gravity="center"
+        android:text="@string/initStr"
+        android:textSize="16sp"/>
+
+</LinearLayout>

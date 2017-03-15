@@ -31,7 +31,8 @@ public abstract class HText implements IHText {
     @Override
     public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
-        mText = mOldText = hTextView.getText();
+        mOldText = "";
+        mText  = hTextView.getText();
 
         mPaint = hTextView.getPaint();
         mPaint.setColor(hTextView.getCurrentTextColor());
@@ -51,34 +52,26 @@ public abstract class HText implements IHText {
                 mHeight = mHTextView.getHeight();
             }
         });
-        mHTextView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                prepareAnimate();
-            }
-        }, 50);
+        prepareAnimate();
     }
 
-
     private void prepareAnimate() {
-        CharSequence text = mHTextView.getText();
         float textSize = mHTextView.getTextSize();
+
         mPaint.setTextSize(textSize);
         mPaint.setColor(mHTextView.getCurrentTextColor());
-
         gapList.clear();
-        for (int i = 0; i < text.length(); i++) {
-            gapList.add(mPaint.measureText(String.valueOf(text.charAt(i))));
+        for (int i = 0; i < mText.length(); i++) {
+            gapList.add(mPaint.measureText(String.valueOf(mText.charAt(i))));
         }
 
         mOldPaint.setTextSize(textSize);
         mOldPaint.setColor(mHTextView.getCurrentTextColor());
         oldGapList.clear();
-        for (int i = 0; i < text.length(); i++) {
-            oldGapList.add(mOldPaint.measureText(String.valueOf(text.charAt(i))));
+        for (int i = 0; i < mOldText.length(); i++) {
+            oldGapList.add(mOldPaint.measureText(String.valueOf(mOldText.charAt(i))));
         }
     }
-
 
     @Override
     public void animateText(CharSequence text) {
