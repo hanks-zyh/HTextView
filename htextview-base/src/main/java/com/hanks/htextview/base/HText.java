@@ -1,6 +1,7 @@
 package com.hanks.htextview.base;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Build;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -22,6 +23,8 @@ public abstract class HText implements IHText {
     protected List<Float> gapList = new ArrayList<>();
     protected List<Float> oldGapList = new ArrayList<>();
     protected float progress; // 0~1
+    protected float mTextSize;
+    protected float oldStartX = 0;
 
     public void setProgress(float progress) {
         this.progress = progress;
@@ -32,13 +35,11 @@ public abstract class HText implements IHText {
     public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
         mHTextView = hTextView;
         mOldText = "";
-        mText  = hTextView.getText();
+        mText = hTextView.getText();
+        progress = 1;
 
-        mPaint = hTextView.getPaint();
-        mPaint.setColor(hTextView.getCurrentTextColor());
+        mPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mOldPaint = new TextPaint(mPaint);
-
-        initVariables();
 
         mHTextView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -48,25 +49,28 @@ public abstract class HText implements IHText {
                 } else {
                     mHTextView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
+                mTextSize = mHTextView.getTextSize();
                 mWidth = mHTextView.getWidth();
                 mHeight = mHTextView.getHeight();
+                oldStartX = mHTextView.getLayout().getLineLeft(0);
+                initVariables();
             }
         });
         prepareAnimate();
     }
 
     private void prepareAnimate() {
-        float textSize = mHTextView.getTextSize();
-
-        mPaint.setTextSize(textSize);
+        mTextSize = mHTextView.getTextSize();
+        mPaint.setTextSize(mTextSize);
         mPaint.setColor(mHTextView.getCurrentTextColor());
+        mPaint.setTypeface(mHTextView.getTypeface());
         gapList.clear();
         for (int i = 0; i < mText.length(); i++) {
             gapList.add(mPaint.measureText(String.valueOf(mText.charAt(i))));
         }
-
-        mOldPaint.setTextSize(textSize);
+        mOldPaint.setTextSize(mTextSize);
         mOldPaint.setColor(mHTextView.getCurrentTextColor());
+        mOldPaint.setTypeface(mHTextView.getTypeface());
         oldGapList.clear();
         for (int i = 0; i < mOldText.length(); i++) {
             oldGapList.add(mOldPaint.measureText(String.valueOf(mOldText.charAt(i))));

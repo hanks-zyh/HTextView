@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * CharacterUtils
  * Created by hanks on 15-12-14.
  */
 public class CharacterUtils {
@@ -51,8 +52,8 @@ public class CharacterUtils {
     }
 
 
-
-    public static float getOffset(int from, int move, float progress, float startX, float oldStartX, List<Float> gaps,List<Float> oldGaps) {
+    public static float getOffset(int from, int move, float progress, float startX, float oldStartX,
+                                  List<Float> gaps, List<Float> oldGaps) {
 
         float dist = startX;
         for (int i = 0; i < move; i++) {
