@@ -20,6 +20,8 @@
         <activity android:name=".ScaleTextViewActivity">
         </activity>
         <activity android:name=".EvaporateTextViewActivity">
+        </activity>
+        <activity android:name=".FallTextViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
