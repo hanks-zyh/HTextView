@@ -3,10 +3,14 @@ package com.hanks.htextview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hanks.htextview.animatetext.AnvilText;
@@ -29,6 +33,7 @@ public class HTextView extends TextView {
     private AttributeSet attrs;
     private int defStyle;
     private int animateType;
+    private boolean isWrapContent;
 
     public HTextView(Context context) {
         super(context);
@@ -101,17 +106,51 @@ public class HTextView extends TextView {
         }
         typedArray.recycle();
         initHText(attrs, defStyle);
+
+        int[] attrsArray = new int[] {
+                android.R.attr.layout_width, // 0
+                android.R.attr.layout_height // 1
+        };
+
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, attrsArray);
+        int layout_width = ta.getLayoutDimension(0, ViewGroup.LayoutParams.MATCH_PARENT);
+        int layout_height = ta.getLayoutDimension(1, ViewGroup.LayoutParams.MATCH_PARENT);
+        ta.recycle();
+
+        isWrapContent = layout_width == ViewGroup.LayoutParams.WRAP_CONTENT;
     }
+
+
 
     private void initHText(AttributeSet attrs, int defStyle) {
         mIHText.init(this, attrs, defStyle);
     }
 
     public void animateText(CharSequence text) {
+        if (isWrapContent) {
+            Paint paint = getPaint();
+            Rect rect = new Rect();
+            paint.getTextBounds(text.toString(), 0, text.length(), rect);
+            ViewGroup.LayoutParams params = getLayoutParams();
+            if (params.width != rect.width())
+                params.width = rect.width();
+            setLayoutParams(params);
+            requestLayout();
+        }
         mIHText.animateText(text);
     }
     
     public void animateText(CharSequence text, int colors[]){
+        if (isWrapContent) {
+            Paint paint = getPaint();
+            Rect rect = new Rect();
+            paint.getTextBounds(text.toString(), 0, text.length(), rect);
+            ViewGroup.LayoutParams params = getLayoutParams();
+            if (params.width != rect.width())
+                params.width = rect.width();
+            setLayoutParams(params);
+            requestLayout();
+        }
         if (mIHText instanceof RainBowText) {
             ((RainBowText) mIHText).setColors(colors);
         }
