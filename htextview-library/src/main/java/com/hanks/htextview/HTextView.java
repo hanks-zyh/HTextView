@@ -163,7 +163,7 @@ public class HTextView extends TextView {
 
     
     @Override
-    public void setTextColor(@ColorInt int color) {
+    public void setTextColor(int color) {
         //Check for RainbowText. Do not alter color if on that type due to paint conflicts
         if(animateType != 8){
             super.setTextColor(color);
