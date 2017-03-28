@@ -22,7 +22,7 @@ android {
     }
 }
 
-String htextview_version = library_version
+
 
 dependencies {
 
@@ -38,6 +38,8 @@ dependencies {
 //    compile project(':htextview-evaporate')
 //    compile project(':htextview-fall')
 
+    String htextview_version = library_version
+
     compile "com.hanks:htextview-base:$htextview_version"    // base library
 
     compile "com.hanks:htextview-fade:$htextview_version"        // optional
@@ -49,7 +51,6 @@ dependencies {
     compile "com.hanks:htextview-scale:$htextview_version"       // optional
     compile "com.hanks:htextview-evaporate:$htextview_version"   // optional
     compile "com.hanks:htextview-fall:$htextview_version"        // optional
-
 
     compile "com.android.support:appcompat-v7:25.3.0"
     compile "com.android.support.constraint:constraint-layout:1.0.1"

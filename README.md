@@ -24,17 +24,21 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ## Usage
 
 
+
 ```
-compile 'com.hanks:htextview-base:0.1.0'    // base library
+String htextview_version = "0.1.1"
 
-compile 'com.hanks:htextview-line:0.1.0'        // optional
-compile 'com.hanks:htextview-rainbow:0.1.0'     // optional
-compile 'com.hanks:htextview-fade:0.1.0'        // optional
-compile 'com.hanks:htextview-typer:0.1.0'       // optional
+compile "com.hanks:htextview-base:$htextview_version"    // base library
 
-compile 'com.hanks:htextview-scale:0.1.0'       // optional
-compile 'com.hanks:htextview-evaporate:0.1.0'   // optional
-compile 'com.hanks:htextview-fall:0.1.0'        // optional
+compile "com.hanks:htextview-fade:$htextview_version"        // optional
+compile "com.hanks:htextview-line:$htextview_version"        // optional
+compile "com.hanks:htextview-rainbow:$htextview_version"     // optional
+compile "com.hanks:htextview-fade:$htextview_version"        // optional
+compile "com.hanks:htextview-typer:$htextview_version"       // optional
+
+compile "com.hanks:htextview-scale:$htextview_version"       // optional
+compile "com.hanks:htextview-evaporate:$htextview_version"   // optional
+compile "com.hanks:htextview-fall:$htextview_version"        // optional
 ```
 
 
