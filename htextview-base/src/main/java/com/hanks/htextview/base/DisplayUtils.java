@@ -5,8 +5,8 @@ import android.util.DisplayMetrics;
 
 /**
  * util to get:
- * - dp<--->px
- * - screen's width/height
+ * dp convert px
+ * screen's width/height
  * Created by hanks on 15-12-19.
  */
 public final class DisplayUtils {

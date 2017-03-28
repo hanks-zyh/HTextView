@@ -22,7 +22,7 @@ public abstract class HText implements IHText {
     protected HTextView mHTextView;
     protected List<Float> gapList = new ArrayList<>();
     protected List<Float> oldGapList = new ArrayList<>();
-    protected float progress; // 0~1
+    protected float progress; // 0 ~ 1
     protected float mTextSize;
     protected float oldStartX = 0;
 

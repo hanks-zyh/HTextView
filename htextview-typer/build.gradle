@@ -18,15 +18,15 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile(project(':htextview-base')) { transitive = true }
+    // compile(project(':htextview-base')) { transitive = true }
+    compile "com.hanks:htextview-base:$library_version"
 }
 
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.0"
+version = library_version
 group = "com.hanks"
 
 def projectName = "TyperTextView"

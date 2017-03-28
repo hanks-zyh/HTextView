@@ -7,6 +7,7 @@ buildscript {
     ext.min_version = 15
     ext.compile_version = 25
     ext.target_version = 25
+    ext.library_version = "0.1.1"
 
     repositories {
         jcenter()

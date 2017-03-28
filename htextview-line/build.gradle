@@ -18,20 +18,20 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile(project(':htextview-base')) { transitive = true }
+    // compile(project(':htextview-base')) { transitive = true }
+    compile "com.hanks:htextview-base:$library_version"
 }
 
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.1"
+version = library_version
 group = "com.hanks"
 
 def projectName = "LineTextView"
-def siteUrl = 'https://github.com/hanks-zyh/HTextView'                    // #CONFIG# // project homepage
-def gitUrl = 'https://github.com/hanks-zyh/HTextView.git'                // #CONFIG# // project git
+def siteUrl = 'https://github.com/hanks-zyh/HTextView'                // #CONFIG# // project homepage
+def gitUrl = 'https://github.com/hanks-zyh/HTextView.git'             // #CONFIG# // project git
 
 install {
     repositories.mavenInstaller {

@@ -2,8 +2,6 @@ package com.hanks.htextview.line;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.hanks.htextview.base.HTextView;
@@ -22,16 +20,16 @@ public class LineTextView extends HTextView {
         this(context, null);
     }
 
-    public LineTextView(Context context, @Nullable AttributeSet attrs) {
+    public LineTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LineTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LineTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
     }
 
-    public void setLineColor(@ColorInt int color) {
+    public void setLineColor(int color) {
         lineText.setLineColor(color);
     }
 
