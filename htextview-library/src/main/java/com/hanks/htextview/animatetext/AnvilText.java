@@ -1,4 +1,5 @@
 package com.hanks.htextview.animatetext;
+
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import com.hanks.htextview.R;
 import com.hanks.htextview.util.CharacterUtils;
 
 import java.lang.reflect.Field;
+
 /**
  * Created by hanks on 15-12-14.
  */
@@ -21,13 +23,14 @@ public class AnvilText extends HText {
     private Paint bitmapPaint;
     private Bitmap[] smokes = new Bitmap[50];
     private float ANIMA_DURATION = 800;
-    private int   mTextHeight    = 0;
-    private int   mTextWidth;
+    private int mTextHeight = 0;
+    private int mTextWidth;
     private float progress;
     private Matrix mMatrix;
     private float dstWidth;
 
-    @Override protected void initVariables() {
+    @Override
+    protected void initVariables() {
 
         bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bitmapPaint.setColor(Color.WHITE);
@@ -52,11 +55,13 @@ public class AnvilText extends HText {
         mMatrix = new Matrix();
     }
 
-    @Override protected void animateStart(CharSequence text) {
+    @Override
+    protected void animateStart(CharSequence text) {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1)
                 .setDuration((long) ANIMA_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override public void onAnimationUpdate(ValueAnimator animation) {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
                 progress = (float) animation.getAnimatedValue();
                 mHTextView.invalidate();
             }
@@ -70,7 +75,8 @@ public class AnvilText extends HText {
         }
     }
 
-    @Override protected void animatePrepare(CharSequence text) {
+    @Override
+    protected void animatePrepare(CharSequence text) {
 
         Rect bounds = new Rect();
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
@@ -78,7 +84,8 @@ public class AnvilText extends HText {
         mTextWidth = bounds.width();
     }
 
-    @Override protected void drawFrame(Canvas canvas) {
+    @Override
+    protected void drawFrame(Canvas canvas) {
         float offset = startX;
         float oldOffset = oldStartX;
 
@@ -150,7 +157,7 @@ public class AnvilText extends HText {
         }
         if (b != null) {
             float dx = (mHTextView.getWidth() - dstWidth) / 2 > 0 ? (mHTextView.getWidth() - dstWidth) / 2 : 0;
-            canvas.translate( dx, (mHTextView.getHeight() - b.getHeight()) / 2);
+            canvas.translate(dx, (mHTextView.getHeight() - b.getHeight()) / 2);
             canvas.drawBitmap(b, mMatrix, bitmapPaint);
         }
     }

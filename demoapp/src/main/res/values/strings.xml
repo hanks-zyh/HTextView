@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DemoApp</string>
+    <string name="initStr">this is a init sentence</string>
+</resources>

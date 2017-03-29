@@ -1,1 +1,1 @@
-include ':demo', ':htextview-library'
+include ':demoapp', ':htextview-base', ':htextview-line',  ':htextview-fade', ':htextview-rainbow', ':htextview-typer', ':htextview-scale', ':htextview-evaporate', ':htextview-fall'

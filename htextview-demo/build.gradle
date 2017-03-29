@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+<<<<<<< HEAD:demo/build.gradle
+    compileSdkVersion 23
+    buildToolsVersion "24.0.1"
+=======
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+>>>>>>> dev:htextview-demo/build.gradle
+
+    defaultConfig {
+        applicationId "com.hanks.htextview.example"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+<<<<<<< HEAD:demo/build.gradle
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile project(':htextview-library')
+=======
+    compile 'com.android.support:appcompat-v7:25.1.0'
+     compile project(':htextview-library')
+>>>>>>> dev:htextview-demo/build.gradle
+//    compile 'hanks.xyz:htextview-library:0.1.5'
+}
+

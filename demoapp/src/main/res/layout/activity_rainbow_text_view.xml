@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.hanks.htextview.rainbow.RainbowTextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is init sentence"/>
+
+
+    <com.hanks.htextview.rainbow.RainbowTextView
+        android:id="@+id/textview2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="#2f00"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:maxLines="2"
+        android:text="this is init sentence"
+        android:textSize="20sp"
+        app:colorSpace="150dp"
+        app:colorSpeed="4dp"/>
+
+</LinearLayout>

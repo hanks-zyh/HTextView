@@ -11,9 +11,6 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 ## Screenshot
 
-<div  style="text-align:center;">
-  <img src="https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo.gif" width="400px"/>
-</div>
 
 | type  | gif |
 | :-- | :-- |
@@ -21,74 +18,117 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 | [EvaporateText](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/EvaporateText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo5.gif) |
 | [Fall](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/FallText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo6.gif) |
 | [Line](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/LineText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo7.gif) |
-| [Sparkle](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/SparkleText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo8.gif) |
 | [Typer](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/TyperText.java) |  ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/typer.gif) |
 | [Rainbow](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/RainBowText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/rainbow.gif) |
-| [Anvil](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/AnvilText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo2.gif) |
-
 
 ## Usage
 
-### Add library dependency to project:
 
-```groovy
-compile 'hanks.xyz:htextview-library:0.1.5'
+
 ```
+String htextview_version = "0.1.1"
 
-### Add HTextView to your layout:
+compile "com.hanks:htextview-base:$htextview_version"    // base library
 
-```xml
-<com.hanks.htextview.HTextView
-       android:id="@+id/text"
-       android:layout_width="match_parent"
-       android:layout_height="100dp"
-       android:background="#000000"
-       android:gravity="center"
-       android:textColor="#FFFFFF"
-       android:textSize="30sp"
-       htext:animateType="anvil"
-       htext:fontAsset="fonts/font-name.ttf" />
-```
+compile "com.hanks:htextview-fade:$htextview_version"        // optional
+compile "com.hanks:htextview-line:$htextview_version"        // optional
+compile "com.hanks:htextview-rainbow:$htextview_version"     // optional
+compile "com.hanks:htextview-fade:$htextview_version"        // optional
+compile "com.hanks:htextview-typer:$htextview_version"       // optional
 
-- `animateType` can be `scale`, `evaporate`, `fall`, `sparkle`, `anvil`, `line`, `pixelate`, `typer`, or `rainbow`.
-- `fontAsset` is optional. It indicates what is the path of true type font to be used. If not set, the default TextView font will be used.
-
-Don't forget to set the layout namespace to res-auto:
-
-```xml
-xmlns:htext="http://schemas.android.com/apk/res-auto"
-```
-
-### Customize HTextView in runtime:
-
-```java
-hTextView = (HTextView) findViewById(R.id.text);
-hTextView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/font-name.ttf"));
-// be sure to set custom typeface before setting the animate type, otherwise the font may not be updated.
-hTextView.setAnimateType(HTextViewType.LINE);
-hTextView.animateText("new simple string"); // animate
+compile "com.hanks:htextview-scale:$htextview_version"       // optional
+compile "com.hanks:htextview-evaporate:$htextview_version"   // optional
+compile "com.hanks:htextview-fall:$htextview_version"        // optional
 ```
 
 
-# Contact & Help
+### line
 
-Please fell free to contact me if there is any problem when using the library.
+```
+<com.hanks.htextview.line.LineTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:paddingRight="10dp"
+    android:text="This is LineTextView\nToday is Monday"
+    android:textSize="16sp"
+    app:animationDuration="3000"
+    app:lineColor="#1367bc"
+    app:lineWidth="4dp"/>
+```
 
-- **email**: zhangyuhan2014@gmail.com
-- **twitter**: https://twitter.com/zhangyuhan3030
-- **weibo**: http://weibo.com/hanksZyh
-- **blog**: http://hanks.xyz
+### fade
 
-welcome to commit [issue](https://github.com/hanks-zyh/HTextView/issues) & [pr](https://github.com/hanks-zyh/HTextView/pulls)
+```
+<com.hanks.htextview.fade.FadeTextView
+    android:layout_width="240dp"
+    android:layout_height="150dp"
+    android:gravity="left"
+    android:letterSpacing="0.08"
+    android:lineSpacingMultiplier="1.3"
+    android:text="This is FadeTextView"
+    android:textColor="#fff"
+    android:textSize="20sp"
+    app:animationDuration="1500"/>
+```
 
----
+### typer
 
-## Thanks
+```
+<com.hanks.htextview.typer.TyperTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="this is init sentence."
+    app:charIncrease="3"
+    app:typerSpeed="80"/>
+```
 
-Thank [Skykai521](https://github.com/Skykai521) for writing an article about HTextView:
+### rainbow
 
-:point_right:[HTextView源代码分析](http://skykai521.github.io/2016/01/30/HTextView%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/)
+```
+<com.hanks.htextview.rainbow.RainbowTextView
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:text="this is init sentence"
+    android:textSize="20sp"
+    app:colorSpace="150dp"
+    app:colorSpeed="4dp"/>
+```
 
+### scale (single line)
+
+```
+<com.hanks.htextview.scale.ScaleTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="this is init sentence"
+    android:textSize="16sp"/>
+```
+
+
+### evaporate (single line)
+
+```
+<com.hanks.htextview.evaporate.EvaporateTextView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:gravity="center"
+    android:paddingTop="8dp"
+    android:text="this is init sentence"
+    android:textSize="20sp"/>
+```
+
+### fall  (single line)
+
+```
+<com.hanks.htextview.fall.FallTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:text="this is init sentence"
+    android:textSize="16sp"/>
+```
 
 ## License
 

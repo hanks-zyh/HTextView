@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.demoapp.TyperTextViewActivity">
+
+    <com.hanks.htextview.typer.TyperTextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#2f00"
+        android:lineSpacingMultiplier="1.5"
+        android:text="this is init sentence."/>
+
+    <com.hanks.htextview.typer.TyperTextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#2f00"
+        android:lineSpacingMultiplier="1.5"
+        android:text="this is init sentence."
+        app:charIncrease="3"
+        app:typerSpeed="80"/>
+</LinearLayout>
