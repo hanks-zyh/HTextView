@@ -12,7 +12,6 @@ import com.hanks.htextview.base.HTextView;
 
 public class BaseActivity extends AppCompatActivity {
     String[] sentences = {"What is design?",
-            "Design",
             "Design is not just",
             "what it looks like and feels like.",
             "Design is how it works. \n- Steve Jobs",

@@ -14,12 +14,13 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 | type  | gif |
 | :-- | :-- |
-| [Scale(Default)](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/ScaleText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo3.gif) |
-| [EvaporateText](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/EvaporateText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo5.gif) |
-| [Fall](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/FallText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo6.gif) |
-| [Line](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/LineText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo7.gif) |
-| [Typer](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/TyperText.java) |  ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/typer.gif) |
-| [Rainbow](https://github.com/hanks-zyh/HTextView/blob/master/htextview-library/src/main/java/com/hanks/htextview/animatetext/RainBowText.java) | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/rainbow.gif) |
+| Scale     | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo3.gif) |
+| Evaporate | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo5.gif) |
+| Fall      | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo6.gif) |
+| Line      | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/demo7.gif) |
+| Typer     |  ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/typer.gif) |
+| Rainbow   | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/rainbow.gif) |
+| Fade      | ![](https://github.com/hanks-zyh/HTextView/blob/master/screenshot/fade.gif) |
 
 ## Usage
 

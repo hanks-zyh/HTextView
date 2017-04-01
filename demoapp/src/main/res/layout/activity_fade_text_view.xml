@@ -9,17 +9,25 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.hanks.htextview.fade.FadeTextView
-        android:id="@+id/textview"
-        android:layout_width="240dp"
-        android:layout_height="150dp"
-        android:gravity="right"
-        android:letterSpacing="0.08"
-        android:lineSpacingMultiplier="1.3"
-        android:text="﻿但愿所有漂泊的人都有酒喝，但愿所有孤独的人都会唱歌﻿。"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        app:animationDuration="1000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.hanks.htextview.fade.FadeTextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="left|center_vertical"
+            android:letterSpacing="0.08"
+            android:lineSpacingMultiplier="1.2"
+            android:text="但愿所有漂泊的人都有酒喝，但愿所有孤独的人都会唱歌﻿。"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            app:animationDuration="2000"/>
+    </LinearLayout>
 
     <com.hanks.htextview.fade.FadeTextView
         android:id="@+id/textview2"
