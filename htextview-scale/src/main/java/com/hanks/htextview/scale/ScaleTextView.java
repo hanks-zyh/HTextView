@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.HTextView;
 
 /**
@@ -30,6 +31,11 @@ public class ScaleTextView extends HTextView {
         scaleText.init(this, attrs, defStyleAttr);
         setMaxLines(1);
         setEllipsize(TextUtils.TruncateAt.END);
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        scaleText.setAnimationListener(listener);
     }
 
     @Override

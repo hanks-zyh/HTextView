@@ -25,6 +25,7 @@ public abstract class HText implements IHText {
     protected float progress; // 0 ~ 1
     protected float mTextSize;
     protected float oldStartX = 0;
+    protected AnimationListener animationListener;
 
     public void setProgress(float progress) {
         this.progress = progress;
@@ -85,6 +86,11 @@ public abstract class HText implements IHText {
         prepareAnimate();
         animatePrepare(text);
         animateStart(text);
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        animationListener = listener;
     }
 
     @Override

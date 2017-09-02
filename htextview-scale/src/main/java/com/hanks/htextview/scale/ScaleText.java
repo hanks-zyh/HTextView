@@ -1,5 +1,6 @@
 package com.hanks.htextview.scale;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -7,6 +8,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.base.CharacterDiffResult;
 import com.hanks.htextview.base.CharacterUtils;
+import com.hanks.htextview.base.DefaultAnimatorListener;
 import com.hanks.htextview.base.HText;
 import com.hanks.htextview.base.HTextView;
 
@@ -31,6 +33,14 @@ public class ScaleText extends HText {
         super.init(hTextView, attrs, defStyle);
         animator = new ValueAnimator();
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addListener(new DefaultAnimatorListener() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if(animationListener != null) {
+                    animationListener.onAnimationEnd(mHTextView);
+                }
+            }
+        });
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

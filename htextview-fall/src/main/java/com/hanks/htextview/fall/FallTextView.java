@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.HTextView;
 
 /**
@@ -26,6 +27,11 @@ public class FallTextView extends HTextView {
     public FallTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        fallText.setAnimationListener(listener);
     }
 
     private void init(AttributeSet attrs, int defStyleAttr) {
