@@ -26,7 +26,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 
 
-```
+```gradle
 String htextview_version = "0.1.1"
 
 compile "com.hanks:htextview-base:$htextview_version"    // base library
@@ -45,7 +45,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### line
 
-```
+```xml
 <com.hanks.htextview.line.LineTextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -60,7 +60,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### fade
 
-```
+```xml
 <com.hanks.htextview.fade.FadeTextView
     android:layout_width="240dp"
     android:layout_height="150dp"
@@ -75,7 +75,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### typer
 
-```
+```xml
 <com.hanks.htextview.typer.TyperTextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -86,7 +86,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### rainbow
 
-```
+```xml
 <com.hanks.htextview.rainbow.RainbowTextView
     android:layout_width="120dp"
     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### scale (single line)
 
-```
+```xml
 <com.hanks.htextview.scale.ScaleTextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -110,7 +110,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### evaporate (single line)
 
-```
+```xml
 <com.hanks.htextview.evaporate.EvaporateTextView
     android:layout_width="match_parent"
     android:layout_height="100dp"
@@ -122,7 +122,7 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
 
 ### fall  (single line)
 
-```
+```xml
 <com.hanks.htextview.fall.FallTextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
