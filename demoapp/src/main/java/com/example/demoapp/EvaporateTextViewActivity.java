@@ -23,6 +23,11 @@ public class EvaporateTextViewActivity extends BaseActivity {
         textView2.setOnClickListener(new ClickListener());
         textView3.setOnClickListener(new ClickListener());
 
+        textView.setAnimationListener(new SimpleAnimationListener(this));
+        textView1.setAnimationListener(new SimpleAnimationListener(this));
+        textView2.setAnimationListener(new SimpleAnimationListener(this));
+        textView3.setAnimationListener(new SimpleAnimationListener(this));
+
         ((SeekBar) findViewById(R.id.seekbar)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

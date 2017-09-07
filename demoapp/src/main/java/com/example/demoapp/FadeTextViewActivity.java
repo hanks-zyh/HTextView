@@ -17,8 +17,10 @@ public class FadeTextViewActivity extends BaseActivity {
 
         textView = (FadeTextView) findViewById(R.id.textview);
         textView.setOnClickListener(new ClickListener());
+        textView.setAnimationListener(new SimpleAnimationListener(this));
         textview2 = (FadeTextView) findViewById(R.id.textview2);
         textview2.setOnClickListener(new ClickListener());
+        textview2.setAnimationListener(new SimpleAnimationListener(this));
 
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

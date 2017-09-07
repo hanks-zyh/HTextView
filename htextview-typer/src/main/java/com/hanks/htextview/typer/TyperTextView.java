@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 
+import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.HTextView;
 
 import java.util.Random;
@@ -23,6 +24,7 @@ public class TyperTextView extends HTextView {
     private Handler handler;
     private int charIncrease;
     private int typerSpeed;
+    private AnimationListener animationListener;
 
     public TyperTextView(Context context) {
         this(context, null);
@@ -56,10 +58,19 @@ public class TyperTextView extends HTextView {
                     message.what = INVALIDATE;
                     handler.sendMessageDelayed(message, randomTime);
                     return false;
+                } else {
+                    if(animationListener != null) {
+                        animationListener.onAnimationEnd(TyperTextView.this);
+                    }
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        animationListener = listener;
     }
 
 
@@ -89,6 +100,7 @@ public class TyperTextView extends HTextView {
         if (text == null) {
             throw new RuntimeException("text must not  be null");
         }
+
         mText = text;
         setText("");
         Message message = Message.obtain();

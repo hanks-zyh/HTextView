@@ -1,5 +1,6 @@
 package com.hanks.htextview.fade;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -7,6 +8,7 @@ import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
+import com.hanks.htextview.base.DefaultAnimatorListener;
 import com.hanks.htextview.base.HText;
 import com.hanks.htextview.base.HTextView;
 
@@ -76,6 +78,14 @@ public class FadeText extends HText {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1)
                 .setDuration((long) animationDuration);
         valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addListener(new DefaultAnimatorListener() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if(animationListener != null) {
+                    animationListener.onAnimationEnd(mHTextView);
+                }
+            }
+        });
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

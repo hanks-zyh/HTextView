@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 
+import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.HTextView;
 
 
@@ -27,6 +28,11 @@ public class LineTextView extends HTextView {
     public LineTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        lineText.setAnimationListener(listener);
     }
 
     public void setLineColor(int color) {

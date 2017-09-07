@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 
+import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.DisplayUtils;
 import com.hanks.htextview.base.HTextView;
 
@@ -36,6 +37,11 @@ public class RainbowTextView extends HTextView {
     public RainbowTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
+    }
+
+    @Override
+    public void setAnimationListener(AnimationListener listener) {
+        throw new UnsupportedOperationException("Invalid operation for rainbow");
     }
 
     private void init(AttributeSet attrs, int defStyleAttr) {

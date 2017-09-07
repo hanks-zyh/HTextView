@@ -1,5 +1,6 @@
 package com.hanks.htextview.evaporate;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -8,6 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.hanks.htextview.base.CharacterDiffResult;
 import com.hanks.htextview.base.CharacterUtils;
+import com.hanks.htextview.base.DefaultAnimatorListener;
 import com.hanks.htextview.base.HText;
 import com.hanks.htextview.base.HTextView;
 
@@ -30,10 +32,18 @@ public class EvaporateText extends HText {
     private ValueAnimator animator;
 
     @Override
-    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
+    public void init(final HTextView hTextView, AttributeSet attrs, int defStyle) {
         super.init(hTextView, attrs, defStyle);
         animator = new ValueAnimator();
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addListener(new DefaultAnimatorListener() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if(animationListener != null) {
+                    animationListener.onAnimationEnd(mHTextView);
+                }
+            }
+        });
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
