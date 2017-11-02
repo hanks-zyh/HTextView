@@ -29,7 +29,6 @@
         android:background="#2f00"
         android:letterSpacing="0.1"
         android:paddingBottom="20dp"
-        android:text="@string/initStr"
         android:textSize="16sp"/>
 
     <com.hanks.htextview.evaporate.EvaporateTextView

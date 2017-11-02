@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion compile_version
-    buildToolsVersion build_tool_version
     defaultConfig {
         minSdkVersion min_version
         targetSdkVersion target_version
@@ -18,8 +17,8 @@ android {
 }
 
 dependencies {
-    // compile(project(':htextview-base')) { transitive = true }
-    compile "com.hanks:htextview-base:$library_version"
+    compile(project(':htextview-base')) { transitive = true }
+//    compile "com.hanks:htextview-base:$library_version"
 }
 
 

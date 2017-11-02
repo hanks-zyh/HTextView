@@ -13,10 +13,10 @@ public class EvaporateTextViewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaporate_text_view);
-        textView = (HTextView) findViewById(R.id.textview);
-        textView1 = (HTextView) findViewById(R.id.textview1);
-        textView2 = (HTextView) findViewById(R.id.textview2);
-        textView3 = (HTextView) findViewById(R.id.textview3);
+        textView = findViewById(R.id.textview);
+        textView1 = findViewById(R.id.textview1);
+        textView2 = findViewById(R.id.textview2);
+        textView3 = findViewById(R.id.textview3);
 
         textView.setOnClickListener(new ClickListener());
         textView1.setOnClickListener(new ClickListener());
@@ -47,5 +47,8 @@ public class EvaporateTextViewActivity extends BaseActivity {
 
             }
         });
+
+        textView3.animateText("Hi text!");
+
     }
 }
