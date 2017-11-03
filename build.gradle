@@ -3,7 +3,7 @@
 buildscript {
 
     ext.support_version = "25.2.0"
-    ext.build_tool_version = "25.0.2"
+    ext.build_tool_version = "25.0.3"
     ext.min_version = 15
     ext.compile_version = 25
     ext.target_version = 25

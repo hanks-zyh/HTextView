@@ -18,8 +18,8 @@ android {
 }
 
 dependencies {
-    // compile(project(':htextview-base')) { transitive = true }
-    compile "com.hanks:htextview-base:$library_version"
+     compile(project(':htextview-base')) { transitive = true }
+//    compile "com.hanks:htextview-base:$library_version"
 }
 
 
