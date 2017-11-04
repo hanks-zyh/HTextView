@@ -17,7 +17,6 @@
         android:background="#000"
         android:gravity="center_horizontal"
         android:paddingTop="8dp"
-        android:text="@string/initStr"
         android:textColor="#fff"
         android:textSize="20sp"/>
 

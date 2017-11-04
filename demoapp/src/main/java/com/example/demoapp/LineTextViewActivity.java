@@ -31,6 +31,8 @@ public class LineTextViewActivity extends BaseActivity {
         hTextView4.setOnClickListener(new ClickListener());
         hTextView4.setAnimationListener(new SimpleAnimationListener(this));
 
+        hTextView.animateText(getString(R.string.initStr));
+
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

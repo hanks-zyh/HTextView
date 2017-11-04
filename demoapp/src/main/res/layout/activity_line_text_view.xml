@@ -17,7 +17,6 @@
         android:background="#2200"
         android:gravity="center"
         android:padding="8dp"
-        android:text="This is LineTextView\nToday is Monday"
         android:textSize="14sp"/>
 
     <com.hanks.htextview.line.LineTextView

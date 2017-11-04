@@ -22,6 +22,8 @@ public class FadeTextViewActivity extends BaseActivity {
         textview2.setOnClickListener(new ClickListener());
         textview2.setAnimationListener(new SimpleAnimationListener(this));
 
+        textView.animateText(getString(R.string.initStr));
+
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
