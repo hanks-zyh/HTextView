@@ -58,17 +58,14 @@ public class EvaporateText extends HText {
     }
 
     @Override
-    public void animateText(CharSequence text) {
-        if (mHTextView == null){
-            return;
-        }
-        if(mHTextView.getLayout() == null){
-            mHTextView.setText(text);
-            return;
-        }
-        Layout layout = mHTextView.getLayout();
-        oldStartX = layout.getLineLeft(0);
-        super.animateText(text);
+    public void animateText(final CharSequence text) {
+        mHTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                oldStartX = mHTextView.getLayout().getLineLeft(0);
+                EvaporateText.super.animateText(text);
+            }
+        });
     }
 
     @Override

@@ -13,6 +13,7 @@ public class TyperTextViewActivity extends BaseActivity {
         final HTextView textView1 = (HTextView) findViewById(R.id.textview);
         textView1.setOnClickListener(new ClickListener());
         textView1.setAnimationListener(new SimpleAnimationListener(this));
+        textView1.animateText(getString(R.string.initStr));
 
         final HTextView textView2 = (HTextView) findViewById(R.id.textview2);
         textView2.setOnClickListener(new ClickListener());
