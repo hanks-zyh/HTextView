@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-
     defaultConfig {
         applicationId "com.example.demoapp"
         minSdkVersion 15
@@ -28,6 +27,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(':htextview-base')
     compile project(':htextview-line')
     compile project(':htextview-fade')
     compile project(':htextview-rainbow')
@@ -40,7 +40,6 @@ dependencies {
 //    compile "com.hanks:htextview-base:$htextview_version"
     // base library
 //    compile "com.hanks:htextview-fade:$htextview_version"
-
 //    // optional
 //    compile "com.hanks:htextview-line:$htextview_version"
 //    // optional
@@ -59,4 +58,15 @@ dependencies {
     // optional
     compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
+
+//    compile "com.hanks:htextview-base:$htextview_version"    // base library
+//
+//    compile "com.hanks:htextview-fade:$htextview_version"        // optional
+//    compile "com.hanks:htextview-line:$htextview_version"        // optional
+//    compile "com.hanks:htextview-rainbow:$htextview_version"     // optional
+//    compile "com.hanks:htextview-typer:$htextview_version"       // optional
+//
+//    compile "com.hanks:htextview-scale:$htextview_version"       // optional
+//    compile "com.hanks:htextview-evaporate:$htextview_version"   // optional
+//    compile "com.hanks:htextview-fall:$htextview_version"        // optional
 }

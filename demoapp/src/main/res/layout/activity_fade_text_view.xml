@@ -23,7 +23,6 @@
             android:gravity="left|center_vertical"
             android:letterSpacing="0.08"
             android:lineSpacingMultiplier="1.2"
-            android:text="但愿所有漂泊的人都有酒喝，但愿所有孤独的人都会唱歌﻿。"
             android:textColor="#fff"
             android:textSize="18sp"
             app:animationDuration="2000"/>
