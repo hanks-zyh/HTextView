@@ -1,11 +1,10 @@
-package com.hanks.htextview.evaporate;
+package cn.ifengge.passport.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.hanks.htextview.base.AnimationListener;
 import com.hanks.htextview.base.HTextView;
 
 /**
@@ -30,11 +29,6 @@ public class EvaporateTextView extends HTextView {
         init(attrs, defStyleAttr);
     }
 
-    @Override
-    public void setAnimationListener(AnimationListener listener) {
-        evaporateText.setAnimationListener(listener);
-    }
-
     private void init(AttributeSet attrs, int defStyleAttr) {
         evaporateText = new EvaporateText();
         evaporateText.init(this, attrs, defStyleAttr);
@@ -50,6 +44,11 @@ public class EvaporateTextView extends HTextView {
     @Override
     public void animateText(CharSequence text) {
         evaporateText.animateText(text);
+    }
+
+    @Override
+    public void setTextColor(int color) {
+        evaporateText.setTextColor(color);
     }
 
     @Override
