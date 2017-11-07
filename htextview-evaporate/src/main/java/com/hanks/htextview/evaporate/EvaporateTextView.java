@@ -1,4 +1,4 @@
-package cn.ifengge.passport.widget;
+package com.hanks.htextview.evaporate;
 
 import android.content.Context;
 import android.graphics.Canvas;

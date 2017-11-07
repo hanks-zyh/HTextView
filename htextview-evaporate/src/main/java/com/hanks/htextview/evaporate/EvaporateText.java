@@ -42,6 +42,14 @@ public class EvaporateText extends HText {
         super.init(hTextView, attrs, defStyle);
         animator = new ValueAnimator();
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.addListener(new DefaultAnimatorListener() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (animationListener != null) {
+                    animationListener.onAnimationEnd(mHTextView);
+                }
+            }
+        });
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
