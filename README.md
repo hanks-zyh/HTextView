@@ -25,16 +25,14 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 ## Usage
 
 
-
 ```
-String htextview_version = "0.1.1"
-
-compile "com.hanks:htextview-base:$htextview_version"    // base library
+def htextview_version = "0.1.2"
+// as 3.0 use implementation
+compile "com.hanks:htextview-base:$htextview_version"        // base library
 
 compile "com.hanks:htextview-fade:$htextview_version"        // optional
 compile "com.hanks:htextview-line:$htextview_version"        // optional
 compile "com.hanks:htextview-rainbow:$htextview_version"     // optional
-compile "com.hanks:htextview-fade:$htextview_version"        // optional
 compile "com.hanks:htextview-typer:$htextview_version"       // optional
 
 compile "com.hanks:htextview-scale:$htextview_version"       // optional
