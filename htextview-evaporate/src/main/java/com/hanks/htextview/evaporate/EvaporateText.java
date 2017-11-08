@@ -3,6 +3,7 @@ package com.hanks.htextview.evaporate;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.text.Layout;
 import android.util.AttributeSet;
@@ -33,12 +34,8 @@ public class EvaporateText extends HText {
     private long duration;
     private ValueAnimator animator;
 
-    private List<CharacterDiffResult> differentList = new ArrayList<>();
-    private long duration;
-    private ValueAnimator animator;
-
     @Override
-    public void init(HTextView hTextView, AttributeSet attrs, int defStyle) {
+    public void init(final HTextView hTextView, AttributeSet attrs, int defStyle) {
         super.init(hTextView, attrs, defStyle);
         animator = new ValueAnimator();
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -62,19 +59,19 @@ public class EvaporateText extends HText {
         duration = (long) (charTime + charTime / mostCount * (n - 1));
     }
 
-
     @Override
-    public void animateText(CharSequence text) {
-        try {
-            oldStartX = mHTextView.getLayout().getLineLeft(0);
-        } catch (Exception ignored) {}
-        oldStartX = 0;
-        super.animateText(text);
+    public void animateText(final CharSequence text) {
+        mHTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                oldStartX = mHTextView.getLayout().getLineLeft(0);
+                EvaporateText.super.animateText(text);
+            }
+        });
     }
 
     @Override
     protected void initVariables() {
-
     }
 
     @Override
@@ -97,7 +94,6 @@ public class EvaporateText extends HText {
         mPaint.getTextBounds(mText.toString(), 0, mText.length(), bounds);
         mTextHeight = bounds.height();
     }
-
 
     @Override
     protected void drawFrame(Canvas canvas) {
