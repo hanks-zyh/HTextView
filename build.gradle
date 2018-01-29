@@ -7,6 +7,7 @@ buildscript {
     ext.compile_version = 25
     ext.target_version = 25
     ext.library_version = "0.1.2"
+    ext.enable_bintray = false
 
     repositories {
         jcenter()

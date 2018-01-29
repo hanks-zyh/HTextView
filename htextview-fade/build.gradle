@@ -25,13 +25,15 @@ dependencies {
     implementation "com.hanks:htextview-base:$library_version"
 }
 
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    userOrg = 'hanks-zyh'
-    groupId = 'com.hanks'
-    uploadName = 'FadeTextView'
-    artifactId = 'htextview-fade'
-    publishVersion = library_version
-    desc = 'FadeTextView'
-    website = 'https://github.com/hanks-zyh/HTextView'
+if (enable_bintray) {
+    apply plugin: 'com.novoda.bintray-release'
+    publish {
+        userOrg = 'hanks-zyh'
+        groupId = 'com.hanks'
+        uploadName = 'FadeTextView'
+        artifactId = 'htextview-fade'
+        publishVersion = library_version
+        desc = 'FadeTextView'
+        website = 'https://github.com/hanks-zyh/HTextView'
+    }
 }

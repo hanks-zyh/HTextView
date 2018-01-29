@@ -23,13 +23,16 @@ android {
 
 dependencies {
 }
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    userOrg = 'hanks-zyh'
-    groupId = 'com.hanks'
-    uploadName = "HTextViewBase"
-    artifactId = 'htextview-base'
-    publishVersion = library_version
-    desc = 'HTextViewBase'
-    website = 'https://github.com/hanks-zyh/HTextView'
+if (enable_bintray) {
+    apply plugin: 'com.novoda.bintray-release'
+
+    publish {
+        userOrg = 'hanks-zyh'
+        groupId = 'com.hanks'
+        uploadName = "HTextViewBase"
+        artifactId = 'htextview-base'
+        publishVersion = library_version
+        desc = 'HTextViewBase'
+        website = 'https://github.com/hanks-zyh/HTextView'
+    }
 }

@@ -24,13 +24,16 @@ dependencies {
     implementation "com.hanks:htextview-base:$library_version"
 }
 
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    userOrg = 'hanks-zyh'
-    groupId = 'com.hanks'
-    uploadName = 'FallTextView'
-    artifactId = 'htextview-fall'
-    publishVersion = library_version
-    desc = 'FallTextView'
-    website = 'https://github.com/hanks-zyh/HTextView'
+if (enable_bintray) {
+    apply plugin: 'com.novoda.bintray-release'
+
+    publish {
+        userOrg = 'hanks-zyh'
+        groupId = 'com.hanks'
+        uploadName = 'FallTextView'
+        artifactId = 'htextview-fall'
+        publishVersion = library_version
+        desc = 'FallTextView'
+        website = 'https://github.com/hanks-zyh/HTextView'
+    }
 }
