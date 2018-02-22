@@ -1,6 +1,7 @@
 package com.hanks.htextview.animatetext;
 
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -37,7 +38,6 @@ public class AnvilText extends HText {
         bitmapPaint.setStyle(Paint.Style.FILL);
         // load drawable
         try {
-            R.drawable d = new R.drawable();
             for (int j = 0; j < 50; j++) {
                 String drawable;
                 if (j < 10) {
@@ -45,9 +45,9 @@ public class AnvilText extends HText {
                 } else {
                     drawable = "wenzi00" + j;
                 }
-                Field fieldImgId = d.getClass().getDeclaredField(drawable);
-                int imgId = (Integer) fieldImgId.get(d);//这个ID就是每个图片资源ID
-                smokes[j] = BitmapFactory.decodeResource(mHTextView.getResources(), imgId);
+                Resources resources = mHTextView.getResources();
+                int imgId = resources.getIdentifier(drawable, "drawable", mHTextView.getContext().getPackageName());
+                smokes[j] = BitmapFactory.decodeResource(resources, imgId);
             }
         } catch (Exception e) {
             e.printStackTrace();
