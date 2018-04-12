@@ -2,7 +2,7 @@
 
 buildscript {
 
-    ext.support_version = "27.0.2"
+    ext.support_version = "27.1.0"
     ext.min_version = 15
     ext.compile_version = 27
     ext.target_version = 27
@@ -14,7 +14,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.1'
         classpath 'com.novoda:bintray-release:0.8.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -33,5 +33,5 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.5'
+    gradleVersion = '4.6'
 }

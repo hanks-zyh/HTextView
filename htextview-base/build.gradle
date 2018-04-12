@@ -22,7 +22,9 @@ android {
 }
 
 dependencies {
+    compileOnly "com.android.support:appcompat-v7:$support_version"
 }
+
 if (enable_bintray) {
     apply plugin: 'com.novoda.bintray-release'
 

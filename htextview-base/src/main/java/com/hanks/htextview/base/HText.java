@@ -3,12 +3,15 @@ package com.hanks.htextview.base;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.v4.view.ViewCompat.LAYOUT_DIRECTION_LTR;
 
 /**
  * abstract class
@@ -53,7 +56,20 @@ public abstract class HText implements IHText {
                 mTextSize = mHTextView.getTextSize();
                 mWidth = mHTextView.getWidth();
                 mHeight = mHTextView.getHeight();
-                oldStartX = mHTextView.getLayout().getLineLeft(0);
+
+                oldStartX = 0;
+
+                try {
+                    int layoutDirection = ViewCompat.getLayoutDirection(mHTextView);
+
+                    oldStartX = layoutDirection == LAYOUT_DIRECTION_LTR
+                            ? mHTextView.getLayout().getLineLeft(0)
+                            : mHTextView.getLayout().getLineRight(0);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 initVariables();
             }
         });
