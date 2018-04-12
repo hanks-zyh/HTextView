@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion compile_version
+    buildToolsVersion buildToolsVer
     defaultConfig {
         applicationId "com.example.demoapp"
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode version_code
+        versionName library_version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -38,9 +39,9 @@ dependencies {
     implementation project(':htextview-fall')
 
     // optional
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation "com.android.support:appcompat-v7:$support_version"
 
-    def htextview_version = "0.1.2"
+    def htextview_version = library_version
 
 //    implementation "com.hanks:htextview-base:$htextview_version"    // base library
 //
