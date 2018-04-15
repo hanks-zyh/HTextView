@@ -129,6 +129,12 @@ compile "com.hanks:htextview-fall:$htextview_version"        // optional
     android:textSize="16sp"/>
 ```
 
+## Third Party Bindings
+
+### React Native
+You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-morphing-text)
+
+
 ## License
 
 This library is licensed under the [Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
