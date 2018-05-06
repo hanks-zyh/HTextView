@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
 import android.text.TextPaint;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.ViewTreeObserver;
 
@@ -53,7 +54,10 @@ public abstract class HText implements IHText {
                 mTextSize = mHTextView.getTextSize();
                 mWidth = mHTextView.getWidth();
                 mHeight = mHTextView.getHeight();
-                oldStartX = mHTextView.getLayout().getLineLeft(0);
+                Layout layout = mHTextView.getLayout();
+                if (layout != null) {
+                    oldStartX = layout.getLineLeft(0);
+                }
                 initVariables();
             }
         });
