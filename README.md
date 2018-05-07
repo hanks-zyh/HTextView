@@ -26,7 +26,7 @@ see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
 
 
 ```
-def htextview_version = "0.1.2"
+def htextview_version = "0.1.6"
 // as 3.0 use implementation
 compile "com.hanks:htextview-base:$htextview_version"        // base library
 

@@ -8,15 +8,15 @@ buildscript {
     ext.target_version = 27
     ext.buildToolsVer = '27.0.3'
     ext.version_code = 10
-    ext.library_version = "0.1.5"
-    ext.enable_bintray = false
+    ext.library_version = "0.1.6"
+    ext.enable_bintray = true
 
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'com.novoda:bintray-release:0.8.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
