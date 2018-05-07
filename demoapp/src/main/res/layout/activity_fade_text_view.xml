@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="﻿但愿所有漂泊的人都有酒喝，但愿所有孤独的人都会唱歌﻿。"
+        android:text="@string/fade_text"
         android:textColor="#ff0000"
         android:textSize="20sp"/>
 

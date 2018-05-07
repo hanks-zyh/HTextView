@@ -2,11 +2,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion compile_version
+    buildToolsVersion buildToolsVer
     defaultConfig {
         minSdkVersion min_version
         targetSdkVersion target_version
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
+        versionName library_version
     }
     buildTypes {
         release {
@@ -14,21 +15,27 @@ android {
             proguardFiles 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 
 dependencies {
-//     compile(project(':htextview-base')) { transitive = true }
-    implementation "com.hanks:htextview-base:$library_version"
+    implementation (project(':htextview-base')) { transitive = true }
+//    implementation "com.hanks:htextview-base:$library_version"
 }
 
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    userOrg = 'hanks-zyh'
-    groupId = 'com.hanks'
-    uploadName = 'TyperTextView'
-    artifactId = 'htextview-typer'
-    publishVersion = library_version
-    desc = 'TyperTextView'
-    website = 'https://github.com/hanks-zyh/HTextView'
+if (enable_bintray) {
+    apply plugin: 'com.novoda.bintray-release'
+    publish {
+        userOrg = 'hanks-zyh'
+        groupId = 'com.hanks'
+        uploadName = 'TyperTextView'
+        artifactId = 'htextview-typer'
+        publishVersion = library_version
+        desc = 'TyperTextView'
+        website = 'https://github.com/hanks-zyh/HTextView'
+    }
 }

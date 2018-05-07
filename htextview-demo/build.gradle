@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion compile_version
+    buildToolsVersion buildToolsVer
 
     defaultConfig {
         applicationId "com.hanks.htextview.example"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode version_code
+        versionName library_version
     }
     buildTypes {
         release {
@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:25.3.0"
+    implementation "com.android.support:appcompat-v7:$support_version"
     compile project(':htextview-library')
 //    compile 'hanks.xyz:htextview-library:0.1.5'
 }

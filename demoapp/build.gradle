@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion compile_version
+    buildToolsVersion buildToolsVer
     defaultConfig {
         applicationId "com.example.demoapp"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode version_code
+        versionName library_version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,36 +17,40 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
-//    implementation project(':htextview-base')
-//    implementation project(':htextview-line')
-//    implementation project(':htextview-fade')
-//    implementation project(':htextview-rainbow')
-//    implementation project(':htextview-typer')
-//    implementation project(':htextview-scale')
-//    implementation project(':htextview-evaporate')
-//    implementation project(':htextview-fall')
+    implementation project(':htextview-base')
+    implementation project(':htextview-line')
+    implementation project(':htextview-fade')
+    implementation project(':htextview-rainbow')
+    implementation project(':htextview-typer')
+    implementation project(':htextview-scale')
+    implementation project(':htextview-evaporate')
+    implementation project(':htextview-fall')
 
     // optional
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:$support_version"
 
-    def htextview_version = "0.1.2"
+    def htextview_version = library_version
 
-    implementation "com.hanks:htextview-base:$htextview_version"    // base library
-
-    implementation "com.hanks:htextview-fade:$htextview_version"        // optional
-    implementation "com.hanks:htextview-line:$htextview_version"        // optional
-    implementation "com.hanks:htextview-rainbow:$htextview_version"     // optional
-    implementation "com.hanks:htextview-typer:$htextview_version"       // optional
-
-    implementation "com.hanks:htextview-scale:$htextview_version"       // optional
-    implementation "com.hanks:htextview-evaporate:$htextview_version"   // optional
-    implementation "com.hanks:htextview-fall:$htextview_version"        // optional
+//    implementation "com.hanks:htextview-base:$htextview_version"    // base library
+//
+//    implementation "com.hanks:htextview-fade:$htextview_version"        // optional
+//    implementation "com.hanks:htextview-line:$htextview_version"        // optional
+//    implementation "com.hanks:htextview-rainbow:$htextview_version"     // optional
+//    implementation "com.hanks:htextview-typer:$htextview_version"       // optional
+//
+//    implementation "com.hanks:htextview-scale:$htextview_version"       // optional
+//    implementation "com.hanks:htextview-evaporate:$htextview_version"   // optional
+//    implementation "com.hanks:htextview-fall:$htextview_version"        // optional
 }

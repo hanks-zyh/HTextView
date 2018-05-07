@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">DemoApp</string>
+    <string name="app_name">HText DemoApp</string>
     <string name="initStr">this is a init sentence</string>
+    <string name="fade_text" formatted="false">"但愿所有漂泊的人都有酒喝, 但愿所有孤独的人都会唱歌﻿。"</string>
 </resources>

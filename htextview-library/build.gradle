@@ -2,17 +2,16 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.1.5"
+version = library_version
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
-
+    compileSdkVersion compile_version
+    buildToolsVersion buildToolsVer
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 8
-        versionName "1.1.1"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode version_code
+        versionName library_version
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
     }
@@ -22,12 +21,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$support_version"
 }
 
 def siteUrl = 'https://github.com/hanks-zyh/HTextView'                    // #CONFIG# // project homepage
