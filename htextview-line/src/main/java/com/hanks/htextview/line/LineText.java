@@ -43,6 +43,8 @@ public class LineText extends HText {
 
     public void setLineColor(int color) {
         this.lineColor = color;
+        if (this.mLinePaint != null)
+            this.mLinePaint.setColor(color);
     }
 
     public float getLineWidth() {
@@ -76,7 +78,8 @@ public class LineText extends HText {
         lineWidth = DEFAULT_LINE_WIDTH;
         animationDuration = DEFAULT_DURATION;
 
-        mLinePaint = new Paint(lineColor);
+        mLinePaint = new Paint();
+        mLinePaint.setColor(lineColor);
         mLinePaint.setStrokeWidth(lineWidth);
     }
 
