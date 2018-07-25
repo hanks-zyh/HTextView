@@ -43,6 +43,7 @@ public class LineText extends HText {
 
     public void setLineColor(int color) {
         this.lineColor = color;
+        this.mLinePaint.setColor(color);
     }
 
     public float getLineWidth() {
