@@ -5,7 +5,9 @@ Animation effects with custom font support to TextView
 ![](https://img.shields.io/badge/Platform-Android-brightgreen.svg)
 ![](https://img.shields.io/badge/Android-CustomView-blue.svg)
 
-see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)
+see [iOS Effects](https://github.com/lexrus/LTMorphingLabel)    
+see [Flutter Effects](https://github.com/HitenDev/flutter_effects)
+
 
 ---
 
