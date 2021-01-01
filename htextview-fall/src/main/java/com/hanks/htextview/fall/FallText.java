@@ -64,6 +64,9 @@ public class FallText extends HText {
         mHTextView.post(new Runnable() {
             @Override
             public void run() {
+                if (mHTextView == null || mHTextView.getLayout() == null) {
+                    return;
+                }
                 oldStartX = mHTextView.getLayout().getLineLeft(0);
                 FallText.super.animateText(text);
             }

@@ -4,16 +4,13 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
-
 import com.hanks.htextview.base.CharacterDiffResult;
 import com.hanks.htextview.base.CharacterUtils;
 import com.hanks.htextview.base.DefaultAnimatorListener;
 import com.hanks.htextview.base.HText;
 import com.hanks.htextview.base.HTextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +59,9 @@ public class EvaporateText extends HText {
         mHTextView.post(new Runnable() {
             @Override
             public void run() {
+                if (mHTextView == null || mHTextView.getLayout() == null) {
+                    return;
+                }
                 oldStartX = mHTextView.getLayout().getLineLeft(0);
                 EvaporateText.super.animateText(text);
             }
