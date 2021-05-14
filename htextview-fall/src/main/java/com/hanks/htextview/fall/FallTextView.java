@@ -37,7 +37,7 @@ public class FallTextView extends HTextView {
     private void init(AttributeSet attrs, int defStyleAttr) {
         fallText = new FallText();
         fallText.init(this, attrs, defStyleAttr);
-        setMaxLines(1);
+        setMaxLines(10);
         setEllipsize(TextUtils.TruncateAt.END);
     }
 
