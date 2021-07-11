@@ -53,6 +53,11 @@ public class EvaporateTextView extends HTextView {
     }
 
     @Override
+    public void setTextColor(int color) {
+        evaporateText.setTextColor(color);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         // super.onDraw(canvas);
         evaporateText.onDraw(canvas);

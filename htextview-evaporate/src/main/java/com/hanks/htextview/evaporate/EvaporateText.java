@@ -3,6 +3,7 @@ package com.hanks.htextview.evaporate;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -24,6 +25,7 @@ public class EvaporateText extends HText {
     float charTime = 300;
     int mostCount = 20;
     private int mTextHeight;
+    private int paintColor = Color.BLACK;
 
     private List<CharacterDiffResult> differentList = new ArrayList<>();
     private long duration;
@@ -111,16 +113,19 @@ public class EvaporateText extends HText {
                 //
                 float pp = progress * duration / (charTime + charTime / mostCount * (mText.length() - 1));
 
+                mOldPaint.setColor(paintColor);
+                mPaint.setColor(paintColor);
+
                 mOldPaint.setTextSize(mTextSize);
                 int move = CharacterUtils.needMove(i, differentList);
                 if (move != -1) {
-                    mOldPaint.setAlpha(255);
+                    mOldPaint.setAlpha(Color.alpha(paintColor));
                     float p = pp * 2f;
                     p = p > 1 ? 1 : p;
                     float distX = CharacterUtils.getOffset(i, move, p, startX, oldStartX, gapList, oldGapList);
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, distX, startY, mOldPaint);
                 } else {
-                    mOldPaint.setAlpha((int) ((1 - pp) * 255));
+                    mOldPaint.setAlpha((int) ((1 - pp) * Color.alpha(paintColor)));
                     float y = startY - pp * mTextHeight;
                     float width = mOldPaint.measureText(mOldText.charAt(i) + "");
                     canvas.drawText(mOldText.charAt(i) + "", 0, 1, oldOffset + (oldGapList.get(i) - width) / 2, y, mOldPaint);
@@ -133,8 +138,8 @@ public class EvaporateText extends HText {
 
                 if (!CharacterUtils.stayHere(i, differentList)) {
 
-                    int alpha = (int) (255f / charTime * (progress * duration - charTime * i / mostCount));
-                    alpha = alpha > 255 ? 255 : alpha;
+                    int alpha = (int) ((float) Color.alpha(paintColor) / charTime * (progress * duration - charTime * i / mostCount));
+                    alpha = alpha > Color.alpha(paintColor) ? Color.alpha(paintColor) : alpha;
                     alpha = alpha < 0 ? 0 : alpha;
 
                     mPaint.setAlpha(alpha);
@@ -149,6 +154,10 @@ public class EvaporateText extends HText {
                 offset += gapList.get(i);
             }
         }
+    }
+
+    public void setTextColor(int color) {
+        this.paintColor = color;
     }
 
 }
